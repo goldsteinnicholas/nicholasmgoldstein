@@ -17,17 +17,13 @@ export class Contact {
           <div class="bg-orange-500/20 p-8 rounded-lg">
             <span class="text-lg text-text/70 block mb-4 text-center">Professional</span>
             <div class="flex justify-center gap-8">
-              <a href="https://github.com/ngoldstein51" target="_blank"
+              <a href="https://github.com/goldsteinnicholas" target="_blank"
                  class="text-text hover:text-orange-500 transition-colors">
                 <i class="fab fa-github text-3xl"></i>
               </a>
-              <a href="https://linkedin.com/in/nicholasmgoldstein" target="_blank"
+              <a href="https://www.linkedin.com/in/nicholas-goldstein-362a13179" target="_blank"
                  class="text-text hover:text-orange-500 transition-colors">
                 <i class="fab fa-linkedin text-3xl"></i>
-              </a>
-              <a href="mailto:nick@nicholasmgoldstein.com"
-                 class="text-text hover:text-orange-500 transition-colors">
-                <i class="fas fa-envelope text-3xl"></i>
               </a>
             </div>
           </div>
