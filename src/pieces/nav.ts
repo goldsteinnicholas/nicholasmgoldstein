@@ -21,7 +21,7 @@ export class Navigation {
             <span class="typing-text"></span><span class="typing-cursor">|</span>
           </h1>
         </div>
-        <ul class="flex gap-4 md:gap-8">
+        <ul class="flex flex-wrap justify-center gap-4 md:gap-8">
           <li>
             <a href="#about" 
                class="px-4 py-2 rounded-full text-text hover:bg-primary/80 hover:text-text/80 transition-all duration-300 text-sm md:text-base">

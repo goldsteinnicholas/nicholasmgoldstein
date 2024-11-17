@@ -213,7 +213,7 @@ export class Experience {
                 <h3 class="text-xl font-semibold text-text">${entry.title}</h3>
                 ${entry.company ? `<div class="text-text/80 font-medium mt-1">${entry.company}</div>` : ''}
               </div>
-              <span class="px-3 py-1 bg-white/50 rounded-full text-sm text-text/70">${entry.category}</span>
+              <span class="hidden md:block px-3 py-1 bg-white/50 rounded-full text-sm text-text/70">${entry.category}</span>
             </div>
             <ul class="mt-4 space-y-2">
               ${entry.description.map(desc => `

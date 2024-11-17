@@ -53,11 +53,11 @@ export class Profile {
                   View Resume
                 </a>
                 <a 
-                  href="mailto:nick@nicholasmgoldstein.com" 
+                  href="#connect"
                   class="inline-flex items-center gap-2 px-6 py-3 bg-white hover:bg-gray-50 text-text rounded-full transition-colors duration-300 font-medium shadow-sm"
                 >
-                  <i class="far fa-envelope"></i>
-                  Contact
+                  <i class="fas fa-link"></i>
+                  Connect
                 </a>
               </div>
 
