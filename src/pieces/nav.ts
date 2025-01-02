@@ -28,11 +28,25 @@ export class Navigation {
                About
             </a>
           </li>
-          <li>
+          <li class="relative group">
             <a href="https://plato5.us/" 
                class="px-4 py-2 rounded-full text-text hover:bg-primary/80 hover:text-text/80 transition-all duration-300 text-sm md:text-base">
                PLATO5
+               <i class="fas fa-chevron-down text-xs transition-transform group-hover:rotate-180"></i>
             </a>
+            <div class="absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+              <div class="bg-white rounded-lg shadow-lg border border-text/10 overflow-hidden min-w-[160px]">
+                <a href="https://plato5.us/" class="flex items-center gap-2 px-4 py-2 hover:bg-primary/10 transition-colors">
+                  <i class="fas fa-external-link-alt text-xs"></i>
+                  <span>Visit Site</span>
+                </a>
+                <div class="flex items-center gap-2 px-4 py-2 text-text/40 cursor-not-allowed border-t border-text/5">
+                  <i class="fas fa-chart-line text-xs"></i>
+                  <span>View Stats</span>
+                  <span class="text-[10px] ml-auto uppercase tracking-wider">Coming Soon</span>
+                </div>
+              </div>
+            </div>
           </li>
           <li>
             <a href="#experience" 

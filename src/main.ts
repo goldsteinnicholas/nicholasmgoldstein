@@ -35,6 +35,21 @@ class HomeScreen {
         </p>
       </div>
     `;
+
+    // Add blog section
+    const blogSection = document.createElement('div');
+    blogSection.className = 'max-w-4xl mx-auto px-6 py-16';
+    blogSection.innerHTML = `
+      <div class="relative border border-text/10 rounded-xl p-8 bg-white/50 backdrop-blur-sm">
+        <span class="absolute -top-3 left-8 px-6 py-1.5 bg-background font-medium text-[11px] uppercase tracking-[0.2em] text-primary/90 rounded-full border-2 border-primary/30 shadow-sm">Coming Soon</span>
+        <div class="flex items-center justify-between mb-8">
+          <h2 class="text-2xl font-heading text-text">Blog Posts</h2>
+        </div>
+        <p class="text-text/70 leading-relaxed">
+          Some posts about my thoughts on startups, technological innovations, and more.
+        </p>
+      </div>
+    `;
     
     // Add hero section with walking-away image
     const heroSection = document.createElement('div');
@@ -55,8 +70,9 @@ class HomeScreen {
     this.navigation.mount(container);
     container.appendChild(titleSection);
     this.profile.mount(container);
+    container.appendChild(blogSection);
     this.experience.mount(container);
-    container.appendChild(heroSection);  // Moved after experience
+    container.appendChild(heroSection);
     this.contact.mount(container);
 
     ScrollFade.init();

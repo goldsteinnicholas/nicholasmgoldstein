@@ -28,6 +28,7 @@ export class Contact {
             </div>
           </div>
 
+          <!-- Social links temporarily removed
           <div class="bg-pink-500/20 p-8 rounded-lg">
             <span class="text-lg text-text/70 block mb-4 text-center">Social</span>
             <div class="flex justify-center gap-8">
@@ -45,6 +46,7 @@ export class Contact {
               </a>
             </div>
           </div>
+          -->
         </div>
       </div>
     `;
