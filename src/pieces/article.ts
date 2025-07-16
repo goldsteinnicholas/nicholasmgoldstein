@@ -170,7 +170,7 @@ export class Article {
 
         <!-- Article Content -->
         <article class="prose prose-lg prose-invert max-w-none">
-          <div class="text-text-secondary leading-relaxed space-y-8 text-lg text-justify">
+          <div class="text-text-secondary leading-relaxed space-y-8 text-lg md:text-justify">
             <div class="first-letter:text-6xl first-letter:font-serif first-letter:float-left first-letter:mr-4 first-letter:leading-none first-letter:bg-gradient-to-br first-letter:from-secondary first-letter:to-purple first-letter:bg-clip-text first-letter:text-transparent first-letter:font-black">
               ${article.content}
             </div>
