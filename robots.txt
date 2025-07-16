@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+# Allow all pages to be crawled
+Allow: /articles
+Allow: /articles/*
+
+# Sitemap location
+Sitemap: https://nicholasmgoldstein.com/sitemap.xml
+
+# Crawl delay (optional - tells bots to wait between requests)
+Crawl-delay: 1 

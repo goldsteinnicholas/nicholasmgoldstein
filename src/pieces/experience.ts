@@ -13,6 +13,16 @@ export class Experience {
   private activeFilter: 'ALL' | 'PROFESSIONAL' | 'PROJECT' | 'EDUCATION' | 'CERTIFICATION' = 'ALL';
   private entries: TimelineEntry[] = [
     {
+      date: 'August 2025',
+      title: 'Relaunched PLATO5',
+      description: [
+        'Decided to take down and rebuild PLATO5 to focus on optimizing the pipeline from online connection to real life friendships',
+        'Refined the social engine approach with improved matching algorithms and user experience',
+        'Integrated AI into every aspect of the platform to enhance user connections'
+      ],
+      category: 'PROJECT'
+    },
+    {
       date: 'November 2024',
       title: 'PLATO5 Web App Launch',
       description: [
@@ -112,26 +122,26 @@ export class Experience {
         
         <!-- Category Filters -->
         <div class="flex flex-wrap justify-center gap-3 mb-16">
-          <button class="px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 bg-primary text-white" data-filter="ALL">
+          <button class="px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 bg-gradient-to-r from-secondary to-blue-600 text-white shadow-lg" data-filter="ALL">
             All
           </button>
-          <button class="px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 hover:bg-amber-100/80" data-filter="PROFESSIONAL">
+          <button class="px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 text-text-secondary hover:text-text hover:bg-card-bg" data-filter="PROFESSIONAL">
             Professional
           </button>
-          <button class="px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 hover:bg-violet-100/80" data-filter="PROJECT">
+          <button class="px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 text-text-secondary hover:text-text hover:bg-card-bg" data-filter="PROJECT">
             Projects
           </button>
-          <button class="px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 hover:bg-emerald-100/80" data-filter="EDUCATION">
+          <button class="px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 text-text-secondary hover:text-text hover:bg-card-bg" data-filter="EDUCATION">
             Education
           </button>
-          <button class="px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 hover:bg-sky-100/80" data-filter="CERTIFICATION">
+          <button class="px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 text-text-secondary hover:text-text hover:bg-card-bg" data-filter="CERTIFICATION">
             Certifications
           </button>
         </div>
 
         <div class="relative">
           <!-- Timeline line with gradient -->
-          <div class="absolute left-[22px] md:left-1/2 -translate-x-1/2 h-full w-1 bg-gradient-to-b from-primary via-primary to-primary/30 rounded-full"></div>
+          <div class="absolute left-[22px] md:left-1/2 -translate-x-1/2 h-full w-1 bg-gradient-to-b from-secondary via-secondary to-secondary/30 rounded-full"></div>
           
           <!-- Timeline entries -->
           <div class="space-y-16" id="timeline-entries"></div>
@@ -151,13 +161,13 @@ export class Experience {
       button.addEventListener('click', () => {
         // Remove active class from all buttons
         buttons.forEach(btn => {
-          btn.classList.remove('bg-primary', 'text-white');
-          btn.classList.add('hover:bg-opacity-80');
+          btn.classList.remove('bg-gradient-to-r', 'from-secondary', 'to-blue-600', 'text-white', 'shadow-lg');
+          btn.classList.add('text-text-secondary', 'hover:text-text', 'hover:bg-card-bg');
         });
         
         // Add active class to clicked button
-        button.classList.add('bg-primary', 'text-white');
-        button.classList.remove('hover:bg-opacity-80');
+        button.classList.add('bg-gradient-to-r', 'from-secondary', 'to-blue-600', 'text-white', 'shadow-lg');
+        button.classList.remove('text-text-secondary', 'hover:text-text', 'hover:bg-card-bg');
         
         // Update filter and re-render
         this.activeFilter = button.getAttribute('data-filter') as typeof this.activeFilter;
@@ -171,12 +181,18 @@ export class Experience {
     if (!entriesContainer) return;
 
     const categoryColors = {
-      'PROFESSIONAL': 'bg-amber-100/80',
-      'PROJECT': 'bg-violet-100/80',
-      'EDUCATION': 'bg-emerald-100/80',
-      'CERTIFICATION': 'bg-sky-100/80'
+      'PROFESSIONAL': 'bg-accent/30 border-accent',
+      'PROJECT': 'bg-purple/30 border-purple',
+      'EDUCATION': 'bg-secondary/30 border-secondary',
+      'CERTIFICATION': 'bg-accent/30 border-accent'
     };
 
+    const categoryBulletColors = {
+      'PROFESSIONAL': 'text-accent',
+      'PROJECT': 'text-purple',
+      'EDUCATION': 'text-secondary',
+      'CERTIFICATION': 'text-accent'
+    };
         
     // Clear existing entries
     entriesContainer.innerHTML = '';
@@ -193,32 +209,32 @@ export class Experience {
       entryElement.innerHTML = `
         <!-- Timeline dot with pulse effect -->
         <div class="absolute left-[22px] md:left-1/2 -translate-x-1/2">
-          <div class="w-4 h-4 bg-primary rounded-full mt-2 z-10 relative"></div>
-          <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-6 h-6 bg-primary/30 rounded-full group-hover:scale-150 transition-transform duration-300"></div>
+          <div class="w-4 h-4 bg-secondary rounded-full mt-2 z-10 relative"></div>
+          <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-6 h-6 bg-secondary/30 rounded-full group-hover:scale-150 transition-transform duration-300"></div>
         </div>
         
         <!-- Timeline connector -->
-        <div class="absolute left-[22px] md:left-1/2 top-[14px] w-8 h-0.5 bg-primary/30 ${index % 2 === 0 ? 'md:-translate-x-full' : 'md:translate-x-0'}"></div>
+        <div class="absolute left-[22px] md:left-1/2 top-[14px] w-8 h-0.5 bg-secondary/30 ${index % 2 === 0 ? 'md:-translate-x-full' : 'md:translate-x-0'}"></div>
         
         <!-- Date -->
         <div class="ml-16 md:ml-0 md:w-1/2 ${index % 2 === 0 ? 'md:text-right md:pr-12' : 'md:pl-12'}">
-          <span class="text-text/70 text-sm font-medium bg-white px-4 py-1 rounded-full shadow-sm">${entry.date}</span>
+          <span class="text-text-secondary text-sm font-medium bg-card-bg px-4 py-1 rounded-full shadow-sm border border-text-secondary/20">${entry.date}</span>
         </div>
         
         <!-- Content -->
         <div class="ml-16 md:ml-0 md:w-1/2 ${index % 2 === 0 ? 'md:pl-12' : 'md:pr-12'} relative">
-          <div class="${categoryColors[entry.category]} rounded-xl shadow-sm p-6 hover:shadow-md transition-all duration-300 hover:-translate-y-1 hover:translate-x-0.5 animate-float">
+          <div class="${categoryColors[entry.category]} rounded-xl shadow-lg p-6 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 hover:translate-x-0.5 animate-float border-2">
             <div class="flex items-start justify-between">
               <div>
                 <h3 class="text-xl font-semibold text-text">${entry.title}</h3>
-                ${entry.company ? `<div class="text-text/80 font-medium mt-1">${entry.company}</div>` : ''}
+                ${entry.company ? `<div class="text-text-secondary font-medium mt-1">${entry.company}</div>` : ''}
               </div>
-              <span class="hidden md:block px-3 py-1 bg-white/50 rounded-full text-sm text-text/70">${entry.category}</span>
+              <span class="hidden md:block px-3 py-1 bg-card-bg/50 rounded-full text-sm text-text-secondary border border-text-secondary/20">${entry.category}</span>
             </div>
             <ul class="mt-4 space-y-2">
               ${entry.description.map(desc => `
-                <li class="flex gap-2 text-text/70">
-                  <span class="text-primary">•</span>
+                <li class="flex gap-2 text-text-secondary">
+                  <span class="${categoryBulletColors[entry.category]}">•</span>
                   <span>${desc}</span>
                 </li>
               `).join('')}

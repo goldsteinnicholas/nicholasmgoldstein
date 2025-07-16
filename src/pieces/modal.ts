@@ -22,9 +22,9 @@ export class Modal {
       modalContent.className = 'fixed inset-0 z-10 overflow-y-auto';
       modalContent.innerHTML = `
         <div class="flex min-h-full items-center justify-center p-4">
-          <div class="relative transform overflow-hidden rounded-2xl bg-white shadow-xl transition-all w-full max-w-lg">
+          <div class="relative transform overflow-hidden rounded-2xl bg-card-bg border border-subtle shadow-xl transition-all w-full max-w-lg backdrop-blur-md">
             <!-- Close button -->
-            <button class="absolute right-4 top-4 text-text/50 hover:text-text transition-colors duration-300">
+            <button class="absolute right-4 top-4 text-text-secondary hover:text-text transition-colors duration-300">
               <i class="fas fa-times text-xl"></i>
             </button>
             
