@@ -14,6 +14,13 @@ export class Articles {
   
   private articles: Article[] = [
     {
+      slug: 'building-to-build-what-should-exist',
+      title: 'Building to Build What Should Exist',
+      excerpt: 'I became enamored by the world of startups after seeing The Social Network in Highschool. I had previously wanted to become a music producer and chase the dream of being an artist. Something was activated in me by that movie...',
+      date: 'July 18, 2025',
+      category: 'Startups'
+    },
+    {
       slug: 'corrosive-convenience',
       title: 'Corrosive Convenience',
       excerpt: 'Convenience Apps: Applications that deconstruct an errand or process that would normally take time away from your day and minimize those errand\'s impact on your schedule and remove them from your immediate attention...',
