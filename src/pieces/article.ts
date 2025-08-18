@@ -8,7 +8,7 @@ interface ArticleContent {
   category: string;
   note?: string;
 }
-
+// Adding a comment to update the project. 
 export class Article {
   private container: HTMLElement | null = null;
   
