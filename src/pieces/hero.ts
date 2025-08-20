@@ -26,7 +26,7 @@ export class Hero {
       id: 'mhs',
       name: 'my human stats',
       description: 'A personalized productivity tool that builds on the power of spreadsheets without requiring coding knowledge. Track and analyze your life in a deeply customized way - diet, habits, mood, productivity, or anything important to you.',
-      icon: '/mhs.png',
+      icon: '/mhs_logo.png',
       color: 'teal',
       status: 'Coming Soon',
       link: 'https://myhumanstats.com',
