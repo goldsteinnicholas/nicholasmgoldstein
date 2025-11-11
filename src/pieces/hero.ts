@@ -8,9 +8,9 @@ export class Hero {
       description: 'A social engine that turns online connections into real-life friendships. Every 24 hours, you get matched with three compatible people for a groupchat, where our AI coach Zen helps conversations flourish and suggests local events to attend together.',
       icon: '/plato5.png',
       color: 'purple',
-      status: 'Live',
+      status: 'Being Rebuilt',
       link: 'https://plato5.us',
-      ctaText: 'Visit Site'
+      ctaText: 'Check Out'
     },
     {
       id: 'emstrata',
@@ -18,9 +18,9 @@ export class Hero {
       description: 'An AI-driven text-based simulation platform that creates immersive narrative experiences through collaborative storytelling. Users participate in real-time simulations where both humans and AI contribute to evolving storylines with logical consistency.',
       icon: '/emstrata.png',
       color: 'blue',
-      status: 'Coming Soon',
+      status: 'Live',
       link: 'https://emstrata.com',
-      ctaText: 'Coming to emstrata.com'
+      ctaText: 'Check Out'
     },
     {
       id: 'mhs',
@@ -65,7 +65,8 @@ export class Hero {
   private renderProjectCard(project: any): string {
     const statusColors: Record<string, string> = {
       'Live': 'text-accent',
-      'Coming Soon': 'text-secondary'
+      'Coming Soon': 'text-secondary',
+      'Being Rebuilt': 'text-secondary'
     };
 
     const iconColors: Record<string, string> = {
@@ -93,7 +94,7 @@ export class Hero {
         <div class="mb-4">
           <h3 class="text-2xl font-heading font-bold text-text mb-2">${project.name}</h3>
           <span class="px-4 py-2 ${statusColors[project.status]} text-sm font-medium rounded-full shadow-lg flex items-center gap-2 justify-center w-fit mx-auto">
-            <i class="fas ${project.status === 'Live' ? 'fa-solid fa-star-of-life' : 'fa-clock'} animate-pulse"></i>
+            <i class="fas ${project.status === 'Live' ? 'fa-solid fa-star-of-life' : project.status === 'Being Rebuilt' ? 'fa-hammer' : 'fa-clock'} animate-pulse"></i>
             ${project.status}
           </span>
         </div>
@@ -104,7 +105,7 @@ export class Hero {
         </p>
 
         <!-- Pill Button -->
-        ${project.id === 'emstrata' || project.id === 'mhs' ? `
+        ${project.status === 'Coming Soon' ? `
           <button 
              class="inline-flex items-center gap-2 px-8 py-4 bg-card-bg text-text-secondary rounded-full font-semibold cursor-not-allowed border border-text-secondary/20">
             <span>Coming Soon</span>
@@ -115,7 +116,7 @@ export class Hero {
              target="_blank" 
              rel="noopener noreferrer"
              class="inline-flex items-center gap-2 px-8 py-4 ${buttonGradients[project.color]} text-white rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105">
-            <span>Check Out</span>
+            <span>${project.ctaText || 'Check Out'}</span>
             <i class="fas fa-arrow-right text-sm transition-transform group-hover:translate-x-1"></i>
           </a>
         `}

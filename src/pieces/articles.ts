@@ -7,6 +7,7 @@ interface Article {
   date: string;
   category: string;
   featured?: boolean;
+  updatedAt?: string;
 }
 
 export class Articles {
@@ -14,11 +15,19 @@ export class Articles {
   
   private articles: Article[] = [
     {
+      slug: 'can-emstrata-dethrone-chatgpt-in-storytelling',
+      title: 'Can Emstrata Dethrone ChatGPT in Storytelling?',
+      excerpt: 'AI storytelling and the ability to immerse yourself in AI generated worlds is entering a brand new era. The good news is apps like Emstrata, have no interest in replacing human creativity or diminishing artistic minds, but rather harnessing them to work alongside AI to create a profound experience that couldn\'t have existed in the pre-LLM era.',
+      date: 'November 10, 2025',
+      category: 'Emstrata'
+    },
+    {
       slug: 'building-to-build-what-should-exist',
       title: 'Building to Build What Should Exist',
-      excerpt: 'I became enamored by the world of startups after seeing The Social Network in Highschool. I had previously wanted to become a music producer and chase the dream of being an artist. Something was activated in me by that movie...',
+      excerpt: 'I became enamored by the world of startups after seeing The Social Network in high school. I had previously wanted to become a music producer and chase the dream of being an artist. Something was activated in me by that movie...',
       date: 'July 18, 2025',
-      category: 'Startups'
+      category: 'Startups',
+      updatedAt: 'November 9, 2025'
     },
     {
       slug: 'corrosive-convenience',
@@ -113,7 +122,12 @@ export class Articles {
               ${latest.excerpt}
             </p>
             <div class="flex items-center justify-between">
-              <span class="text-text-secondary text-sm">${latest.date}</span>
+              <div class="flex flex-col">
+                <span class="text-text-secondary text-sm">${latest.date}</span>
+                ${latest.updatedAt ? `
+                <span class="text-text-secondary text-xs italic">Updated: ${latest.updatedAt}</span>
+                ` : ''}
+              </div>
               <span class="text-accent group-hover:text-green-400 transition-colors duration-300 text-sm font-medium">
                 Read Article →
               </span>
@@ -140,7 +154,12 @@ export class Articles {
             ${article.excerpt}
           </p>
           <div class="flex items-center justify-between mt-auto">
-            <span class="text-text-secondary text-sm">${article.date}</span>
+            <div class="flex flex-col">
+              <span class="text-text-secondary text-sm">${article.date}</span>
+              ${article.updatedAt ? `
+              <span class="text-text-secondary text-xs italic">Updated: ${article.updatedAt}</span>
+              ` : ''}
+            </div>
             <span class="text-accent group-hover:text-green-400 transition-colors duration-300 text-sm font-medium">
               Read More →
             </span>

@@ -13,11 +13,14 @@ export class Navigation {
             Nick Goldstein
           </h1>
         </div>
-        <div class="flex items-center">
+        <div class="flex items-center gap-2">
           <a href="/articles" 
              class="px-3 py-1.5 rounded-xl text-text/70 hover:text-text hover:bg-primary/10 transition-all duration-300 text-sm">
              Articles
           </a>
+          <span class="px-3 py-1.5 rounded-xl text-text/40 cursor-not-allowed text-sm opacity-50">
+             Courses
+          </span>
         </div>
       </nav>
     `;
@@ -51,6 +54,16 @@ export class Navigation {
       articlesLink.addEventListener('click', (e) => {
         e.preventDefault();
         window.history.pushState({}, '', '/articles');
+        window.dispatchEvent(new PopStateEvent('popstate'));
+      });
+    }
+
+    // Setup courses link
+    const coursesLink = this.container?.querySelector('a[href="/courses"]');
+    if (coursesLink) {
+      coursesLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.history.pushState({}, '', '/courses');
         window.dispatchEvent(new PopStateEvent('popstate'));
       });
     }

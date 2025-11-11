@@ -7,34 +7,132 @@ interface ArticleContent {
   date: string;
   category: string;
   note?: string;
+  updatedAt?: string;
 }
 // Adding a comment to update the project. 
 export class Article {
   private container: HTMLElement | null = null;
   
   private articles: Record<string, ArticleContent> = {
+    'can-emstrata-dethrone-chatgpt-in-storytelling': {
+      slug: 'can-emstrata-dethrone-chatgpt-in-storytelling',
+      title: 'Can Emstrata Dethrone ChatGPT in Storytelling?',
+      content: `
+        <div class="mb-8 p-6 bg-gradient-to-r from-secondary/20 to-blue-600/20 border-2 border-secondary/30 rounded-xl">
+          <div class="flex items-start gap-3">
+            <i class="fas fa-info-circle text-secondary text-xl mt-1"></i>
+            <div>
+              <h3 class="text-lg font-heading text-text mb-2 font-bold">Assessment In Progress</h3>
+              <p class="text-text-secondary leading-relaxed">This assessment is incomplete, but there may be some interesting information comparing these two platforms and the criteria I will use. Testing and results are pending. This article will be updated soon.</p>
+            </div>
+          </div>
+        </div>
+
+        <p class="mb-8">AI storytelling and the ability to immerse yourself in AI generated worlds is entering a brand new era. The good news is apps like Emstrata, have no interest in replacing human creativity or diminishing artistic minds, but rather harnessing them to work alongside AI to create a profound experience that couldn't have existed in the pre-LLM era.</p>
+
+        <p class="mb-8">Today we'll jump into comparing Emstrata to the the biggest LLM out there, ChatGPT. Now, Emstrata is going to fall short of ChatGPT in a myriad of ways, for instance, it won't write your school essay or generate you a simple webpage, but what it will do particularly well is setup a narrative world based on your prompts in which you can inhabit. You can also alter these simulations by taking actions and allowing the AI to adapt to your decisions and by interacting with the tooling built specifically to always allow users to have the final say in the direction of their simulation.</p>
+
+        <p class="mb-8">I'm Nick Goldstein, and yes, I built Emstrata. It's a powerful emergent narrative engine designed to not only build narrative worlds, but maintain their reality; complete with systems to ensure realistic consequences to actions within your simulation reality. Emstrata is, in short, the natural evolution of storytelling in the AI era. It synthesizes human creativity, AI-mediation, and memory management to enable a unique experience that doesn't diminish the creative predisposition of human beings.</p>
+
+        <p class="mb-8">ChatGPT is obviously the general purpose LLM of note that brought this wave of AI products to the fore in the first place. Without it, I, and many other developers, would have much less leeway to build compelling products. They broke down the walls of the castle, so that Emstrata could barge in and decapitate the king. Or, at least do so in some simulated reality.</p>
+
+        <p class="mb-8">Now, for the meat of the sandwich. We'll be doing a deep dive on how these 2 systems handle a variety of aspects that are essential to not only storytelling and immersion, but the mechanics that make a simulated reality feel real. Specifically, we'll be looking at how ChatGPT and Emstrata handle:</p>
+
+        <ul class="mb-8 space-y-4 text-text-secondary leading-relaxed">
+          <li class="mb-4">
+            <strong class="text-text">World Building</strong>
+            <ul class="mt-2 ml-6 space-y-2 list-disc">
+              <li>The ability to construct a dense and rich world that feels livable and has clearly defined constraints.</li>
+              <li>If you're a fan of Game of Thrones, think of how layered Westeros is and how George RR Martin built that out so completely.</li>
+            </ul>
+          </li>
+          <li class="mb-4">
+            <strong class="text-text">Continuity</strong>
+            <ul class="mt-2 ml-6 space-y-2 list-disc">
+              <li>Are small details forgotten, and are there methods to correct these issues without upending the session?</li>
+              <li>Films and filmmakers are notorious for hyper-focusing on continuity errors. Well, a service that strives to immerse a user in a simulated reality should be too. These errors take you out of the story and shift your attention to this uncanny-valley-like phenomenon.</li>
+            </ul>
+          </li>
+          <li class="mb-4">
+            <strong class="text-text">Tooling</strong>
+            <ul class="mt-2 ml-6 space-y-2 list-disc">
+              <li>How does the service handle auxiliary aspects of simulated realities?</li>
+              <li>Are there simple methods to correct errors? Are there ways to enforce foreign rule-sets? What does the platform offer that would ensure that the user has absolutely everything they need to commit to the reality and fully immerse.</li>
+              <li>This one is a bit of a layup for Emstrata.</li>
+            </ul>
+          </li>
+          <li class="mb-4">
+            <strong class="text-text">Pacing/Action</strong>
+            <ul class="mt-2 ml-6 space-y-2 list-disc">
+              <li>How do these systems handle the pace of the story? Is it consistent throughout?</li>
+            </ul>
+          </li>
+          <li class="mb-4">
+            <strong class="text-text">Autonomy of Participants</strong>
+            <ul class="mt-2 ml-6 space-y-2 list-disc">
+              <li>Does the system respect user's choices or change them to fit an overarching narrative?</li>
+            </ul>
+          </li>
+          <li class="mb-4">
+            <strong class="text-text">Ease of Use</strong>
+            <ul class="mt-2 ml-6 space-y-2 list-disc">
+              <li>How quickly can you get started with the system? Is there a learning curve?</li>
+            </ul>
+          </li>
+          <li class="mb-4">
+            <strong class="text-text">Brainstorming</strong>
+            <ul class="mt-2 ml-6 space-y-2 list-disc">
+              <li>Which system can generate better simulation ideas?</li>
+            </ul>
+          </li>
+          <li class="mb-4">
+            <strong class="text-text">Story Development</strong>
+            <ul class="mt-2 ml-6 space-y-2 list-disc">
+              <li>Does the story evolve naturally and change with user actions in a reliable way?</li>
+            </ul>
+          </li>
+          <li class="mb-4">
+            <strong class="text-text">Character Development</strong>
+            <ul class="mt-2 ml-6 space-y-2 list-disc">
+              <li>If you invest time in learning about a character, will that character develop or stay a basic, static character?</li>
+            </ul>
+          </li>
+          <li class="mb-4">
+            <strong class="text-text">Consequence Handling</strong>
+            <ul class="mt-2 ml-6 space-y-2 list-disc">
+              <li>How are action consequences handled? Does the AI determine everything and lord over the simulation reality or is there a different system that makes the AI simulation guide less omnipotent?</li>
+            </ul>
+          </li>
+        </ul>
+
+        <p class="mb-8">Testing and results are pending. This article will be updated soon.</p>
+      `,
+      date: 'November 10, 2025',
+      category: 'Emstrata'
+    },
     'building-to-build-what-should-exist': {
       slug: 'building-to-build-what-should-exist',
       title: 'Building to Build What Should Exist',
       content: `
-        <p class="mb-8">I became enamored by the world of startups after seeing The Social Network in high school. I had previously wanted to become a music producer and chase the dream of being an artist. Something was activated in me by that movie. It was likely equal parts that I identified with the outsider, Zuck, and that building startups was an incredibly monetizable route for my creative ambitions. Shortly after, I taught myself to build. I experienced all the pitfalls that come along with self-teaching programming, and I eventually pulled myself from the depths of tutorial hell with my keyboard held high. It wasn't for another, at least, 5 years until I'd come up with the basic concept of PLATO5. I had other ideas. My earliest was a weirdly ambitious idea for a 17-year-old: A new way to monetize music for independent artists called MUSICORUM, that allowed users to purchase percentages of independent musicians' royalties and fund their careers. Now, obviously, I could sit here and poke holes in that today, but what I had at that time was an idea that sounds a lot like what Patreon became. Later I pivoted the idea to include crypto for funding and also a music video streaming app, but I wasn't ready to build anything close to that complex on my own, nor should I have. I slowly lost interest and I had other ideas, like Isle, a simple app that was a mix between productivity software and social media. You would create public occurrences that would display on a timeline that other people could check out. It was clean and simple, and also an early example of me trying to give people tools to meet each other for public events.</p>
+        <p class="mb-8">I became enamored by the world of startups after seeing The Social Network in high school. I had previously wanted to become a music producer and chase the dream of being an artist. Something was activated in me by that movie. It was likely equal parts that I identified with the outsider, Zuck, and that building startups was an incredibly monetizable route for my creative ambitions. Shortly after, I taught myself to build. I experienced all the pitfalls that come along with self-teaching programming, and I eventually pulled myself from the depths of tutorial hell with my keyboard held high. It wasn't for another, at least, 5 years until I'd come up with the basic concept of PLATO5, an AI social app of my own, and a decent amount longer until I'd stumble upon the idea for Emstrata, my most recent project that utilizes AI to generate emergent narratives you can live in. I had other ideas early on. My earliest was a weirdly ambitious idea for a 17-year-old: A new way to monetize music for independent artists called MUSICORUM, that allowed users to purchase percentages of independent musicians' royalties and fund their careers. Now, obviously, I could sit here and poke holes in that today, but what I had at that time was an idea that sounds a lot like what Patreon became. Later I pivoted the idea to include crypto for funding and also a music video streaming app, but I wasn't ready to build anything close to that complex on my own, nor should I have. I slowly lost interest and I had other ideas, like Isle, a simple app that was a mix between productivity software and social media. You would create public occurrences that would display on a timeline that other people could check out. It was clean and simple, and also an early example of me trying to give people tools to meet each other for public events. Isle was sort of a prototypical version of PLATO5 in many ways.</p>
 
-        <p class="mb-8">The Silicon Valley of my late teens was one that I glamorized. I don't recognize it. The startup stories of today are largely that of little innovation and quick exits. Behemoth tech giant conglomerates eat competitors with their endless resources. Competition exists, but it exists between companies with pockets deeper than most countries and CEOs with net worths only matched by their arrogance. Perhaps I hold a misconception born of nostalgia, but I doubt it. Zuckerberg started Facebook in a dorm room and now he couldn't conceivably fall from the top of the subindustry of social media, without some sort of divine intervention. Plus, the social apps of today aren't even original. Snapchat introduces stories and the others copy, TikTok blows up and all of a sudden every app has a short-video feed. Even the outbreak ideas of our time have a short-lasting impact due to obvious mimicry. Perhaps I'm just lamenting the fact that it's much more difficult to shock the world with an app, but I don't quite think it's that either.</p>
+        <p class="mb-8">The Silicon Valley of my late teens was one that I glamorized. I don't recognize it. The startup stories of today are largely that of little innovation and quick exits. B2B SaaS products with a severe want for taste and imagination litter the rolling hills of tech hubs. Behemoth tech giant conglomerates eat competitors with their endless resources. Competition exists, but it exists between companies with pockets deeper than most countries and CEOs with net worths only matched by their arrogance. Perhaps I hold a misconception born of nostalgia, but I doubt it. Zuckerberg started Facebook in a dorm room and now he couldn't conceivably fall from the top of the subindustry of social media, without some sort of divine intervention. It has seemed almost insurmountable to build a new social app since at least 2015. TikTok has broken the mold there, but that was doubtless a herculean feat only possible with metric tons of money. Plus, the social apps of today aren't even original. Snapchat introduces stories and the others copy, TikTok blows up and all of a sudden every app has a short-video feed. Even the outbreak ideas of our time have a short-lasting impact due to obvious mimicry. Perhaps I'm just lamenting the fact that it's much more difficult to shock the world with an app, but I don't quite think it's that either. ChatGPT's launch was also enormous, and shocked the world in this traditional sense, but again, that was an Olympian lift, with the backing of an insane amount of capital and a once-in-a-lifetime innovation. And, further deepening my point, Meta, Google, and many others copied them within months of launch, rather than investing in their own new, exciting products. Smart Business? Maybe. Great for people who genuinely enjoy new tech and invention? Definitely not.</p>
 
-        <p class="mb-8">Naturally, founders have adapted to this new world of copycats and acquisitions. People have begun to build for exits, bump up their engagement metrics, and learn all the buzzwords that VCs orgasm to upon utterance.</p>
+        <p class="mb-8">Naturally, founders have adapted to this new world of copycats and acquisitions. People have begun to build for exits, bump up their engagement metrics, and learn all the buzzwords that VCs orgasm to upon utterance. Founders don't opt to build new platforms or tools anymore, which on a personal level, is about the only thing I find interesting to build. They have moved toward building incremental improvements to existing solutions or products that are just branded slightly differently to capture a different market segment.</p>
 
-        <p class="mb-8">If we go back further in time, we have Steve Wozniak and Jobs's idyllic tech landscape. A relative blank canvas from where we sit today. Unfathomable possibilities and unparalleled innovation. They sat on the precipice of a typhoon of consumer electronics that they would unleash on the world from a garage in California. It was a world with far fewer gatekeepers or hyper-entrenched players with checkbooks utilized as artillery. A place where an early sort of Countercultural Tech thrived and things were built because they should exist.</p>
+        <p class="mb-8">If we go back further in time, we have Steve Wozniak and Jobs' idyllic tech landscape. A relative blank canvas from where we sit today. Unfathomable possibilities and unparalleled innovation. They sat on the precipice of a typhoon of consumer electronics that they would unleash on the world from a garage in California. It was a world with far fewer gatekeepers or hyper-entrenched players with checkbooks utilized as artillery. A place where an early sort of Countercultural Tech thrived and things were built because they should exist.</p>
 
-        <p class="mb-8">This is gone. Maybe it exists in pockets, but from a bird's-eye view, it's nonexistent. Anti-competitive practices are simply the rules of the road on this highway and there's no clear upswell fighting against this. We will see less innovation, more pattycake between overpowered enterprises who have long forgotten what it was like to build what should exist and instead build what should pad their shareholders' pockets with buzzwords ready to fire at a moment's notice. They went from 'move fast and break things' to 'maintain market position and buy the competition'.</p>
+        <p class="mb-8">This is gone. Maybe it exists in pockets, but from a bird's-eye view, it's nonexistent. Anti-competitive practices are simply the rules of the road on this highway and there's no clear upswell fighting against this. We will see less innovation, more pattycake between overpowered enterprises who have long forgotten what it was like to build what should exist and instead build what should pad their shareholders' pockets with buzzwords ready to fire at a moment's notice. They went from 'move fast and break things' to 'maintain market position and buy the competition'. The money that flooded into the industry over the decades following the era of the advent of the personal computer likely contorted this revolutionary wave into its current form.</p>
 
-        <p class="mb-8">Now, all hope is not lost. I guess hope is the one true human universal. There's always a chance to make things better, even in a face-off with entrenched powers with unbelievable resources. My proposal is a cultural one: Countercultural Tech. A philocultural path for bringing new ideas to bear under these circumstances, that maintains chiefly the aim of always building to build what should exist. A path that rejects VC orthodoxy and catering to people who want subpar or incremental creation because it's easier to sell. We want a tech that revolutionizes and inspires again.</p>
+        <p class="mb-8">Now, all hope is not lost. I guess hope is the one true human universal. There's always a chance to make things better, even in a face-off with entrenched powers with unbelievable resources. My proposal is a cultural one: Countercultural Tech. A philocultural path for bringing new ideas to bear under these circumstances, that maintains chiefly the aim of always building to build what should exist. A path that rejects VC orthodoxy and catering to people who want subpar or incremental creation because it's easier to sell. We want a tech that revolutionizes and inspires again and isn't beholden to the interests of financiers with 12 vacation homes in 7 nations and 4 yachts, but perhaps accountable to the people or at least genuine innovation and tasteful execution.</p>
 
-        <p class="mb-8">To build what should exist could be seen as ambiguous, so let me expound on how this relates to ethical and cultural considerations. As mentioned above, many ambitious, young founders have gone the route of building a company for a quick exit or to get noticed by a VC firm. This is the VC orthodoxy that has captured an entire generation of industrious entrepreneurs. To build counterculturally you must surgically remove that from your mind. You need to build to effectuate some ideal future, whether that means maximizing profit or not. And, to be clear, that doesn't mean that a hyper-profitable company can just paste on a slogan or two and be considered Countercultural Tech. It will be clear in how a business is run, whether they are trying to effectuate a better society or not.</p>
+        <p class="mb-8">To build what should exist could be seen as ambiguous, so let me expound on how this relates to ethical and cultural considerations. As mentioned above, many ambitious, young founders have gone the route of building a company for a quick exits or to get noticed by a VC firm. They treat the term 'Founder' as if it's a job position, rather than an indicator of grit and creative entrepreneurship that struggles to find footing in normal employment. This is the VC orthodoxy that has captured an entire generation of industrious builders. To build counterculturally you must surgically remove that rot from your mind. You need to build to effectuate some ideal future, whether that means maximizing profit or not. And, to be clear, that doesn't mean that a hyper-profitable company can just paste on a slogan or two and be considered Countercultural Tech. It will be clear in how a business is run, whether they are trying to effectuate a better society or not, as it always was.</p>
 
-        <p class="mb-8">Let me be clear, I'm not begging for a change in this piece. This is a statement of intention. I aim to innovate at the level of the people I look up to and hope that's enough to break through the scaffolding and create something better on the other side. To find a place to build things that should exist.</p>
+        <p class="mb-8">Let me be clear, I'm not begging for a change in this piece. This is a statement of intention. I aim to innovate at the level of the people I look up to and hope that's enough to break through the scaffolding and create something better on the other side. To find a place to build things that should exist. I hope you join me there.</p>
       `,
       date: 'July 18, 2025',
-      category: 'Startups'
+      category: 'Startups',
+      updatedAt: 'November 9, 2025'
     },
     'corrosive-convenience': {
       slug: 'corrosive-convenience',
@@ -178,7 +276,16 @@ export class Article {
             </span>
           </div>
           <h1 class="text-4xl md:text-5xl font-heading text-text mb-4">${article.title}</h1>
-          <time class="text-text-secondary text-lg">${article.date}</time>
+          <div class="flex flex-col gap-2">
+            <time class="text-text-secondary text-lg">
+              Published: ${article.date}
+            </time>
+            ${article.updatedAt ? `
+            <time class="text-text-secondary text-base italic">
+              Updated: ${article.updatedAt}
+            </time>
+            ` : ''}
+          </div>
           
           ${article.note ? `
           <!-- Custom note -->
