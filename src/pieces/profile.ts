@@ -45,7 +45,7 @@ export class Profile {
               
               <div class="flex flex-wrap justify-center md:justify-start gap-3">
                 <a 
-                  href="/nicholas_goldstein_resume.pdf" 
+                  href="/Nick_Goldstein_Resume.pdf" 
                   target="_blank"
                   class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-secondary to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white rounded-full transition-all duration-300 font-medium shadow-lg hover:shadow-xl hover:scale-105"
                 >
