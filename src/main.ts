@@ -5,8 +5,8 @@ import { Experience } from './pieces/experience';
 import { Contact } from './pieces/contact';
 import { Articles } from './pieces/articles';
 import { Article } from './pieces/article';
-import { Courses } from './pieces/courses';
-import { Course } from './pieces/course';
+// import { Courses } from './pieces/courses';
+// import { Course } from './pieces/course';
 import { ScrollFade } from './scroll-fade';
 
 class HomeScreen {
@@ -18,8 +18,8 @@ class HomeScreen {
   private contact: Contact;
   private articles: Articles;
   private article: Article;
-  private courses: Courses;
-  private course: Course;
+  // private courses: Courses;
+  // private course: Course;
 
   constructor() {
     this.navigation = new Navigation();
@@ -29,8 +29,8 @@ class HomeScreen {
     this.contact = new Contact();
     this.articles = new Articles();
     this.article = new Article();
-    this.courses = new Courses();
-    this.course = new Course();
+    // this.courses = new Courses();
+    // this.course = new Course();
   }
 
   public mount(container: HTMLElement) {
@@ -141,30 +141,30 @@ class HomeScreen {
     window.scrollTo(0, 0);
   }
 
-  private showCoursesPage(): void {
-    if (!this.container) return;
-    
-    this.container.innerHTML = ''; // Clear existing content
-    
-    // Mount navigation and courses
-    this.navigation.mount(this.container);
-    this.courses.mount(this.container);
+  // private showCoursesPage(): void {
+  //   if (!this.container) return;
+  //   
+  //   this.container.innerHTML = ''; // Clear existing content
+  //   
+  //   // Mount navigation and courses
+  //   this.navigation.mount(this.container);
+  //   this.courses.mount(this.container);
+  //
+  //   ScrollFade.init();
+  //   window.scrollTo(0, 0);
+  // }
 
-    ScrollFade.init();
-    window.scrollTo(0, 0);
-  }
-
-  private showCoursePage(courseSlug: string, moduleNumber?: number): void {
-    if (!this.container) return;
-    
-    this.container.innerHTML = ''; // Clear existing content
-    
-    // Mount course (no navigation header, back button is in course component)
-    this.course.mount(this.container, courseSlug, moduleNumber);
-
-    ScrollFade.init();
-    window.scrollTo(0, 0);
-  }
+  // private showCoursePage(courseSlug: string, moduleNumber?: number): void {
+  //   if (!this.container) return;
+  //   
+  //   this.container.innerHTML = ''; // Clear existing content
+  //   
+  //   // Mount course (no navigation header, back button is in course component)
+  //   this.course.mount(this.container, courseSlug, moduleNumber);
+  //
+  //   ScrollFade.init();
+  //   window.scrollTo(0, 0);
+  // }
 
   private showNotFoundPage(): void {
     if (!this.container) return;
