@@ -28,7 +28,7 @@ export class Article {
           </div>
         </div>
 
-        <p class="mb-8">AI storytelling and the ability to immerse yourself in AI generated worlds is entering a brand new era. The good news is apps like Emstrata, have no interest in replacing human creativity or diminishing artistic minds, but rather harnessing them to work alongside AI to create a profound experience that couldn't have existed in the pre-LLM era.</p>
+        <p class="mb-8 first-letter:text-6xl first-letter:font-serif first-letter:float-left first-letter:mr-4 first-letter:leading-none first-letter:bg-gradient-to-br first-letter:from-secondary first-letter:to-purple first-letter:bg-clip-text first-letter:text-transparent first-letter:font-black">AI storytelling and the ability to immerse yourself in AI generated worlds is entering a brand new era. The good news is apps like Emstrata, have no interest in replacing human creativity or diminishing artistic minds, but rather harnessing them to work alongside AI to create a profound experience that couldn't have existed in the pre-LLM era.</p>
 
         <p class="mb-8">Today we'll jump into comparing Emstrata to the the biggest LLM out there, ChatGPT. Now, Emstrata is going to fall short of ChatGPT in a myriad of ways, for instance, it won't write your school essay or generate you a simple webpage, but what it will do particularly well is setup a narrative world based on your prompts in which you can inhabit. You can also alter these simulations by taking actions and allowing the AI to adapt to your decisions and by interacting with the tooling built specifically to always allow users to have the final say in the direction of their simulation.</p>
 
@@ -299,7 +299,7 @@ export class Article {
         </header>
 
         <!-- Article Content -->
-        <article class="prose prose-lg prose-invert max-w-none">
+        <article class="prose prose-lg prose-invert max-w-none fade-in-scroll opacity-0 translate-y-8 transition-all duration-700 ease-out">
           <div class="text-text-secondary leading-relaxed space-y-8 text-lg md:text-justify">
             <div class="first-letter:text-6xl first-letter:font-serif first-letter:float-left first-letter:mr-4 first-letter:leading-none first-letter:bg-gradient-to-br first-letter:from-secondary first-letter:to-purple first-letter:bg-clip-text first-letter:text-transparent first-letter:font-black">
               ${article.content}
@@ -330,6 +330,15 @@ export class Article {
     
     this.container.appendChild(section);
     ScrollFade.init();
+    
+    // Trigger fade-in for article content immediately on load
+    setTimeout(() => {
+      const articleContent = section.querySelector('article');
+      if (articleContent) {
+        articleContent.classList.remove('opacity-0', 'translate-y-8');
+        articleContent.classList.add('opacity-100', 'translate-y-0');
+      }
+    }, 50);
   }
 
   private showNotFound(): void {

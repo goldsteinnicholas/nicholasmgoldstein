@@ -7,7 +7,7 @@ export class Navigation {
     const header = document.createElement('header');
     header.className = 'py-4 bg-card-bg/60 backdrop-blur-sm sticky top-0 z-50 rounded-2xl shadow-sm';
     header.innerHTML = `
-      <nav class="flex justify-between items-center px-6 md:px-8 max-w-7xl mx-auto">
+      <nav class="flex flex-col md:flex-row justify-center md:justify-between items-center gap-3 md:gap-0 px-6 md:px-8 max-w-7xl mx-auto">
         <div class="flex items-center">
           <h1 class="text-lg md:text-xl font-heading text-text/80 hover:text-text transition-colors duration-300 cursor-pointer">
             Nick Goldstein
