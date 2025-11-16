@@ -309,26 +309,104 @@ export class Article {
 
         <!-- Share Section -->
         <div class="mt-16 pt-8 border-t border-text-secondary/20">
-          <div class="flex items-center justify-between">
+          <div class="flex items-center justify-between flex-wrap gap-4">
             <span class="text-text-secondary">Share this article:</span>
-            <div class="flex gap-4">
+            <div class="flex gap-4 flex-wrap">
               <a href="https://twitter.com/intent/tweet?text=${encodeURIComponent(article.title)}&url=${encodeURIComponent(window.location.href)}" 
                  target="_blank" 
-                 class="text-text-secondary hover:text-secondary transition-colors duration-300">
+                 rel="noopener noreferrer"
+                 class="text-text-secondary hover:text-blue-400 transition-colors duration-300"
+                 aria-label="Share on Twitter">
                 <i class="fab fa-twitter text-xl"></i>
               </a>
               <a href="https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(window.location.href)}" 
                  target="_blank" 
-                 class="text-text-secondary hover:text-secondary transition-colors duration-300">
+                 rel="noopener noreferrer"
+                 class="text-text-secondary hover:text-blue-600 transition-colors duration-300"
+                 aria-label="Share on LinkedIn">
                 <i class="fab fa-linkedin text-xl"></i>
               </a>
+              <a href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}" 
+                 target="_blank" 
+                 rel="noopener noreferrer"
+                 class="text-text-secondary hover:text-blue-700 transition-colors duration-300"
+                 aria-label="Share on Facebook">
+                <i class="fab fa-facebook text-xl"></i>
+              </a>
+              <a href="https://www.reddit.com/submit?url=${encodeURIComponent(window.location.href)}&title=${encodeURIComponent(article.title)}" 
+                 target="_blank" 
+                 rel="noopener noreferrer"
+                 class="text-text-secondary hover:text-orange-500 transition-colors duration-300"
+                 aria-label="Share on Reddit">
+                <i class="fab fa-reddit text-xl"></i>
+              </a>
+              <a href="mailto:?subject=${encodeURIComponent(article.title)}&body=${encodeURIComponent(window.location.href)}" 
+                 class="text-text-secondary hover:text-gray-500 transition-colors duration-300"
+                 aria-label="Share via Email">
+                <i class="fas fa-envelope text-xl"></i>
+              </a>
+              <button 
+                 id="copy-link-btn"
+                 class="text-text-secondary hover:text-secondary transition-colors duration-300 bg-transparent border-none cursor-pointer"
+                 aria-label="Copy link">
+                <i class="fas fa-link text-xl"></i>
+              </button>
             </div>
+          </div>
+        </div>
+
+        <!-- Check me out elsewhere -->
+        <div class="mt-12 pt-8 border-t border-text-secondary/20">
+          <p class="text-text-secondary mb-4 text-center">Check me out elsewhere:</p>
+          <div class="flex items-center justify-center gap-6 flex-wrap">
+            <a href="https://www.youtube.com/@goldsteinnick" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               class="text-text-secondary hover:text-red-500 transition-colors duration-300"
+               aria-label="YouTube">
+              <i class="fab fa-youtube text-2xl"></i>
+            </a>
+            <a href="https://goldsteinnick.substack.com/" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               class="text-text-secondary hover:text-orange-500 transition-colors duration-300"
+               aria-label="Substack">
+              <i class="fas fa-envelope-open-text text-2xl"></i>
+            </a>
+            <a href="https://medium.com/@nicholas_18438" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               class="text-text-secondary hover:text-black dark:hover:text-white transition-colors duration-300"
+               aria-label="Medium">
+              <i class="fab fa-medium text-2xl"></i>
+            </a>
+            <a href="https://www.threads.com/@goldsteinnick?xmt=AQF0Bw9n1CvqpqWunZqBIgKQjfG0Difn8fa_GlkIP1vchhE" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               class="text-text-secondary hover:text-black dark:hover:text-white transition-colors duration-300"
+               aria-label="Threads">
+              <i class="fab fa-threads text-2xl"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/nicholas-goldstein-362a13179/" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               class="text-text-secondary hover:text-blue-600 transition-colors duration-300"
+               aria-label="LinkedIn">
+              <i class="fab fa-linkedin text-2xl"></i>
+            </a>
           </div>
         </div>
       </div>
     `;
     
     this.container.appendChild(section);
+    
+    // Update metadata (canonical, title, description, Open Graph, Twitter)
+    this.updateMetadata(article, slug);
+    
+    // Setup copy link button
+    this.setupCopyLink();
+    
     ScrollFade.init();
     
     // Trigger fade-in for article content immediately on load
@@ -341,6 +419,77 @@ export class Article {
         }
       });
     });
+  }
+
+  private setupCopyLink(): void {
+    const copyBtn = this.container?.querySelector('#copy-link-btn');
+    if (!copyBtn) return;
+
+    copyBtn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(window.location.href);
+        const icon = copyBtn.querySelector('i');
+        if (icon) {
+          const originalClass = icon.className;
+          icon.className = 'fas fa-check text-xl';
+          setTimeout(() => {
+            icon.className = originalClass;
+          }, 2000);
+        }
+      } catch (err) {
+        console.error('Failed to copy link:', err);
+      }
+    });
+  }
+
+  private updateMetadata(article: ArticleContent, slug: string): void {
+    const canonicalUrl = `https://nicholasmgoldstein.com/articles/${slug}`;
+    const articleUrl = canonicalUrl;
+    
+    // Update canonical link
+    let canonicalLink = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
+    if (!canonicalLink) {
+      canonicalLink = document.createElement('link');
+      canonicalLink.rel = 'canonical';
+      document.head.appendChild(canonicalLink);
+    }
+    canonicalLink.href = canonicalUrl;
+    
+    // Update page title
+    document.title = `${article.title} | Nick Goldstein`;
+    
+    // Update or create meta description
+    let metaDescription = document.querySelector('meta[name="description"]') as HTMLMetaElement;
+    if (!metaDescription) {
+      metaDescription = document.createElement('meta');
+      metaDescription.name = 'description';
+      document.head.appendChild(metaDescription);
+    }
+    // Create a simple description from the first paragraph or use a default
+    const description = article.content.replace(/<[^>]*>/g, '').substring(0, 160) + '...';
+    metaDescription.content = description;
+    
+    // Update Open Graph tags
+    this.updateMetaTag('property', 'og:type', 'article');
+    this.updateMetaTag('property', 'og:url', articleUrl);
+    this.updateMetaTag('property', 'og:title', article.title);
+    this.updateMetaTag('property', 'og:description', description);
+    
+    // Update Twitter tags
+    this.updateMetaTag('property', 'twitter:card', 'summary_large_image');
+    this.updateMetaTag('property', 'twitter:url', articleUrl);
+    this.updateMetaTag('property', 'twitter:title', article.title);
+    this.updateMetaTag('property', 'twitter:description', description);
+  }
+
+  private updateMetaTag(attribute: string, name: string, content: string): void {
+    let metaTag = document.querySelector(`meta[${attribute}="${name}"]`) as HTMLMetaElement;
+    if (!metaTag) {
+      metaTag = document.createElement('meta');
+      metaTag.setAttribute(attribute, name);
+      document.head.appendChild(metaTag);
+    }
+    metaTag.content = content;
   }
 
   private showNotFound(): void {

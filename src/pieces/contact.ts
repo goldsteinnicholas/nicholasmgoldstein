@@ -16,7 +16,7 @@ export class Contact {
         <div class="space-y-6">
           <div class="bg-gradient-to-r from-secondary/20 to-blue-600/20 p-8 rounded-xl border border-secondary/30 shadow-lg">
             <span class="text-lg text-text-secondary block mb-4 text-center">Professional</span>
-            <div class="flex justify-center gap-8">
+            <div class="flex justify-center gap-8 flex-wrap">
               <a href="https://github.com/goldsteinnicholas" target="_blank"
                  class="text-text-secondary hover:text-secondary transition-colors duration-300 hover:scale-110 transform">
                 <i class="fab fa-github text-3xl"></i>
@@ -25,16 +25,20 @@ export class Contact {
                  class="text-text-secondary hover:text-secondary transition-colors duration-300 hover:scale-110 transform">
                 <i class="fab fa-linkedin text-3xl"></i>
               </a>
+              <a href="https://goldsteinnick.substack.com/" target="_blank"
+                 class="text-text-secondary hover:text-secondary transition-colors duration-300 hover:scale-110 transform">
+                <i class="fas fa-envelope-open-text text-3xl"></i>
+              </a>
+              <a href="https://medium.com/@nicholas_18438" target="_blank"
+                 class="text-text-secondary hover:text-secondary transition-colors duration-300 hover:scale-110 transform">
+                <i class="fab fa-medium text-3xl"></i>
+              </a>
             </div>
           </div>
 
           <div class="bg-gradient-to-r from-purple/20 to-purple-600/20 p-8 rounded-xl border border-purple/30 shadow-lg">
             <span class="text-lg text-text-secondary block mb-4 text-center">Social</span>
-            <div class="flex justify-center gap-8">
-              <a href="https://x.com/goldsteinnichol" target="_blank"
-                 class="text-text-secondary hover:text-purple transition-colors duration-300 hover:scale-110 transform">
-                <i class="fab fa-x-twitter text-3xl"></i>
-              </a>
+            <div class="flex justify-center gap-8 flex-wrap">
               <a href="https://www.instagram.com/goldsteinnick" target="_blank"
                  class="text-text-secondary hover:text-purple transition-colors duration-300 hover:scale-110 transform">
                 <i class="fab fa-instagram text-3xl"></i>
@@ -46,6 +50,10 @@ export class Contact {
               <a href="https://www.youtube.com/@goldsteinnick" target="_blank"
                  class="text-text-secondary hover:text-purple transition-colors duration-300 hover:scale-110 transform">
                 <i class="fab fa-youtube text-3xl"></i>
+              </a>
+              <a href="https://www.threads.com/@goldsteinnick?xmt=AQF0Bw9n1CvqpqWunZqBIgKQjfG0Difn8fa_GlkIP1vchhE" target="_blank"
+                 class="text-text-secondary hover:text-purple transition-colors duration-300 hover:scale-110 transform">
+                <i class="fab fa-threads text-3xl"></i>
               </a>
             </div>
           </div>
