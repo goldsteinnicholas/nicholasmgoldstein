@@ -20,7 +20,8 @@ export class Course {
     {
       number: '2',
       title: 'Setting Up Your Platform Prereqs',
-      description: 'Developing the framework to iterate on your platforms, selecting a tech & productivity stack.'
+      description: 'Developing the framework to iterate on your platforms, selecting a tech & productivity stack.',
+      slideDeckPath: '/02 Build AI Platforms from Scratch - Slide Deck/index.html'
     },
     {
       number: '3',
@@ -64,8 +65,8 @@ export class Course {
                 return `
                 <a 
                   href="/course/${courseSlug}/module/${module.number}"
-                  class="md:bg-card-bg md:border border-text-secondary/20 rounded-xl p-3 md:p-4 cursor-pointer group flex-shrink-0 w-20 md:w-auto md:hover:border-accent/30 hover:shadow-lg transition-all duration-300 ${isActive ? 'md:border-accent/50 md:bg-primary/5' : ''} md:flex md:flex-col" style="height: 220px;">
-                  <div class="text-sm md:text-base text-secondary font-medium mb-1 md:mb-2 text-center md:text-left">${module.number}</div>
+                  class="md:bg-card-bg md:border border-text-secondary/20 rounded-full md:rounded-xl flex items-center justify-center md:items-start md:justify-start w-12 h-12 md:w-auto md:h-[220px] md:p-4 cursor-pointer group flex-shrink-0 md:hover:border-accent/30 hover:shadow-lg transition-all duration-300 ${isActive ? 'bg-primary/15 text-accent border-2 border-blue-500 md:border-accent/50 md:bg-primary/5' : 'text-text-secondary hover:text-text hover:bg-primary/10 border'} md:border-text-secondary/20 md:flex md:flex-col">
+                  <div class="text-base md:text-base text-secondary font-semibold md:font-medium md:mb-2">${module.number}</div>
                   <h3 class="text-xs md:text-sm lg:text-base font-heading text-text mb-1 md:mb-2 hidden md:block group-hover:text-accent transition-colors duration-300">${module.title}</h3>
                   <p class="text-xs md:text-sm text-text-secondary leading-relaxed hidden md:block flex-grow">${module.description}</p>
                 </a>
@@ -85,7 +86,7 @@ export class Course {
             <div class="aspect-video bg-card-bg border border-text-secondary/20 rounded-xl overflow-hidden mt-6">
               <div id="youtube-embed" class="w-full h-full flex items-center justify-center">
                 <!-- YouTube embed will be inserted here -->
-                <p class="text-text-secondary">YouTube video embed placeholder</p>
+                <p class="text-text-secondary text-lg">Video Coming Soon...</p>
               </div>
             </div>
           </div>
@@ -197,18 +198,8 @@ export class Course {
     const embedContainer = this.container?.querySelector('#youtube-embed');
     if (!embedContainer) return;
 
-    // Placeholder - replace with actual YouTube video ID
-    const videoId = 'dQw4w9WgXcQ'; // Replace with actual video ID
-    
     embedContainer.innerHTML = `
-      <iframe 
-        class="w-full h-full" 
-        src="https://www.youtube.com/embed/${videoId}" 
-        title="YouTube video player" 
-        frameborder="0" 
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-        allowfullscreen>
-      </iframe>
+      <p class="text-text-secondary text-lg">Video Coming Soon</p>
     `;
   }
 

@@ -18,9 +18,10 @@ export class Navigation {
              class="px-3 py-1.5 rounded-xl text-text/70 hover:text-text hover:bg-primary/10 transition-all duration-300 text-sm">
              Articles
           </a>
-          <span class="px-3 py-1.5 rounded-xl text-text/40 cursor-not-allowed text-sm opacity-50">
+          <a href="/courses" 
+             class="px-3 py-1.5 rounded-xl text-text/70 hover:text-text hover:bg-primary/10 transition-all duration-300 text-sm">
              Courses
-          </span>
+          </a>
         </div>
       </nav>
     `;
