@@ -332,13 +332,15 @@ export class Article {
     ScrollFade.init();
     
     // Trigger fade-in for article content immediately on load
-    setTimeout(() => {
-      const articleContent = section.querySelector('article');
-      if (articleContent) {
-        articleContent.classList.remove('opacity-0', 'translate-y-8');
-        articleContent.classList.add('opacity-100', 'translate-y-0');
-      }
-    }, 50);
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        const articleContent = section.querySelector('article');
+        if (articleContent) {
+          articleContent.classList.remove('opacity-0', 'translate-y-8');
+          articleContent.classList.add('opacity-100', 'translate-y-0');
+        }
+      });
+    });
   }
 
   private showNotFound(): void {
