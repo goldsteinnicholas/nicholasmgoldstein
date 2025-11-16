@@ -412,6 +412,11 @@ export class Article {
     // Trigger fade-in for article content immediately on load
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
+        // Fade in the section wrapper
+        section.classList.remove('opacity-0', 'translate-y-8');
+        section.classList.add('opacity-100', 'translate-y-0');
+        
+        // Fade in the article content
         const articleContent = section.querySelector('article');
         if (articleContent) {
           articleContent.classList.remove('opacity-0', 'translate-y-8');
