@@ -323,6 +323,10 @@ export class Article {
       return;
     }
 
+    // Parse dates for datetime attributes
+    const publishedDateISO = this.parseDate(article.date);
+    const updatedDateISO = article.updatedAt ? this.parseDate(article.updatedAt) : '';
+
     const section = document.createElement('section');
     section.className = 'py-16 px-6 fade-in-scroll opacity-0 translate-y-8 transition-all duration-700 ease-out';
     section.innerHTML = `
@@ -344,11 +348,11 @@ export class Article {
           </div>
           <h1 class="text-4xl md:text-5xl font-heading text-text mb-4">${article.title}</h1>
           <div class="flex flex-col gap-2">
-            <time class="text-text-secondary text-lg">
+            <time class="text-text-secondary text-lg" datetime="${publishedDateISO}">
               Published: ${article.date}
             </time>
             ${article.updatedAt ? `
-            <time class="text-text-secondary text-base italic">
+            <time class="text-text-secondary text-base italic" datetime="${updatedDateISO}">
               Updated: ${article.updatedAt}
             </time>
             ` : ''}
@@ -518,6 +522,10 @@ export class Article {
     const canonicalUrl = `https://nicholasmgoldstein.com/articles/${slug}`;
     const articleUrl = canonicalUrl;
     
+    // Parse dates for proper formatting
+    const publishedDate = this.parseDate(article.date);
+    const modifiedDate = article.updatedAt ? this.parseDate(article.updatedAt) : publishedDate;
+    
     // Update canonical link
     let canonicalLink = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
     if (!canonicalLink) {
@@ -547,11 +555,84 @@ export class Article {
     this.updateMetaTag('property', 'og:title', article.title);
     this.updateMetaTag('property', 'og:description', description);
     
+    // Article-specific Open Graph tags
+    this.updateMetaTag('property', 'article:published_time', publishedDate);
+    this.updateMetaTag('property', 'article:modified_time', modifiedDate);
+    this.updateMetaTag('property', 'article:author', 'Nick Goldstein');
+    this.updateMetaTag('property', 'article:section', article.category);
+    this.updateMetaTag('property', 'article:tag', article.category);
+    
     // Update Twitter tags
     this.updateMetaTag('property', 'twitter:card', 'summary_large_image');
     this.updateMetaTag('property', 'twitter:url', articleUrl);
     this.updateMetaTag('property', 'twitter:title', article.title);
     this.updateMetaTag('property', 'twitter:description', description);
+    
+    // Add Schema.org Article structured data for AI readability
+    this.addArticleStructuredData(article, slug, publishedDate, modifiedDate);
+  }
+
+  private parseDate(dateString: string): string {
+    // Convert "November 17, 2025" to ISO 8601 format "2025-11-17"
+    const months: Record<string, string> = {
+      'January': '01', 'February': '02', 'March': '03', 'April': '04',
+      'May': '05', 'June': '06', 'July': '07', 'August': '08',
+      'September': '09', 'October': '10', 'November': '11', 'December': '12'
+    };
+    
+    const parts = dateString.split(' ');
+    if (parts.length === 3) {
+      const month = months[parts[0]];
+      const day = parts[1].replace(',', '').padStart(2, '0');
+      const year = parts[2];
+      return `${year}-${month}-${day}`;
+    }
+    return new Date().toISOString().split('T')[0];
+  }
+
+  private addArticleStructuredData(article: ArticleContent, slug: string, publishedDate: string, modifiedDate: string): void {
+    // Remove existing article structured data if any
+    const existingScript = document.querySelector('script[type="application/ld+json"][data-article-schema]');
+    if (existingScript) {
+      existingScript.remove();
+    }
+    
+    // Extract plain text content for description
+    const textContent = article.content.replace(/<[^>]*>/g, '').trim();
+    const articleDescription = textContent.substring(0, 200) + (textContent.length > 200 ? '...' : '');
+    
+    const structuredData = {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": article.title,
+      "description": articleDescription,
+      "image": "https://nicholasmgoldstein.com/nicholasmgoldstein-favicon.png",
+      "datePublished": publishedDate,
+      "dateModified": modifiedDate,
+      "author": {
+        "@type": "Person",
+        "name": "Nick Goldstein",
+        "url": "https://nicholasmgoldstein.com"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Nick Goldstein",
+        "url": "https://nicholasmgoldstein.com"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": `https://nicholasmgoldstein.com/articles/${slug}`
+      },
+      "articleSection": article.category,
+      "keywords": article.category,
+      "inLanguage": "en-US"
+    };
+    
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.setAttribute('data-article-schema', 'true');
+    script.textContent = JSON.stringify(structuredData);
+    document.head.appendChild(script);
   }
 
   private updateMetaTag(attribute: string, name: string, content: string): void {
