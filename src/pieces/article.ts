@@ -597,8 +597,27 @@ export class Article {
       existingScript.remove();
     }
     
-    // Extract plain text content for description
-    const textContent = article.content.replace(/<[^>]*>/g, '').trim();
+    // Extract plain text content - remove HTML tags but preserve structure
+    let textContent = article.content
+      .replace(/<blockquote[^>]*>/g, '\n\n> ')
+      .replace(/<\/blockquote>/g, '\n\n')
+      .replace(/<strong[^>]*>/g, '**')
+      .replace(/<\/strong>/g, '**')
+      .replace(/<em[^>]*>/g, '*')
+      .replace(/<\/em>/g, '*')
+      .replace(/<li[^>]*>/g, '\n- ')
+      .replace(/<\/li>/g, '')
+      .replace(/<ul[^>]*>/g, '\n')
+      .replace(/<\/ul>/g, '\n')
+      .replace(/<p[^>]*>/g, '\n\n')
+      .replace(/<\/p>/g, '')
+      .replace(/<div[^>]*>/g, '\n')
+      .replace(/<\/div>/g, '')
+      .replace(/<img[^>]*>/g, '')
+      .replace(/<[^>]*>/g, '')
+      .replace(/\n{3,}/g, '\n\n')
+      .trim();
+    
     const articleDescription = textContent.substring(0, 200) + (textContent.length > 200 ? '...' : '');
     
     const structuredData = {
@@ -606,6 +625,7 @@ export class Article {
       "@type": "Article",
       "headline": article.title,
       "description": articleDescription,
+      "articleBody": textContent,
       "image": "https://nicholasmgoldstein.com/nicholasmgoldstein-favicon.png",
       "datePublished": publishedDate,
       "dateModified": modifiedDate,
