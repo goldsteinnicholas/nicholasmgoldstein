@@ -15,6 +15,13 @@ export class Articles {
   
   private articles: Article[] = [
     {
+      slug: 'learning-german-through-ai-simulations-part-i',
+      title: 'Learning German Through AI Simulations Part I',
+      excerpt: 'Language learning is an incredible pain. Most people I know took Spanish in high school and the amount of Spanish that they retained couldn\'t order them a taco. So few Americans are bilingual today and the reason is obvious; you really only need English in the United States to get by.',
+      date: 'November 17, 2025',
+      category: 'Emstrata'
+    },
+    {
       slug: 'can-emstrata-dethrone-chatgpt-in-storytelling',
       title: 'Can Emstrata Dethrone ChatGPT in Storytelling?',
       excerpt: 'AI storytelling and the ability to immerse yourself in AI generated worlds is entering a brand new era. The good news is apps like Emstrata, have no interest in replacing human creativity or diminishing artistic minds, but rather harnessing them to work alongside AI to create a profound experience that couldn\'t have existed in the pre-LLM era.',
