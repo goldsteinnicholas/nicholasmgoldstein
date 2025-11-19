@@ -15,6 +15,13 @@ export class Articles {
   
   private articles: Article[] = [
     {
+      slug: 'the-dystopian-future-of-ai-girlfriends',
+      title: 'The Dystopian Future of AI Girlfriends',
+      excerpt: 'Can anyone think of a more apt way our society comes to a screeching halt than through the monopolization of human attention? It seems we haven\'t learned much from our experiments in degrading people\'s dopamine receptors and neural circuits for decades at this point.',
+      date: 'November 19, 2025',
+      category: 'Society & Culture'
+    },
+    {
       slug: 'learning-german-through-ai-simulations-part-i',
       title: 'Learning German Through AI Simulations Part I',
       excerpt: 'Language learning is an incredible pain. Most people I know took Spanish in high school and the amount of Spanish that they retained couldn\'t order them a taco. So few Americans are bilingual today and the reason is obvious; you really only need English in the United States to get by.',
