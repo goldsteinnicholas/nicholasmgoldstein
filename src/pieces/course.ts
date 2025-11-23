@@ -47,7 +47,7 @@ export class Course {
     {
       number: '7',
       title: 'Real-World Application: PLATO5 Planning',
-      description: 'Apply learned concepts to a real-world case study: building the planning system for PLATO5.'
+      description: 'Apply learned concepts to a real-world case study: planning PLATO5\'s rebuild.'
     },
     {
       number: '8',
