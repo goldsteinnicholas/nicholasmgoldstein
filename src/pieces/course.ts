@@ -2,6 +2,7 @@ import { ScrollFade } from '../scroll-fade';
 
 interface CourseModule {
   number: string;
+  chapter: number;
   title: string;
   description: string;
   slideDeckPath?: string;
@@ -11,131 +12,172 @@ export class Course {
   private container: HTMLElement | null = null;
   
   private modules: CourseModule[] = [
+    // Chapter 1: Foundations
     {
       number: '1',
+      chapter: 1,
       title: 'Before we get started',
       description: 'Introduction to the course concept and how it will be structured.',
       slideDeckPath: '/01 Build AI Platforms from Scratch - Slide Deck/index.html'
     },
     {
       number: '2',
+      chapter: 1,
       title: 'Setting Up Your Platform Prereqs',
       description: 'Developing the framework to iterate on your platforms, selecting a tech & productivity stack.',
       slideDeckPath: '/02 Build AI Platforms from Scratch - Slide Deck/index.html'
     },
     {
       number: '3',
+      chapter: 1,
       title: 'Prompt Engineering',
       description: 'Learn effective prompt engineering techniques for building AI platforms.'
-      // slideDeckPath will be added when available
     },
     {
       number: '4',
+      chapter: 1,
       title: 'Multilayered Architectures',
       description: 'Explore complex system architectures with multiple layers for building robust AI platforms.'
     },
     {
       number: '5',
+      chapter: 1,
       title: 'Recap: Modules 1-5',
-      description: 'A comprehensive review of the foundational concepts: course introduction, platform prerequisites, prompt engineering, multilayered architectures, and data operations.'
+      description: 'A comprehensive review of the foundational concepts: course introduction, platform prerequisites, prompt engineering, and multilayered architectures.'
     },
+    // Chapter 2: Core Architecture & Data Operations
     {
       number: '6',
+      chapter: 2,
       title: 'CRUD, Transformations, & Parsing',
       description: 'Understand data operations, transformations, and parsing techniques essential for AI platform development.'
     },
     {
       number: '7',
-      title: 'Real-World Application: PLATO5 Planning',
-      description: 'Apply learned concepts to a real-world case study: planning PLATO5\'s rebuild.'
-    },
-    {
-      number: '8',
+      chapter: 2,
       title: 'AI-Rep Architecture In-Depth',
       description: 'Deep dive into AI-Rep architecture patterns and how to implement them in your platforms.'
     },
     {
-      number: '9',
+      number: '8',
+      chapter: 2,
       title: 'Building Your Own Architecture / Compounding Transformations',
       description: 'Learn to design and build custom architectures by compounding transformations for complex AI systems.'
     },
     {
-      number: '10',
-      title: 'Recap: Modules 6-10',
-      description: 'A comprehensive review of advanced architecture topics: PLATO5 planning, AI-Rep patterns, custom architectures, progress updates, and Emstrata\'s architecture.'
+      number: '9',
+      chapter: 2,
+      title: 'Real-World Application: PLATO5 Planning',
+      description: 'Apply learned concepts to a real-world case study: planning PLATO5\'s rebuild.'
     },
     {
+      number: '10',
+      chapter: 2,
+      title: 'Recap: Modules 6-10',
+      description: 'A comprehensive review of data operations, AI-Rep patterns, custom architectures, and PLATO5 planning.'
+    },
+    // Chapter 3: Real-World Applications & Design
+    {
       number: '11',
+      chapter: 3,
       title: 'In-Depth Look: Emstrata\'s Architecture',
       description: 'Explore the architecture behind Emstrata, a platform for creating immersive narrative experiences using AI to generate emergent storylines.'
     },
     {
       number: '12',
+      chapter: 3,
       title: 'Notes on Platform Design & Design Language',
       description: 'Learn about platform design principles and developing a cohesive design language for AI-powered applications.'
     },
     {
       number: '13',
+      chapter: 3,
       title: 'Considering Use-Cases, Demographics, & Markets',
       description: 'Explore how to identify use-cases, understand target demographics, and evaluate market opportunities for AI platforms.'
     },
     {
       number: '14',
+      chapter: 3,
       title: 'Messaging About Novel Products/Services',
       description: 'Learn how to effectively communicate and market innovative AI products and services to your target audience.'
     },
     {
       number: '15',
+      chapter: 3,
       title: 'Recap: Modules 11-15',
-      description: 'A comprehensive review of platform design, market considerations, messaging, infrastructure, and the latest PLATO5 rebuild progress.'
+      description: 'A comprehensive review of real-world architectures, platform design, market considerations, and messaging.'
     },
+    // Chapter 4: Infrastructure & Integration
     {
       number: '16',
-      title: 'Hosting Your APIs, Storing Your Multimedia, etc.',
-      description: 'Practical guidance on infrastructure decisions: hosting APIs, storing multimedia content, and managing platform resources.'
+      chapter: 4,
+      title: 'Deployment & Distribution - Web, Mobile, & API Hosting & Storage',
+      description: 'Learn how to deploy and distribute your platform: hosting APIs, deploying web apps, publishing to app stores, and storing multimedia content.'
     },
     {
       number: '17',
-      title: 'New Update on PLATO5\'s Rebuild',
-      description: 'Latest progress update on the PLATO5 rebuild, covering recent developments, challenges overcome, and architectural refinements.'
-    },
-    {
-      number: '18',
+      chapter: 4,
       title: 'Integrating Other AI Services',
       description: 'Learn how to integrate additional AI capabilities including TTS, image generation, video generation, and other AI algorithms into your platform.'
     },
     {
-      number: '19',
+      number: '18',
+      chapter: 4,
       title: 'Securing AI Pipelines Against Hallucination',
       description: 'Strategies and techniques for preventing, detecting, and handling AI hallucinations to ensure reliable and trustworthy outputs.'
     },
     {
-      number: '20',
-      title: 'Recap: Modules 16-20',
-      description: 'A comprehensive review of the advanced topics covered: infrastructure, PLATO5 rebuild updates, integrating AI services, securing pipelines, and overlooked considerations.'
+      number: '19',
+      chapter: 4,
+      title: 'New Update on PLATO5\'s Rebuild',
+      description: 'Latest progress update on the PLATO5 rebuild, covering recent developments, challenges overcome, and architectural refinements.'
     },
     {
+      number: '20',
+      chapter: 4,
+      title: 'Recap: Modules 16-20',
+      description: 'A comprehensive review of infrastructure, AI service integration, security, and PLATO5 rebuild progress.'
+    },
+    // Chapter 5: Ethics, Operations & Growth
+    {
       number: '21',
+      chapter: 5,
+      title: 'Ethical AI Usage & Examples of Pitfalls',
+      description: 'Learn about ethical considerations in AI development, including privacy concerns, disclosing AI usage, and common pitfalls to avoid when building AI platforms.'
+    },
+    {
+      number: '22',
+      chapter: 5,
+      title: 'Retaining Your AI Outputs for Future Training',
+      description: 'Strategies for storing and managing AI-generated outputs to enable future model training, fine-tuning, and continuous improvement of your platform.'
+    },
+    {
+      number: '23',
+      chapter: 5,
       title: 'Things that go Unconsidered',
       description: 'Critical but often overlooked aspects of platform development including Terms of Service, session logic, data retention policies, and other essential considerations.'
     },
     {
-      number: '20',
-      title: 'Recap: Modules 16-20',
-      description: 'A comprehensive review of the advanced topics covered: infrastructure, PLATO5 rebuild updates, integrating AI services, securing pipelines, and overlooked considerations.'
-    },
-    {
-      number: '21',
+      number: '24',
+      chapter: 5,
       title: 'Building An Audience for your platform',
       description: 'Strategies for growing and engaging an audience for your AI platform, from early adopters to broader market reach.'
     },
     {
-      number: '22',
+      number: '25',
+      chapter: 5,
+      title: 'Recap: Modules 21-25',
+      description: 'A comprehensive review of ethical AI usage, retaining outputs, overlooked considerations, and audience building.'
+    },
+    {
+      number: '26',
+      chapter: 5,
       title: 'Onboarding Users',
       description: 'Design effective user onboarding experiences that help users understand and successfully use your AI platform\'s capabilities.'
     },
     {
-      number: '23',
+      number: '27',
+      chapter: 5,
       title: 'Wrap-Up: Building AI Platforms from Scratch',
       description: 'Final thoughts and key takeaways from the course, summarizing the journey from foundational concepts to building complete AI platforms.'
     }
@@ -167,23 +209,7 @@ export class Course {
           <div class="mb-6 md:mb-0">
             <h2 class="text-lg md:text-xl font-heading text-text mb-4 md:mb-6">Modules</h2>
             <nav class="flex md:flex-col gap-3 overflow-x-auto md:overflow-y-auto md:overflow-x-visible md:max-h-[calc(100vh-8rem)] pb-2 md:pb-0 -mx-6 px-6 md:mx-0 md:px-0">
-              ${this.modules.map(module => {
-                const isActive = module.number === currentModule.number;
-                return `
-                <a 
-                  href="/course/${courseSlug}/module/${module.number}"
-                  class="md:bg-card-bg md:border border-text-secondary/20 rounded-full md:rounded-xl flex items-center justify-center md:items-start md:justify-start w-12 h-12 md:w-auto md:h-[280px] md:p-4 cursor-pointer group flex-shrink-0 md:hover:border-accent/30 hover:shadow-lg transition-all duration-300 ${isActive ? 'bg-primary/15 text-accent border-2 border-blue-500 md:border-accent/50 md:bg-primary/5' : 'text-text-secondary hover:text-text hover:bg-primary/10 border'} md:border-text-secondary/20 md:flex md:flex-col md:overflow-hidden">
-                  <!-- Mobile: Just the number -->
-                  <div class="md:hidden text-base text-secondary font-semibold">${module.number}</div>
-                  <!-- Desktop: Full content -->
-                  <div class="hidden md:flex md:flex-col md:w-full md:h-full">
-                    <div class="text-base text-secondary font-semibold md:font-medium md:mb-2 flex-shrink-0">${module.number}</div>
-                    <h3 class="text-xs md:text-sm lg:text-base font-heading text-text mb-1 md:mb-2 group-hover:text-accent transition-colors duration-300 break-words leading-tight" style="display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">${module.title}</h3>
-                    <p class="text-xs md:text-sm text-text-secondary leading-relaxed flex-grow break-words" style="display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden;">${module.description}</p>
-                  </div>
-                </a>
-              `;
-              }).join('')}
+              ${this.renderModulesByChapter(courseSlug, currentModule)}
             </nav>
           </div>
         </aside>
@@ -282,6 +308,49 @@ export class Course {
     ScrollFade.init();
   }
 
+  private renderModulesByChapter(courseSlug: string, currentModule: CourseModule): string {
+    const chapterNames = [
+      '', // 0-indexed, so chapter 1 is at index 1
+      'Chapter 1: Foundations',
+      'Chapter 2: Core Architecture & Data Operations',
+      'Chapter 3: Real-World Applications, Design & Communication',
+      'Chapter 4: Infrastructure & Integration',
+      'Chapter 5: Ethics, Operations, Audience Building'
+    ];
+
+    let currentChapter = 0;
+    let html = '';
+
+    this.modules.forEach(module => {
+      if (module.chapter !== currentChapter) {
+        currentChapter = module.chapter;
+        html += `
+          <div class="hidden md:block mt-4 mb-2 first:mt-0">
+            <h3 class="text-sm font-heading text-text-secondary/70 font-semibold uppercase tracking-wide">${chapterNames[currentChapter]}</h3>
+          </div>
+        `;
+      }
+
+      const isActive = module.number === currentModule.number;
+      html += `
+        <a 
+          href="/course/${courseSlug}/module/${module.number}"
+          class="md:bg-card-bg md:border border-text-secondary/20 rounded-full md:rounded-xl flex items-center justify-center md:items-start md:justify-start w-12 h-12 md:w-auto md:h-[280px] md:p-4 cursor-pointer group flex-shrink-0 md:hover:border-accent/30 hover:shadow-lg transition-all duration-300 ${isActive ? 'bg-primary/15 text-accent border-2 border-blue-500 md:border-accent/50 md:bg-primary/5' : 'text-text-secondary hover:text-text hover:bg-primary/10 border'} md:border-text-secondary/20 md:flex md:flex-col md:overflow-hidden">
+          <!-- Mobile: Just the number -->
+          <div class="md:hidden text-base text-secondary font-semibold">${module.number}</div>
+          <!-- Desktop: Full content -->
+          <div class="hidden md:flex md:flex-col md:w-full md:h-full">
+            <div class="text-base text-secondary font-semibold md:font-medium md:mb-2 flex-shrink-0">${module.number}</div>
+            <h3 class="text-xs md:text-sm lg:text-base font-heading text-text mb-1 md:mb-2 group-hover:text-accent transition-colors duration-300 break-words leading-tight" style="display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">${module.title}</h3>
+            <p class="text-xs md:text-sm text-text-secondary leading-relaxed flex-grow break-words" style="display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden;">${module.description}</p>
+          </div>
+        </a>
+      `;
+    });
+
+    return html;
+  }
+
   private setupModuleLinks(courseSlug: string): void {
     const moduleLinks = this.container?.querySelectorAll(`a[href^="/course/${courseSlug}/module/"]`);
     moduleLinks?.forEach(link => {
@@ -358,4 +427,5 @@ export class Course {
     });
   }
 }
+
 
