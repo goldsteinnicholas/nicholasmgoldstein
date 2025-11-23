@@ -159,7 +159,8 @@ class HomeScreen {
     
     this.container.innerHTML = ''; // Clear existing content
     
-    // Mount course (no navigation header, back button is in course component)
+    // Mount navigation and course
+    this.navigation.mount(this.container);
     this.course.mount(this.container, courseSlug, moduleNumber);
 
     ScrollFade.init();

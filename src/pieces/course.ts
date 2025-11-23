@@ -33,6 +33,111 @@ export class Course {
       number: '4',
       title: 'Multilayered Architectures',
       description: 'Explore complex system architectures with multiple layers for building robust AI platforms.'
+    },
+    {
+      number: '5',
+      title: 'Recap: Modules 1-5',
+      description: 'A comprehensive review of the foundational concepts: course introduction, platform prerequisites, prompt engineering, multilayered architectures, and data operations.'
+    },
+    {
+      number: '6',
+      title: 'CRUD, Transformations, & Parsing',
+      description: 'Understand data operations, transformations, and parsing techniques essential for AI platform development.'
+    },
+    {
+      number: '7',
+      title: 'Real-World Application: PLATO5 Planning',
+      description: 'Apply learned concepts to a real-world case study: building the planning system for PLATO5.'
+    },
+    {
+      number: '8',
+      title: 'AI-Rep Architecture In-Depth',
+      description: 'Deep dive into AI-Rep architecture patterns and how to implement them in your platforms.'
+    },
+    {
+      number: '9',
+      title: 'Building Your Own Architecture / Compounding Transformations',
+      description: 'Learn to design and build custom architectures by compounding transformations for complex AI systems.'
+    },
+    {
+      number: '10',
+      title: 'Recap: Modules 6-10',
+      description: 'A comprehensive review of advanced architecture topics: PLATO5 planning, AI-Rep patterns, custom architectures, progress updates, and Emstrata\'s architecture.'
+    },
+    {
+      number: '11',
+      title: 'In-Depth Look: Emstrata\'s Architecture',
+      description: 'Explore the architecture behind Emstrata, a platform for creating immersive narrative experiences using AI to generate emergent storylines.'
+    },
+    {
+      number: '12',
+      title: 'Notes on Platform Design & Design Language',
+      description: 'Learn about platform design principles and developing a cohesive design language for AI-powered applications.'
+    },
+    {
+      number: '13',
+      title: 'Considering Use-Cases, Demographics, & Markets',
+      description: 'Explore how to identify use-cases, understand target demographics, and evaluate market opportunities for AI platforms.'
+    },
+    {
+      number: '14',
+      title: 'Messaging About Novel Products/Services',
+      description: 'Learn how to effectively communicate and market innovative AI products and services to your target audience.'
+    },
+    {
+      number: '15',
+      title: 'Recap: Modules 11-15',
+      description: 'A comprehensive review of platform design, market considerations, messaging, infrastructure, and the latest PLATO5 rebuild progress.'
+    },
+    {
+      number: '16',
+      title: 'Hosting Your APIs, Storing Your Multimedia, etc.',
+      description: 'Practical guidance on infrastructure decisions: hosting APIs, storing multimedia content, and managing platform resources.'
+    },
+    {
+      number: '17',
+      title: 'New Update on PLATO5\'s Rebuild',
+      description: 'Latest progress update on the PLATO5 rebuild, covering recent developments, challenges overcome, and architectural refinements.'
+    },
+    {
+      number: '18',
+      title: 'Integrating Other AI Services',
+      description: 'Learn how to integrate additional AI capabilities including TTS, image generation, video generation, and other AI algorithms into your platform.'
+    },
+    {
+      number: '19',
+      title: 'Securing AI Pipelines Against Hallucination',
+      description: 'Strategies and techniques for preventing, detecting, and handling AI hallucinations to ensure reliable and trustworthy outputs.'
+    },
+    {
+      number: '20',
+      title: 'Recap: Modules 16-20',
+      description: 'A comprehensive review of the advanced topics covered: infrastructure, PLATO5 rebuild updates, integrating AI services, securing pipelines, and overlooked considerations.'
+    },
+    {
+      number: '21',
+      title: 'Things that go Unconsidered',
+      description: 'Critical but often overlooked aspects of platform development including Terms of Service, session logic, data retention policies, and other essential considerations.'
+    },
+    {
+      number: '20',
+      title: 'Recap: Modules 16-20',
+      description: 'A comprehensive review of the advanced topics covered: infrastructure, PLATO5 rebuild updates, integrating AI services, securing pipelines, and overlooked considerations.'
+    },
+    {
+      number: '21',
+      title: 'Building An Audience for your platform',
+      description: 'Strategies for growing and engaging an audience for your AI platform, from early adopters to broader market reach.'
+    },
+    {
+      number: '22',
+      title: 'Onboarding Users',
+      description: 'Design effective user onboarding experiences that help users understand and successfully use your AI platform\'s capabilities.'
+    },
+    {
+      number: '23',
+      title: 'Wrap-Up: Building AI Platforms from Scratch',
+      description: 'Final thoughts and key takeaways from the course, summarizing the journey from foundational concepts to building complete AI platforms.'
     }
   ];
 
@@ -44,31 +149,38 @@ export class Course {
     const section = document.createElement('section');
     section.className = 'min-h-screen py-8 px-6 fade-in-scroll opacity-0 translate-y-8 transition-all duration-700 ease-out';
     section.innerHTML = `
-      <!-- Sticky Back Button -->
-      <div class="sticky top-0 z-50 bg-background/80 mb-6 -mx-6 px-6 py-4">
-        <div class="max-w-7xl mx-auto">
-          <button 
+      <div class="max-w-7xl mx-auto">
+        <!-- Back Navigation -->
+        <div class="mb-8">
+          <a 
             id="back-to-courses-btn"
-            class="w-8 h-8 rounded-full bg-card-bg border border-text-secondary/20 flex items-center justify-center hover:border-accent/30 hover:bg-primary/10 transition-all duration-300 text-text-secondary hover:text-text text-sm">
+            href="/courses" 
+            class="inline-flex items-center gap-2 text-text-secondary hover:text-text transition-colors duration-300">
             <i class="fas fa-arrow-left"></i>
-          </button>
+            Back to Courses
+          </a>
         </div>
       </div>
       <div class="max-w-7xl mx-auto flex flex-col md:flex-row gap-4 md:gap-8">
         <!-- Left Navigation Column -->
         <aside class="w-full md:w-48 lg:w-56 flex-shrink-0 md:sticky md:top-24 md:self-start">
           <div class="mb-6 md:mb-0">
-            <h2 class="text-lg md:text-xl font-heading text-text mb-4 md:mb-6 hidden md:block">Modules</h2>
-            <nav class="flex md:flex-col gap-3 overflow-x-auto md:overflow-x-visible pb-2 md:pb-0 -mx-6 px-6 md:mx-0 md:px-0">
+            <h2 class="text-lg md:text-xl font-heading text-text mb-4 md:mb-6">Modules</h2>
+            <nav class="flex md:flex-col gap-3 overflow-x-auto md:overflow-y-auto md:overflow-x-visible md:max-h-[calc(100vh-8rem)] pb-2 md:pb-0 -mx-6 px-6 md:mx-0 md:px-0">
               ${this.modules.map(module => {
                 const isActive = module.number === currentModule.number;
                 return `
                 <a 
                   href="/course/${courseSlug}/module/${module.number}"
-                  class="md:bg-card-bg md:border border-text-secondary/20 rounded-full md:rounded-xl flex items-center justify-center md:items-start md:justify-start w-12 h-12 md:w-auto md:h-[220px] md:p-4 cursor-pointer group flex-shrink-0 md:hover:border-accent/30 hover:shadow-lg transition-all duration-300 ${isActive ? 'bg-primary/15 text-accent border-2 border-blue-500 md:border-accent/50 md:bg-primary/5' : 'text-text-secondary hover:text-text hover:bg-primary/10 border'} md:border-text-secondary/20 md:flex md:flex-col">
-                  <div class="text-base md:text-base text-secondary font-semibold md:font-medium md:mb-2">${module.number}</div>
-                  <h3 class="text-xs md:text-sm lg:text-base font-heading text-text mb-1 md:mb-2 hidden md:block group-hover:text-accent transition-colors duration-300">${module.title}</h3>
-                  <p class="text-xs md:text-sm text-text-secondary leading-relaxed hidden md:block flex-grow">${module.description}</p>
+                  class="md:bg-card-bg md:border border-text-secondary/20 rounded-full md:rounded-xl flex items-center justify-center md:items-start md:justify-start w-12 h-12 md:w-auto md:h-[280px] md:p-4 cursor-pointer group flex-shrink-0 md:hover:border-accent/30 hover:shadow-lg transition-all duration-300 ${isActive ? 'bg-primary/15 text-accent border-2 border-blue-500 md:border-accent/50 md:bg-primary/5' : 'text-text-secondary hover:text-text hover:bg-primary/10 border'} md:border-text-secondary/20 md:flex md:flex-col md:overflow-hidden">
+                  <!-- Mobile: Just the number -->
+                  <div class="md:hidden text-base text-secondary font-semibold">${module.number}</div>
+                  <!-- Desktop: Full content -->
+                  <div class="hidden md:flex md:flex-col md:w-full md:h-full">
+                    <div class="text-base text-secondary font-semibold md:font-medium md:mb-2 flex-shrink-0">${module.number}</div>
+                    <h3 class="text-xs md:text-sm lg:text-base font-heading text-text mb-1 md:mb-2 group-hover:text-accent transition-colors duration-300 break-words leading-tight" style="display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">${module.title}</h3>
+                    <p class="text-xs md:text-sm text-text-secondary leading-relaxed flex-grow break-words" style="display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden;">${module.description}</p>
+                  </div>
                 </a>
               `;
               }).join('')}
@@ -188,7 +300,8 @@ export class Course {
     const backBtn = this.container?.querySelector('#back-to-courses-btn');
     if (!backBtn) return;
 
-    backBtn.addEventListener('click', () => {
+    backBtn.addEventListener('click', (e) => {
+      e.preventDefault();
       window.history.pushState({}, '', '/courses');
       window.dispatchEvent(new PopStateEvent('popstate'));
     });
