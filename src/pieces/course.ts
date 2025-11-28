@@ -86,97 +86,103 @@ export class Course {
     {
       number: '12',
       chapter: 3,
+      title: 'Architecting Lore Builder System for Emstrata',
+      description: 'Learn how to design and build a lore builder system for narrative platforms, using Emstrata as a case study.'
+    },
+    {
+      number: '13',
+      chapter: 3,
       title: 'Notes on Platform Design & Design Language',
       description: 'Learn about platform design principles and developing a cohesive design language for AI-powered applications.'
     },
     {
-      number: '13',
+      number: '14',
       chapter: 3,
       title: 'Considering Use-Cases, Demographics, & Markets',
       description: 'Explore how to identify use-cases, understand target demographics, and evaluate market opportunities for AI platforms.'
     },
     {
-      number: '14',
+      number: '15',
       chapter: 3,
       title: 'Messaging About Novel Products/Services',
       description: 'Learn how to effectively communicate and market innovative AI products and services to your target audience.'
     },
     {
-      number: '15',
+      number: '16',
       chapter: 3,
-      title: 'Recap: Modules 11-15',
-      description: 'A comprehensive review of real-world architectures, platform design, market considerations, and messaging.'
+      title: 'Recap: Modules 11-16',
+      description: 'A comprehensive review of real-world architectures, lore builder systems, platform design, market considerations, and messaging.'
     },
     // Chapter 4: Infrastructure & Integration
     {
-      number: '16',
+      number: '17',
       chapter: 4,
       title: 'Deployment & Distribution - Web, Mobile, & API Hosting & Storage',
       description: 'Learn how to deploy and distribute your platform: hosting APIs, deploying web apps, publishing to app stores, and storing multimedia content.'
     },
     {
-      number: '17',
+      number: '18',
       chapter: 4,
       title: 'Integrating Other AI Services',
       description: 'Learn how to integrate additional AI capabilities including TTS, image generation, video generation, and other AI algorithms into your platform.'
     },
     {
-      number: '18',
+      number: '19',
       chapter: 4,
       title: 'Securing AI Pipelines Against Hallucination',
       description: 'Strategies and techniques for preventing, detecting, and handling AI hallucinations to ensure reliable and trustworthy outputs.'
     },
     {
-      number: '19',
+      number: '20',
       chapter: 4,
       title: 'New Update on PLATO5\'s Rebuild',
       description: 'Latest progress update on the PLATO5 rebuild, covering recent developments, challenges overcome, and architectural refinements.'
     },
     {
-      number: '20',
+      number: '21',
       chapter: 4,
-      title: 'Recap: Modules 16-20',
-      description: 'A comprehensive review of infrastructure, AI service integration, security, and PLATO5 rebuild progress.'
+      title: 'Recap: Modules 17-21',
+      description: 'A comprehensive review of deployment, AI service integration, security, and PLATO5 rebuild progress.'
     },
     // Chapter 5: Ethics, Operations & Growth
     {
-      number: '21',
+      number: '22',
       chapter: 5,
       title: 'Ethical AI Usage & Examples of Pitfalls',
       description: 'Learn about ethical considerations in AI development, including privacy concerns, disclosing AI usage, and common pitfalls to avoid when building AI platforms.'
     },
     {
-      number: '22',
+      number: '23',
       chapter: 5,
       title: 'Retaining Your AI Outputs for Future Training',
       description: 'Strategies for storing and managing AI-generated outputs to enable future model training, fine-tuning, and continuous improvement of your platform.'
     },
     {
-      number: '23',
+      number: '24',
       chapter: 5,
       title: 'Things that go Unconsidered',
       description: 'Critical but often overlooked aspects of platform development including Terms of Service, session logic, data retention policies, and other essential considerations.'
     },
     {
-      number: '24',
+      number: '25',
       chapter: 5,
       title: 'Building An Audience for your platform',
       description: 'Strategies for growing and engaging an audience for your AI platform, from early adopters to broader market reach.'
     },
     {
-      number: '25',
+      number: '26',
       chapter: 5,
-      title: 'Recap: Modules 21-25',
+      title: 'Recap: Modules 22-26',
       description: 'A comprehensive review of ethical AI usage, retaining outputs, overlooked considerations, and audience building.'
     },
     {
-      number: '26',
+      number: '27',
       chapter: 5,
       title: 'Onboarding Users',
       description: 'Design effective user onboarding experiences that help users understand and successfully use your AI platform\'s capabilities.'
     },
     {
-      number: '27',
+      number: '28',
       chapter: 5,
       title: 'Wrap-Up: Building AI Platforms from Scratch',
       description: 'Final thoughts and key takeaways from the course, summarizing the journey from foundational concepts to building complete AI platforms.'
@@ -187,6 +193,9 @@ export class Course {
     this.container = container;
     
     const currentModule = this.modules.find(m => m.number === moduleNumber.toString()) || this.modules[0];
+    
+    // Update metadata
+    document.title = `${currentModule.title} - Module ${moduleNumber}`;
     
     const section = document.createElement('section');
     section.className = 'min-h-screen py-8 px-6 fade-in-scroll opacity-0 translate-y-8 transition-all duration-700 ease-out';

@@ -104,6 +104,9 @@ class HomeScreen {
     
     this.container.innerHTML = ''; // Clear existing content
     
+    // Update metadata
+    document.title = 'Nick Goldstein';
+    
     // Mount components in order with new dark theme layout
     this.navigation.mount(this.container);
     this.hero.mount(this.container);
@@ -119,6 +122,9 @@ class HomeScreen {
     if (!this.container) return;
     
     this.container.innerHTML = ''; // Clear existing content
+    
+    // Update metadata
+    document.title = 'Articles by Nick Goldstein';
     
     // Mount navigation and articles
     this.navigation.mount(this.container);
@@ -145,6 +151,9 @@ class HomeScreen {
     if (!this.container) return;
     
     this.container.innerHTML = ''; // Clear existing content
+    
+    // Update metadata
+    document.title = 'Courses by Nick Goldstein';
     
     // Mount navigation and courses
     this.navigation.mount(this.container);
