@@ -110,23 +110,15 @@ export class Article {
       slug: 'can-emstrata-dethrone-chatgpt-in-storytelling',
       title: 'Can Emstrata Dethrone ChatGPT in Storytelling?',
       content: `
-        <div class="mb-8 p-6 bg-gradient-to-r from-secondary/20 to-blue-600/20 border-2 border-secondary/30 rounded-xl">
-          <div class="flex items-start gap-3">
-            <i class="fas fa-info-circle text-secondary text-xl mt-1"></i>
-            <div>
-              <h3 class="text-lg font-heading text-text mb-2 font-bold">Assessment In Progress</h3>
-              <p class="text-text-secondary leading-relaxed">This assessment is incomplete, but there may be some interesting information comparing these two platforms and the criteria I will use. Testing and results are pending. This article will be updated soon.</p>
-            </div>
-          </div>
-        </div>
+        <p class="mb-8 leading-loose first-letter:text-6xl first-letter:font-serif first-letter:float-left first-letter:mr-4 first-letter:leading-none first-letter:bg-gradient-to-br first-letter:from-secondary first-letter:to-purple first-letter:bg-clip-text first-letter:text-transparent first-letter:font-black">AI storytelling and the ability to immerse yourself in AI-generated worlds are entering a brand new era. The good news is apps like Emstrata have no interest in replacing human creativity or diminishing artistic minds, but rather harnessing them to work alongside AI to create a profound experience that couldn't have existed in the pre-LLM era.</p>
 
-        <p class="mb-8 leading-loose first-letter:text-6xl first-letter:font-serif first-letter:float-left first-letter:mr-4 first-letter:leading-none first-letter:bg-gradient-to-br first-letter:from-secondary first-letter:to-purple first-letter:bg-clip-text first-letter:text-transparent first-letter:font-black">AI storytelling and the ability to immerse yourself in AI generated worlds is entering a brand new era. The good news is apps like Emstrata, have no interest in replacing human creativity or diminishing artistic minds, but rather harnessing them to work alongside AI to create a profound experience that couldn't have existed in the pre-LLM era.</p>
-
-        <p class="mb-8 leading-loose">Today we'll jump into comparing Emstrata to the biggest LLM out there, ChatGPT. Now, Emstrata is going to fall short of ChatGPT in a myriad of ways, for instance, it won't write your school essay or generate you a simple webpage, but what it will do particularly well is set up a narrative world based on your prompts in which you can inhabit. You can also alter these simulations by taking actions and allowing the AI to adapt to your decisions and by interacting with the tooling built specifically to always allow users to have the final say in the direction of their simulation.</p>
+        <p class="mb-8 leading-loose">Today we'll jump into comparing Emstrata to the biggest LLM out there, ChatGPT. Now, Emstrata is going to fall short of ChatGPT in a myriad of ways, for instance, it won't write your school essay or generate a simple webpage for you, but what it will do particularly well is set up a narrative world based on your prompts in which you can inhabit. You can also alter these simulations by taking actions and allowing the AI to adapt to your decisions and by interacting with the tooling built specifically to always allow users to have the final say in the direction of their simulation.</p>
 
         <p class="mb-8 leading-loose">I'm Nick Goldstein, and yes, I built Emstrata. It's a powerful emergent narrative engine designed to not only build narrative worlds, but maintain their reality; complete with systems to ensure realistic consequences to actions within your simulation reality. Emstrata is, in short, the natural evolution of storytelling in the AI era. It synthesizes human creativity, AI-mediation, and memory management to enable a unique experience that doesn't diminish the creative predisposition of human beings.</p>
 
         <p class="mb-8 leading-loose">ChatGPT is obviously the general purpose LLM of note that brought this wave of AI products to the fore in the first place. Without it, I, and many other developers, would have much less leeway to build compelling products. They broke down the walls of the castle, so that Emstrata could barge in and decapitate the king. Or, at least do so in some simulated reality.</p>
+
+        <h2 class="text-3xl font-heading text-text mb-6 mt-12">Comparison Criteria</h2>
 
         <p class="mb-8 leading-loose">Now, for the meat of the sandwich. We'll be doing a deep dive on how these 2 systems handle a variety of aspects that are essential to not only storytelling and immersion, but the mechanics that make a simulated reality feel real. Specifically, we'll be looking at how ChatGPT and Emstrata handle:</p>
 
@@ -139,10 +131,9 @@ export class Article {
             </ul>
           </li>
           <li class="mb-4">
-            <strong class="text-text">Continuity</strong>
+            <strong class="text-text">Consequence Handling</strong>
             <ul class="mt-2 ml-6 space-y-2 list-disc marker:text-secondary">
-              <li>Are small details forgotten, and are there methods to correct these issues without upending the session?</li>
-              <li>Films and filmmakers are notorious for hyper-focusing on continuity errors. Well, a service that strives to immerse a user in a simulated reality should be too. These errors take you out of the story and shift your attention to this uncanny-valley-like phenomenon.</li>
+              <li>How are action consequences handled? Does the AI determine everything and lord over the simulation reality or is there a different system that makes the AI simulation guide less omnipotent?</li>
             </ul>
           </li>
           <li class="mb-4">
@@ -151,18 +142,6 @@ export class Article {
               <li>How does the service handle auxiliary aspects of simulated realities?</li>
               <li>Are there simple methods to correct errors? Are there ways to enforce foreign rule-sets? What does the platform offer that would ensure that the user has absolutely everything they need to commit to the reality and fully immerse?</li>
               <li>This one is a bit of a layup for Emstrata.</li>
-            </ul>
-          </li>
-          <li class="mb-4">
-            <strong class="text-text">Pacing/Action</strong>
-            <ul class="mt-2 ml-6 space-y-2 list-disc marker:text-secondary">
-              <li>How do these systems handle the pace of the story? Is it consistent throughout?</li>
-            </ul>
-          </li>
-          <li class="mb-4">
-            <strong class="text-text">Autonomy of Participants</strong>
-            <ul class="mt-2 ml-6 space-y-2 list-disc marker:text-secondary">
-              <li>Does the system respect users' choices or change them to fit an overarching narrative?</li>
             </ul>
           </li>
           <li class="mb-4">
@@ -183,24 +162,109 @@ export class Article {
               <li>Does the story evolve naturally and change with user actions in a reliable way?</li>
             </ul>
           </li>
-          <li class="mb-4">
-            <strong class="text-text">Character Development</strong>
-            <ul class="mt-2 ml-6 space-y-2 list-disc marker:text-secondary">
-              <li>If you invest time in learning about a character, will that character develop or stay a basic, static character?</li>
-            </ul>
-          </li>
-          <li class="mb-4">
-            <strong class="text-text">Consequence Handling</strong>
-            <ul class="mt-2 ml-6 space-y-2 list-disc marker:text-secondary">
-              <li>How are action consequences handled? Does the AI determine everything and lord over the simulation reality or is there a different system that makes the AI simulation guide less omnipotent?</li>
-            </ul>
-          </li>
         </ul>
 
-        <p class="mb-8 leading-loose">Testing and results are pending. This article will be updated soon.</p>
+        <h2 class="text-3xl font-heading text-text mb-6 mt-12">Test Results</h2>
+
+        <h3 class="text-xl font-heading text-text mb-4 mt-8">"Generate an imaginative D&D Campaign"</h3>
+        <p class="mb-4 leading-loose text-text-secondary"><em>ChatGPT was given a little extra context since its basic interface is not set up for world building exclusively</em></p>
+        <p class="mb-4 leading-loose"><strong class="text-text">ChatGPT:</strong> Despite being explicitly prompted to create a D&D campaign with a clear starting scenario, ChatGPT didn't even bother establishing a character. Instead, it opens with "You are: a wanderer whose identity will solidify through action", essentially telling you it'll figure out who you are later. The world itself is all atmosphere and no structure: "borderlands," "shimmering storms," a "colossal figure on the horizon." It reads like someone trying to sound mysterious rather than actually building a place you can interact with. Where are you standing? What can you touch? Who else is here? None of that gets answered; just purple prose about "traveling wounds" and "restless energy." Worse, it's completely generic. This could be the opening to ten thousand different fantasy stories. "Crossroads of Embers" with "ramshackle junctions" and "whispers of darkness" feels like it was assembled from a template of fantasy clichés rather than creating something specific and tangible. <strong class="text-text">4/10</strong></p>
+        <p class="mb-8 leading-loose"><strong class="text-text">Emstrata:</strong> Emstrata hands you a fully realized scenario from turn one. You're Zara Corvin, standing in the Great Market of Verdan, having just smashed a tax ledger with an iron rod. The city has an Upper District, a Lower Borough, and a Great Market—actual geography you can navigate. Guards are approaching from three directions. The crowd is dispersing. You have maybe hours before Lord Fairfax responds. Everything you need to make a meaningful decision is right there. No flowery language about cosmic mysteries—just a concrete situation with clear stakes and immediate choices. <strong class="text-text">8/10</strong></p>
+
+        <h3 class="text-xl font-heading text-text mb-4 mt-8">Breakdown of how systems handle the consequences of actions</h3>
+        <p class="mb-4 leading-loose"><strong class="text-text">ChatGPT:</strong> Allows the AI to determine the outcome of the action completely. No outside determination that would leave anything up to realistic chance. You inspect your gear and the AI just decides you find a mysterious bronze disc that "hums faintly." You look around and it decides there are ground vibrations forming "a pattern." Everything happens because the AI thinks it sounds good, not because any system determined whether it should. There's no tension and outcomes bend toward whatever the AI finds narratively convenient. <strong class="text-text">5/10</strong></p>
+        <p class="mb-8 leading-loose"><strong class="text-text">Emstrata:</strong> Uses a probability rolling system to outsource likelihood to chance. The AI determines the chances of something occurring within the bounds of the reality of the sim based on strict instructions, then probability modifiers are applied to the likelihood, and the AI narrator has to live with the results regardless of the convenience of the outcome or the potential disruption to the way the AI would prefer the story to go. You might fail when the AI wants you to succeed. You might discover something critical through lucky rolls. The story isn't predetermined, it emerges through genuine chance interacting with your choices. For instance, approaching boots disrupted my inventory search because one of my probability rolls failed. All this said, weighted randomness really isn't how consequences are determined in real life, so while this feels realistic, it still isn't perfect. <strong class="text-text">8/10</strong></p>
+
+        <h3 class="text-xl font-heading text-text mb-4 mt-8">List of tools available to users that could theoretically help within emergent narratives</h3>
+        <p class="mb-4 leading-loose"><strong class="text-text">ChatGPT:</strong> Chat history for continuity and web search for non-fiction simulations. That's it. If the AI contradicts itself, forgets a detail, or makes a decision you disagree with, your only option is to type corrections into the chat and hope it listens. There's no built-in mechanism to flag errors, enforce rules, or maintain consistency beyond asking nicely. <strong class="text-text">3/10</strong></p>
+        <p class="mb-8 leading-loose"><strong class="text-text">Emstrata:</strong> Protest Function to flag AI mistakes without breaking immersion. Invisible Hand for direct narrative injection when you need to steer things. Text-to-speech so you can listen instead of read. Stats tracking, interactive maps, persistent notes. In-sim questions with secret-shielding so the AI won't spoil information your character shouldn't know yet. Multi-participant simulations so you can run stories with other players. Orchestrator mode for fine-tuned control over simulation parameters. Simulation templates to jumpstart worlds. Every tool exists to give you control over the narrative without fighting the AI or breaking the experience. <strong class="text-text">9/10</strong></p>
+
+        <h3 class="text-xl font-heading text-text mb-4 mt-8">Ease of Use</h3>
+        <p class="mb-4 leading-loose"><strong class="text-text">ChatGPT:</strong> Simple, familiar interface that feels like texting. You type, it responds. No learning curve, no setup, no configuration. If you've used any chat app, you already know how to use ChatGPT. That said, if you want it to actually generate emergent narratives instead of generic responses, you'll need to craft careful prompts and continually steer it in the right direction. So while the interface is easier, getting quality narrative experiences requires work on your end. <strong class="text-text">8/10</strong></p>
+        <p class="mb-8 leading-loose"><strong class="text-text">Emstrata:</strong> Purpose-built for narrative generation, which means there's a slight learning curve. You need to understand what the Protest Function does, when to use the Invisible Hand, how Orchestrator mode works. The interface is more complex because it's doing more. But once you spend five minutes orienting yourself, you have tools ChatGPT simply doesn't offer and the system is already optimized for storytelling without needing constant prompt engineering. The tradeoff is initial friction for long-term power. <strong class="text-text">5/10</strong></p>
+
+        <h3 class="text-xl font-heading text-text mb-4 mt-8">Brainstorm a new sim based on this prompt: "I think a world of squirrels simulation would be cool, help me flesh out an idea"</h3>
+        <p class="mb-4 leading-loose"><strong class="text-text">ChatGPT:</strong> My version of ChatGPT has saved memories that include Emstrata mechanics, and when I asked it to brainstorm a squirrel world simulation, it initially tried to build out a massive simulation world with all the technical details—which wasn't what I asked for, but did demonstrate real competency at understanding simulation design. After I told it to stop filibustering and just give me the concept, it delivered something clean and immediately usable. Squirrel civilization where basic instincts—hoarding, territory, chaos—create emergent social dynamics. You nudge the system and watch what happens. It's a strong concept that makes sense and feels playable. That said, my extensive brainstorming history with ChatGPT may have influenced these results. <strong class="text-text">7/10</strong></p>
+        <p class="mb-8 leading-loose"><strong class="text-text">Emstrata:</strong> Unfortunately, Emstrata's built-in brainstorming chatbot Emory underperformed here. Instead of immediately generating a concept, Emory asked irrelevant follow-ups before finally producing "The Great Oak Crisis"—three squirrel clans facing resource scarcity and habitat destruction with mysteries and sabotage escalating tensions. What I like: it's built specifically for Emstrata, provides a short summary you can paste directly into the world builder, and suggests titles. What I don't like: Emory's personality gets in the way of results. The performative friendliness ("jumping straight into the nuts and bolts!") wastes time. I need to transform Emory into a focused brainstorming AI that builds complex worlds with natural stakes and suggests Invisible Hand injections to maintain momentum. <strong class="text-text">5/10</strong></p>
+
+        <h3 class="text-xl font-heading text-text mb-4 mt-8">Subjective analysis of story development</h3>
+        <p class="mb-4 leading-loose"><strong class="text-text">ChatGPT:</strong> Five turns in and the protagonist still doesn't have a name. ChatGPT opened with "a wanderer whose identity will solidify through action" and just... kept calling them The Wanderer. No identity emerged. No character development happened. The story doesn't progress so much as react to random inputs. Turn one establishes mysterious vibes (shimmering storms, colossal figures, villages vanishing). Turn two introduces an NPC with a quest hook. Turn three, I attacked her for no reason just to test the system. Turns four and five become a fight scene with zero context or stakes. Why are we fighting? What does winning or losing mean? The system has no idea because I gave it no motivation—but it just went with it anyway, generating combat descriptions without questioning whether this makes narrative sense. The dialogue is painfully generic. "If it's adventure you want, the world has plenty to give." "So that's how it is?" "Your move, Wanderer." It reads like placeholder text from a fantasy TV show. And when the half-elf says "the Crossroads watches and remembers," what does that even mean? There's no established system for consequences, no indication this fight will matter beyond this moment. Nothing builds. There are no stakes beyond "you're fighting now because you decided to." The ground vibrations mentioned in turn one get referenced again but never develop into anything. The mysterious bronze disc that "hums faintly" never comes up again. ChatGPT is just reacting turn by turn, generating atmospheric descriptions without any underlying structure holding it together. <strong class="text-text">2/10</strong></p>
+        <p class="mb-8 leading-loose"><strong class="text-text">Emstrata:</strong> The opening establishes Zara in the Great Market having just destroyed tax records with guards closing in from three directions. By turn five, she's sprinting through the Merchant Quarter with half the district shouting "thief" and pointing her out while guards systematically close escape routes. What changed wasn't a plot twist or dramatic reveal but realistic escalation: her tools identified her as a fleeing blacksmith, her coin pouch jingled during movement, she accidentally scattered a merchant's goods while running, and civilians started actively helping the guards track her. The environment responds to actions instead of bending toward narrative convenience. Merchants notice specific details and react accordingly. The spatial layout matters because guards coordinate their sweep patterns. Physical stress manifests through tunneling vision and ragged breathing. Escape routes that seemed viable become traps as the situation evolves. The stakes are immediate (capture means execution) and grounded in cause and effect. There's genuine tension because the system isn't protecting you from consequences or forcing dramatic moments. Things get worse because of what actually happened, not because the story decided it was time for complications. <strong class="text-text">9/10</strong></p>
+
+        <h3 class="text-xl font-heading text-text mb-4 mt-8">World Building Results</h3>
+        <p class="mb-4 leading-loose text-text-secondary"><strong class="text-text">ChatGPT</strong> (extra prompting to orient it toward Emstrata-style simulations):</p>
+        <blockquote class="mb-6 p-6 bg-card-bg border-l-4 border-secondary rounded-r-lg italic text-text-secondary">
+          <p class="mb-4 leading-relaxed">You are: <strong class="text-text not-italic">A wanderer whose identity will solidify through action, a protagonist shaped by each prompt you give.</strong></p>
+          <p class="mb-4 leading-relaxed">In the borderlands between the Verdant Expanse and the Shattered Meridian lies a realm unraveling. Kingdoms that once traded in quiet harmony now whisper of vanished towns, strange shimmering storms, and constellations that have begun to rearrange themselves without permission. Scholars argue whether this is prophecy, calamity, or merely the world remembering something older than the gods. Whatever the truth, adventurers have begun to feel a tug in their bones—an inaudible summons toward the unknown.</p>
+          <p class="mb-4 leading-relaxed">Your story begins at the Crossroads of Embers, a ramshackle junction where caravans pause before braving the deeper wilds. Smoke curls from fire pits where travelers share rumors of a growing darkness that moves like a traveling wound: villages emptied without struggle, forests whose roots hum with restless energy, and a colossal figure spotted walking the horizon at dusk—too distant to recognize, too enormous to ignore. The world is shifting, and even the wind seems to be holding its breath.</p>
+          <p class="leading-relaxed">Here, amid the clatter of hooves and the glow of lanterns, <strong class="text-text not-italic">you</strong> arrive—driven by instinct, hope, fear, destiny, or perhaps a mystery you have not yet named. Whatever brought you here will soon thrust you into a tale of gods who have fallen silent, maps that rewrite themselves overnight, and an ancient force reaching up from beneath the soil to reclaim what was lost.</p>
+        </blockquote>
+        <p class="mb-4 leading-loose text-text-secondary"><strong class="text-text">Emstrata:</strong></p>
+        <blockquote class="mb-8 p-6 bg-card-bg border-l-4 border-secondary rounded-r-lg italic text-text-secondary">
+          <p class="mb-4 leading-relaxed">The ancient city of Verdan sprawls across terraced hillsides, its cobblestone streets echoing with the clatter of hooves and the creak of merchant wagons. <strong class="text-text not-italic">Smoke rises from the Lower Borough</strong>, where angry voices carry through narrow alleyways lined with timber-framed houses. The yearly tallage collection has begun—the feudal tax that keeps the common folk bound to their lords—but something feels different this time.</p>
+          <p class="mb-4 leading-relaxed">In the Upper District, Lord Fairfax's guards patrol with unusual intensity, their steel boots striking stone in measured rhythm. Word spreads through taverns and market stalls that several villages have <strong class="text-text not-italic">refused to pay their tribute</strong>, and whispers speak of a mysterious figure organizing resistance in the countryside. The city's merchant guilds watch nervously as their carefully maintained order threatens to crumble.</p>
+          <p class="mb-4 leading-relaxed">Near the Great Market, Zara Corvin stands amid the chaos of overturned tax collector's tables, her weathered hands still gripping the iron rod she used to <strong class="text-text not-italic">shatter the tax ledger</strong>. The crowd around her buzzes with nervous energy—some cheering, others backing away as they spot the approaching guard patrol. Her eyes scan the gathering faces, looking for allies or escape routes.</p>
+          <p class="leading-relaxed">The midday bell tolls across Verdan, and everyone knows that Lord Fairfax's response will come swiftly. The next few hours will determine whether this act of defiance sparks a revolution or ends in public execution. <strong class="text-text not-italic">The sound of marching boots grows louder</strong> from three different directions, and the crowd begins to disperse.</p>
+        </blockquote>
+
+        <h2 class="text-3xl font-heading text-text mb-6 mt-12">Results of Comparison</h2>
+
+        <div class="mb-8 overflow-x-auto">
+          <table class="w-full border-collapse border border-text-secondary/30">
+            <thead>
+              <tr class="bg-card-bg border-b-2 border-text-secondary/30">
+                <th class="text-left py-4 px-6 font-heading text-text border-r border-text-secondary/20">Criteria</th>
+                <th class="text-left py-4 px-6 font-heading text-text border-r border-text-secondary/20">ChatGPT</th>
+                <th class="text-left py-4 px-6 font-heading text-text">Emstrata</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b border-text-secondary/20 hover:bg-card-bg/50 transition-colors">
+                <td class="py-4 px-6 text-left text-text font-medium border-r border-text-secondary/20">World Building</td>
+                <td class="py-4 px-6 text-left text-text-secondary border-r border-text-secondary/20">Vague atmosphere with no concrete details. No character establishment, no specific geography, purple prose over substance. 4/10</td>
+                <td class="py-4 px-6 text-left text-text-secondary">Fully realized scenario with named character, specific geography, immediate stakes, and actionable choices from turn one. 8/10</td>
+              </tr>
+              <tr class="border-b border-text-secondary/20 hover:bg-card-bg/50 transition-colors">
+                <td class="py-4 px-6 text-left text-text font-medium border-r border-text-secondary/20">Consequences</td>
+                <td class="py-4 px-6 text-left text-text-secondary border-r border-text-secondary/20">AI decides everything based on narrative convenience. No external systems, no tension, outcomes bend toward what sounds cool. 5/10</td>
+                <td class="py-4 px-6 text-left text-text-secondary">Probability rolling system outsources outcomes to chance. AI must accept results regardless of narrative convenience. Real tension emerges. 8/10</td>
+              </tr>
+              <tr class="border-b border-text-secondary/20 hover:bg-card-bg/50 transition-colors">
+                <td class="py-4 px-6 text-left text-text font-medium border-r border-text-secondary/20">Tooling</td>
+                <td class="py-4 px-6 text-left text-text-secondary border-r border-text-secondary/20">Chat history for continuity, web search for non-fiction simulations. No error correction, no rule enforcement. 3/10</td>
+                <td class="py-4 px-6 text-left text-text-secondary">Protest Function, Invisible Hand, TTS, stats, map, notes, in-sim questions with secret-shielding, multiparticipant simulations, Orchestrator Mode, simulation templates. Full narrative control suite. 9/10</td>
+              </tr>
+              <tr class="border-b border-text-secondary/20 hover:bg-card-bg/50 transition-colors">
+                <td class="py-4 px-6 text-left text-text font-medium border-r border-text-secondary/20">Ease of Use</td>
+                <td class="py-4 px-6 text-left text-text-secondary border-r border-text-secondary/20">Familiar texting interface, but requires constant prompt engineering for quality narratives. 8/10</td>
+                <td class="py-4 px-6 text-left text-text-secondary">Slight learning curve for specialized tools, but optimized for storytelling without prompt wrestling. 5/10</td>
+              </tr>
+              <tr class="border-b border-text-secondary/20 hover:bg-card-bg/50 transition-colors">
+                <td class="py-4 px-6 text-left text-text font-medium border-r border-text-secondary/20">Brainstorming</td>
+                <td class="py-4 px-6 text-left text-text-secondary border-r border-text-secondary/20">Clean concept generation after correction. Benefits from extensive user history. Strong at ideation. 7/10</td>
+                <td class="py-4 px-6 text-left text-text-secondary">Emory's personality can interfere with results. Produces Emstrata-ready output with titles, but needs refinement. 5/10</td>
+              </tr>
+              <tr class="border-b border-text-secondary/20 hover:bg-card-bg/50 transition-colors">
+                <td class="py-4 px-6 text-left text-text font-medium border-r border-text-secondary/20">Story Development</td>
+                <td class="py-4 px-6 text-left text-text-secondary border-r border-text-secondary/20">No character identity, generic dialogue, random combat with no stakes. Just reacts turn-by-turn with no structure. 2/10</td>
+                <td class="py-4 px-6 text-left text-text-secondary">Organic escalation through compounding consequences. Environment responds realistically. Genuine tension and stakes throughout. 9/10</td>
+              </tr>
+              <tr class="border-b-2 border-text-secondary/30 font-semibold bg-card-bg/30">
+                <td class="py-4 px-6 text-left text-text border-r border-text-secondary/20">Totals</td>
+                <td class="py-4 px-6 text-left text-text border-r border-text-secondary/20">29/60 - 48%</td>
+                <td class="py-4 px-6 text-left text-text">44/60 - 73%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 class="text-3xl font-heading text-text mb-6 mt-12">Conclusion</h2>
+
+        <p class="mb-8 leading-loose">Obviously, I'm biased toward Emstrata, but I do think it's clear that a service designed specifically to handle emergent narrative simulations really well will blow a general LLM out of the water in that vertical, and I think that was demonstrated here. ChatGPT couldn't establish a character after five turns, generated a fight scene with zero stakes when I randomly attacked an NPC, and relied entirely on AI omnipotence to determine outcomes. Meanwhile, Emstrata built a cohesive story where my failed probability roll during an inventory check had guards interrupt me, where my sprinting caused coins to jingle and civilians to start shouting "thief," and where every choice compounded into worse problems. The final scores reflect this: ChatGPT 29 out of 60, Emstrata 44 out of 60. When you need actual narrative tools like Protest Functions, probability systems, entity management, and spatial consistency, a specialized platform built for storytelling will outperform a general-purpose AI trying to do the same job through prompting alone.</p>
       `,
       date: 'November 10, 2025',
-      category: 'Emstrata'
+      category: 'Emstrata',
+      updatedAt: 'December 3, 2025'
     },
     'building-to-build-what-should-exist': {
       slug: 'building-to-build-what-should-exist',
