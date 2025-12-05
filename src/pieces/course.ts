@@ -6,6 +6,7 @@ interface CourseModule {
   title: string;
   description: string;
   slideDeckPath?: string;
+  videoUrl?: string;
 }
 
 export class Course {
@@ -18,7 +19,8 @@ export class Course {
       chapter: 1,
       title: 'Before we get started',
       description: 'Introduction to the course concept and how it will be structured.',
-      slideDeckPath: '/01 Build AI Platforms from Scratch - Slide Deck/index.html'
+      slideDeckPath: '/01 Build AI Platforms from Scratch - Slide Deck/index.html',
+      videoUrl: 'https://youtu.be/t033k5bSSkY?si=qvwgst_6UcnLDbJf'
     },
     {
       number: '2',
@@ -231,10 +233,19 @@ export class Course {
             <p class="text-base sm:text-lg text-text-secondary mb-4 md:mb-6">${moduleNumber === 1 ? 'Learn to build powerful AI-powered applications and platforms from scratch. This course focuses on design, architecture, and engineering, NOT coding.' : currentModule.description}</p>
             
             <div class="aspect-video bg-card-bg border border-text-secondary/20 rounded-xl overflow-hidden mt-6">
-              <div id="youtube-embed" class="w-full h-full flex items-center justify-center">
-                <!-- YouTube embed will be inserted here -->
-                <p class="text-text-secondary text-lg">Video Coming Soon...</p>
-              </div>
+              ${currentModule.videoUrl && this.extractYouTubeVideoId(currentModule.videoUrl) ? `
+                <iframe 
+                  src="https://www.youtube.com/embed/${this.extractYouTubeVideoId(currentModule.videoUrl)}" 
+                  class="w-full h-full"
+                  frameborder="0" 
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                  allowfullscreen>
+                </iframe>
+              ` : `
+                <div class="w-full h-full flex items-center justify-center">
+                  <p class="text-text-secondary text-lg">Video Coming Soon...</p>
+                </div>
+              `}
             </div>
           </div>
 
@@ -312,7 +323,6 @@ export class Course {
     this.container.appendChild(section);
     this.setupBackButton();
     this.setupModuleLinks(courseSlug);
-    this.setupYouTubeEmbed();
     this.setupSlideshow();
     ScrollFade.init();
   }
@@ -385,13 +395,21 @@ export class Course {
     });
   }
 
-  private setupYouTubeEmbed(): void {
-    const embedContainer = this.container?.querySelector('#youtube-embed');
-    if (!embedContainer) return;
+  private extractYouTubeVideoId(url: string): string | null {
+    // Handle various YouTube URL formats
+    const patterns = [
+      /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&\n?#]+)/,
+      /youtube\.com\/.*[?&]v=([^&\n?#]+)/
+    ];
 
-    embedContainer.innerHTML = `
-      <p class="text-text-secondary text-lg">Video Coming Soon</p>
-    `;
+    for (const pattern of patterns) {
+      const match = url.match(pattern);
+      if (match && match[1]) {
+        return match[1];
+      }
+    }
+
+    return null;
   }
 
   private setupSlideshow(): void {
