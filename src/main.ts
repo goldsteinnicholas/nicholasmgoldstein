@@ -7,6 +7,7 @@ import { Articles } from './pieces/articles';
 import { Article } from './pieces/article';
 import { Courses } from './pieces/courses';
 import { Course } from './pieces/course';
+import { SystemPromptGenerator } from './pieces/system-prompt-generator';
 import { ScrollFade } from './scroll-fade';
 
 class HomeScreen {
@@ -20,6 +21,7 @@ class HomeScreen {
   private article: Article;
   private courses: Courses;
   private course: Course;
+  private systemPromptGenerator: SystemPromptGenerator;
 
   constructor() {
     this.navigation = new Navigation();
@@ -31,6 +33,7 @@ class HomeScreen {
     this.article = new Article();
     this.courses = new Courses();
     this.course = new Course();
+    this.systemPromptGenerator = new SystemPromptGenerator();
   }
 
   public mount(container: HTMLElement) {
@@ -58,6 +61,8 @@ class HomeScreen {
         window.history.replaceState({}, '', `/course/${coursePath}/module/1`);
         this.showCoursePage(coursePath, 1);
       }
+    } else if (path === '/system-prompt-generator') {
+      this.showSystemPromptGeneratorPage();
     } else if (path === '/') {
       this.showHomePage();
     } else if (path === '/unknown-route') {
@@ -88,6 +93,8 @@ class HomeScreen {
           window.history.replaceState({}, '', `/course/${coursePath}/module/1`);
           this.showCoursePage(coursePath, 1);
         }
+      } else if (newPath === '/system-prompt-generator') {
+        this.showSystemPromptGeneratorPage();
       } else if (newPath === '/') {
         this.showHomePage();
       } else if (newPath === '/unknown-route') {
@@ -174,6 +181,56 @@ class HomeScreen {
 
     ScrollFade.init();
     window.scrollTo(0, 0);
+  }
+
+  private showSystemPromptGeneratorPage(): void {
+    if (!this.container) return;
+    
+    this.container.innerHTML = ''; // Clear existing content
+    
+    // Update metadata
+    const description = 'Build production-ready system prompts for Claude, GPT-4, and other AI platforms with our free modular prompt engineering tool. The System Prompt Generator helps developers, AI engineers, and businesses create structured, maintainable AI instructions using industry best practices.';
+    const fullDescription = 'Build production-ready system prompts for Claude, GPT-4, and other AI platforms with our free modular prompt engineering tool. The System Prompt Generator helps developers, AI engineers, and businesses create structured, maintainable AI instructions using industry best practices. Design custom AI assistants, chatbots, and automation tools with clearly defined modules for identity, platform context, quality standards, request parsing, and response formatting. Features dynamic function builders, key-value mapping tools, and quality check processes. Perfect for enterprise AI deployment, custom GPT development, conversational AI applications, and AI-powered workflow automation. Export professional-grade system prompts that ensure consistent AI behavior, accurate response formatting, and scalable architecture. No prompt engineering expertise required - our intuitive interface guides you through creating effective AI instructions with modular components that can be updated, tested, and reused across projects.';
+    
+    document.title = 'System Prompt Generator - Professional AI Instruction Design Tool | Nick Goldstein';
+    
+    // Update meta description
+    let metaDescription = document.querySelector('meta[name="description"]') as HTMLMetaElement;
+    if (!metaDescription) {
+      metaDescription = document.createElement('meta');
+      metaDescription.name = 'description';
+      document.head.appendChild(metaDescription);
+    }
+    metaDescription.content = fullDescription;
+    
+    // Update Open Graph tags
+    this.updateMetaTag('property', 'og:type', 'website');
+    this.updateMetaTag('property', 'og:url', 'https://nicholasmgoldstein.com/system-prompt-generator');
+    this.updateMetaTag('property', 'og:title', 'System Prompt Generator - Professional AI Instruction Design Tool');
+    this.updateMetaTag('property', 'og:description', description);
+    
+    // Update Twitter tags
+    this.updateMetaTag('property', 'twitter:card', 'summary_large_image');
+    this.updateMetaTag('property', 'twitter:url', 'https://nicholasmgoldstein.com/system-prompt-generator');
+    this.updateMetaTag('property', 'twitter:title', 'System Prompt Generator - Professional AI Instruction Design Tool');
+    this.updateMetaTag('property', 'twitter:description', description);
+    
+    // Mount navigation and system prompt generator
+    this.navigation.mount(this.container);
+    this.systemPromptGenerator.mount(this.container);
+
+    ScrollFade.init();
+    window.scrollTo(0, 0);
+  }
+
+  private updateMetaTag(attribute: string, name: string, content: string): void {
+    let metaTag = document.querySelector(`meta[${attribute}="${name}"]`) as HTMLMetaElement;
+    if (!metaTag) {
+      metaTag = document.createElement('meta');
+      metaTag.setAttribute(attribute, name);
+      document.head.appendChild(metaTag);
+    }
+    metaTag.content = content;
   }
 
   private showNotFoundPage(): void {

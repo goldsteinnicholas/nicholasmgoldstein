@@ -294,6 +294,15 @@ export class Course {
               </div>
               <div class="max-w-md">
                 <a 
+                  href="/system-prompt-generator" 
+                  class="text-text hover:text-accent transition-colors duration-300 inline-flex items-center gap-2">
+                  <span class="font-medium">System Prompt Generator</span>
+                  <i class="fas fa-arrow-right text-xs text-text-secondary/50"></i>
+                </a>
+                <p class="text-sm text-text-secondary mt-1">A tool for generating effective system prompts for AI platforms.</p>
+              </div>
+              <div class="max-w-md">
+                <a 
                   href="https://emstrata.com" 
                   target="_blank" 
                   rel="noopener noreferrer"
@@ -323,6 +332,7 @@ export class Course {
     this.container.appendChild(section);
     this.setupBackButton();
     this.setupModuleLinks(courseSlug);
+    this.setupSystemPromptGeneratorLink();
     this.setupSlideshow();
     ScrollFade.init();
   }
@@ -381,6 +391,15 @@ export class Course {
           window.dispatchEvent(new PopStateEvent('popstate'));
         }
       });
+    });
+  }
+
+  private setupSystemPromptGeneratorLink(): void {
+    const link = this.container?.querySelector('a[href="/system-prompt-generator"]');
+    link?.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.history.pushState({}, '', '/system-prompt-generator');
+      window.dispatchEvent(new PopStateEvent('popstate'));
     });
   }
 
