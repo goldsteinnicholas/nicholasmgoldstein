@@ -33,7 +33,8 @@ export class Course {
       number: '3',
       chapter: 1,
       title: 'Prompt Engineering',
-      description: 'Learn effective prompt engineering techniques for building AI platforms.'
+      description: 'Learn effective prompt engineering techniques for building AI platforms.',
+      slideDeckPath: '/03 Build AI Platforms from Scratch- Prompt Engineering/index.html'
     },
     {
       number: '4',

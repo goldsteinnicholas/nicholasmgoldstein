@@ -108,7 +108,8 @@ export class SystemPromptGenerator {
             </div>
 
             <div>
-              <label class="block text-sm font-medium text-text mb-2">Key-Value Pairs:</label>
+              <label class="block text-sm font-medium text-text mb-2">Example Request Format (Key-Value Pairs):</label>
+              <p class="text-xs text-text-secondary mb-3">Enter the actual key names that will be used in requests. The values shown are examples to illustrate the format.</p>
               <div id="key-value-pairs" class="space-y-3 mb-4">
                 <!-- Key-value pairs will be added here dynamically -->
               </div>
@@ -248,32 +249,44 @@ export class SystemPromptGenerator {
     if (!container) return;
 
     const pairDiv = document.createElement('div');
-    pairDiv.className = 'flex gap-3 items-start';
+    pairDiv.className = 'bg-primary/30 border border-text-secondary/20 rounded-lg p-4 space-y-3';
     pairDiv.innerHTML = `
-      <div class="flex-1">
-        <input
-          type="text"
-          placeholder="user-input"
-          class="w-full px-4 py-2 bg-card-bg border border-text-secondary/20 rounded-lg text-text placeholder-text-secondary/50 focus:outline-none focus:border-accent/50 focus:ring-2 focus:ring-accent/20 transition-all text-sm"
-        />
+      <div class="flex gap-3 items-start">
+        <div class="flex-1">
+          <label class="block text-xs font-medium text-text-secondary mb-1">Key (Actual Key Name):</label>
+          <input
+            type="text"
+            placeholder="user-input"
+            class="key-input w-full px-4 py-2 bg-card-bg border border-text-secondary/20 rounded-lg text-text placeholder-text-secondary/50 focus:outline-none focus:border-accent/50 focus:ring-2 focus:ring-accent/20 transition-all text-sm"
+          />
+        </div>
+        <div class="flex items-center text-text-secondary pt-6">
+          <span>:</span>
+        </div>
+        <div class="flex-1">
+          <label class="block text-xs font-medium text-text-secondary mb-1">Example Value:</label>
+          <input
+            type="text"
+            placeholder="value"
+            class="example-input w-full px-4 py-2 bg-card-bg border border-text-secondary/20 rounded-lg text-text placeholder-text-secondary/50 focus:outline-none focus:border-accent/50 focus:ring-2 focus:ring-accent/20 transition-all text-sm"
+          />
+        </div>
+        <button
+          type="button"
+          class="remove-pair-btn px-3 py-2 text-text-secondary hover:text-text transition-colors mt-6"
+          aria-label="Remove pair"
+        >
+          <i class="fas fa-times"></i>
+        </button>
       </div>
-      <div class="flex items-center text-text-secondary pt-2">
-        <span>:</span>
+      <div>
+        <label class="block text-xs font-medium text-text-secondary mb-1">Input Element Definition:</label>
+        <textarea
+          placeholder="Define what this input element represents..."
+          class="definition-input w-full px-4 py-2 bg-card-bg border border-text-secondary/20 rounded-lg text-text placeholder-text-secondary/50 focus:outline-none focus:border-accent/50 focus:ring-2 focus:ring-accent/20 transition-all text-sm resize-y"
+          rows="2"
+        ></textarea>
       </div>
-      <div class="flex-1">
-        <input
-          type="text"
-          placeholder="value"
-          class="w-full px-4 py-2 bg-card-bg border border-text-secondary/20 rounded-lg text-text placeholder-text-secondary/50 focus:outline-none focus:border-accent/50 focus:ring-2 focus:ring-accent/20 transition-all text-sm"
-        />
-      </div>
-      <button
-        type="button"
-        class="remove-pair-btn px-3 py-2 text-text-secondary hover:text-text transition-colors"
-        aria-label="Remove pair"
-      >
-        <i class="fas fa-times"></i>
-      </button>
     `;
 
     // Remove button handler
@@ -307,6 +320,14 @@ export class SystemPromptGenerator {
         class="function-name-input w-full px-4 py-2 bg-card-bg border border-text-secondary/20 rounded-lg text-text placeholder-text-secondary/50 focus:outline-none focus:border-accent/50 focus:ring-2 focus:ring-accent/20 transition-all text-sm mb-4"
         placeholder="functionName"
       />
+      <div class="mb-4">
+        <label class="block text-xs font-medium text-text-secondary mb-1">What this function represents:</label>
+        <textarea
+          class="function-definition-input w-full px-4 py-2 bg-card-bg border border-text-secondary/20 rounded-lg text-text placeholder-text-secondary/50 focus:outline-none focus:border-accent/50 focus:ring-2 focus:ring-accent/20 transition-all text-sm resize-y"
+          placeholder="Describe what this function does and when it should be used..."
+          rows="2"
+        ></textarea>
+      </div>
       <div>
         <label class="block text-sm font-medium text-text mb-2">Parameters:</label>
         <div class="function-parameters space-y-2 mb-2">
@@ -342,51 +363,49 @@ export class SystemPromptGenerator {
     if (!container) return;
 
     const paramDiv = document.createElement('div');
-    paramDiv.className = 'relative flex gap-2 items-start';
+    paramDiv.className = 'bg-primary/20 border border-text-secondary/20 rounded-lg p-3 space-y-2';
     paramDiv.innerHTML = `
-      <div class="flex gap-2 items-center" style="min-width: 140px;">
-        <select class="param-type-select px-3 py-2 bg-card-bg border border-text-secondary/20 rounded-lg text-text focus:outline-none focus:border-accent/50 focus:ring-2 focus:ring-accent/20 transition-all text-sm flex-1">
-          <option value="string">string</option>
-          <option value="num">num</option>
-          <option value="likelihood">likelihood</option>
-        </select>
-        <div class="param-info-icon relative group">
-          <i class="fas fa-info-circle text-text-secondary/50 hover:text-text-secondary cursor-help text-sm"></i>
-          <div class="param-description absolute left-0 top-6 w-64 p-3 bg-card-bg border border-text-secondary/20 rounded-lg text-xs text-text-secondary shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-10 pointer-events-none">
-            <!-- Description will be updated dynamically -->
+      <div class="flex gap-2 items-start">
+        <div class="flex gap-2 items-center flex-1">
+          <select class="param-type-select px-3 py-2 bg-card-bg border border-text-secondary/20 rounded-lg text-text focus:outline-none focus:border-accent/50 focus:ring-2 focus:ring-accent/20 transition-all text-sm" style="min-width: 140px;">
+            <option value="string">string</option>
+            <option value="num">num</option>
+            <option value="likelihood">likelihood</option>
+          </select>
+          <div class="param-type-display px-3 py-2 bg-card-bg/50 border border-text-secondary/20 rounded-lg text-text-secondary text-sm flex-1">
+            <span class="param-type-text">string</span>
           </div>
         </div>
+        <button
+          type="button"
+          class="remove-parameter-btn px-2 py-2 text-text-secondary hover:text-text transition-colors"
+          aria-label="Remove parameter"
+        >
+          <i class="fas fa-times text-xs"></i>
+        </button>
       </div>
-      <input
-        type="text"
-        class="param-value-input flex-1 px-3 py-2 bg-card-bg border border-text-secondary/20 rounded-lg text-text placeholder-text-secondary/50 focus:outline-none focus:border-accent/50 focus:ring-2 focus:ring-accent/20 transition-all text-sm"
-        placeholder="value"
-      />
-      <button
-        type="button"
-        class="remove-parameter-btn px-2 py-2 text-text-secondary hover:text-text transition-colors"
-        aria-label="Remove parameter"
-      >
-        <i class="fas fa-times text-xs"></i>
-      </button>
+      <div>
+        <label class="block text-xs font-medium text-text-secondary mb-1">What this argument represents:</label>
+        <input
+          type="text"
+          class="param-definition-input w-full px-3 py-2 bg-card-bg border border-text-secondary/20 rounded-lg text-text placeholder-text-secondary/50 focus:outline-none focus:border-accent/50 focus:ring-2 focus:ring-accent/20 transition-all text-sm"
+          placeholder="Describe what this argument represents..."
+        />
+      </div>
     `;
 
     const typeSelect = paramDiv.querySelector('.param-type-select') as HTMLSelectElement;
-    const valueInput = paramDiv.querySelector('.param-value-input') as HTMLInputElement;
-    const descriptionDiv = paramDiv.querySelector('.param-description') as HTMLElement;
+    const typeDisplay = paramDiv.querySelector('.param-type-text') as HTMLElement;
 
-    // Update placeholder and description based on type
+    // Update type display based on selection
     const updateParameterType = () => {
       const type = typeSelect.value;
       if (type === 'string') {
-        valueInput.placeholder = 'e.g. example text';
-        descriptionDiv.innerHTML = '<strong class="text-text">string "..."</strong><br>A text value that will be enclosed in quotes. Use for text responses, labels, or string identifiers.';
+        typeDisplay.textContent = '"string..."';
       } else if (type === 'num') {
-        valueInput.placeholder = 'e.g. 42';
-        descriptionDiv.innerHTML = '<strong class="text-text">num #</strong><br>A numeric value. Use for counts, quantities, or any numeric data.';
+        typeDisplay.textContent = 'num';
       } else if (type === 'likelihood') {
-        valueInput.placeholder = 'e.g. 750';
-        descriptionDiv.innerHTML = '<strong class="text-text">likelihood num/1000</strong><br>A number between 0-1000 representing probability (0-1.0). The value is divided by 1000 to get the decimal. Use for confidence scores, probabilities, or percentage-like values. Example: 750 represents 0.75 or 75%.';
+        typeDisplay.textContent = 'likelihood/1000';
       }
     };
 
@@ -412,16 +431,17 @@ export class SystemPromptGenerator {
     const qualityCheckProcess = (this.container?.querySelector('#quality-check-process') as HTMLTextAreaElement)?.value.trim();
 
     // Get key-value pairs
-    const keyValuePairs: Array<{ key: string; value: string }> = [];
+    const keyValuePairs: Array<{ key: string; example: string; definition: string }> = [];
     const pairDivs = this.container?.querySelectorAll('#key-value-pairs > div');
     pairDivs?.forEach((div) => {
-      const inputs = div.querySelectorAll('input');
-      if (inputs.length >= 2) {
-        const key = inputs[0].value.trim();
-        const value = inputs[1].value.trim();
-        if (key || value) {
-          keyValuePairs.push({ key, value });
-        }
+      const keyInput = div.querySelector('.key-input') as HTMLInputElement;
+      const exampleInput = div.querySelector('.example-input') as HTMLInputElement;
+      const definitionInput = div.querySelector('.definition-input') as HTMLTextAreaElement;
+      const key = keyInput?.value.trim() || '';
+      const example = exampleInput?.value.trim() || '';
+      const definition = definitionInput?.value.trim() || '';
+      if (key || example || definition) {
+        keyValuePairs.push({ key, example, definition });
       }
     });
 
@@ -459,49 +479,79 @@ export class SystemPromptGenerator {
         prompt += `${dissectingNotes}\n\n`;
       }
       if (keyValuePairs.length > 0) {
-        prompt += `Input Field Definitions:\n\n`;
-        prompt += `The following key-value mappings define each input field and how you should interpret it:\n\n`;
-        keyValuePairs.forEach(({ key, value }) => {
-          if (key && value) {
-            prompt += `${key}: ${value}\n`;
+        // Show example request format
+        prompt += `Example Request Format:\n\n`;
+        prompt += `The following shows the key names you will receive, with example values to illustrate the format:\n\n`;
+        keyValuePairs.forEach(({ key, example }) => {
+          if (key && example) {
+            prompt += `${key}: ${example}\n`;
+          } else if (key) {
+            prompt += `${key}:\n`;
           }
         });
-        prompt += `\n\n`;
+        prompt += `\n`;
+        
+        // Show input element definitions
+        const definitions = keyValuePairs.filter(({ definition }) => definition);
+        if (definitions.length > 0) {
+          prompt += `Input Element Definitions:\n\n`;
+          prompt += `The following defines each input element and how you should interpret it:\n\n`;
+          definitions.forEach(({ key, definition }) => {
+            if (key && definition) {
+              prompt += `${key}: ${definition}\n`;
+            }
+          });
+          prompt += `\n\n`;
+        }
       }
     }
 
     // Get response functions
-    const responseFunctions: Array<{ name: string; parameters: string[] }> = [];
+    const responseFunctions: Array<{ 
+      name: string; 
+      parameters: string[]; 
+      definition?: string;
+      argumentDefinitions: Array<{ position: number; definition: string; type: string }>;
+    }> = [];
     const functionDivs = this.container?.querySelectorAll('#response-functions > div');
     functionDivs?.forEach((div) => {
       const nameInput = div.querySelector('.function-name-input') as HTMLInputElement;
+      const definitionInput = div.querySelector('.function-definition-input') as HTMLTextAreaElement;
       const paramDivs = div.querySelectorAll('.function-parameters > div');
       const name = nameInput?.value.trim();
+      const definition = definitionInput?.value.trim();
       const parameters: string[] = [];
+      const argumentDefinitions: Array<{ position: number; definition: string; type: string }> = [];
       
-      paramDivs?.forEach((paramDiv) => {
+      paramDivs?.forEach((paramDiv, index) => {
         const typeSelect = paramDiv.querySelector('.param-type-select') as HTMLSelectElement;
-        const valueInput = paramDiv.querySelector('.param-value-input') as HTMLInputElement;
+        const paramDefInput = paramDiv.querySelector('.param-definition-input') as HTMLInputElement;
         const type = typeSelect?.value;
-        const value = valueInput?.value.trim();
+        const paramDef = paramDefInput?.value.trim();
         
-        if (value) {
-          if (type === 'string') {
-            // Ensure string is wrapped in quotes
-            const formattedValue = value.startsWith('"') && value.endsWith('"') 
-              ? value 
-              : `"${value}"`;
-            parameters.push(formattedValue);
-          } else if (type === 'num') {
-            parameters.push(value);
-          } else if (type === 'likelihood') {
-            parameters.push(`${value}/1000`);
-          }
+        // Add parameter type to the function signature
+        if (type === 'string') {
+          parameters.push('"string..."');
+        } else if (type === 'num') {
+          parameters.push('num');
+        } else if (type === 'likelihood') {
+          parameters.push('likelihood/1000');
+        }
+        
+        if (paramDef) {
+          argumentDefinitions.push({ position: index + 1, definition: paramDef, type });
+        } else {
+          argumentDefinitions.push({ position: index + 1, definition: '', type });
         }
       });
 
-      if (name || parameters.length > 0) {
-        responseFunctions.push({ name: name || 'unnamed', parameters });
+      if (name || parameters.length > 0 || definition) {
+        responseFunctions.push({ 
+          name: name || 'unnamed', 
+          parameters,
+          definition,
+          argumentDefinitions
+        });
       }
     });
 
@@ -517,10 +567,32 @@ export class SystemPromptGenerator {
       responseFunctions.forEach(({ name, parameters }) => {
         const paramsStr = parameters.length > 0 
           ? parameters.join(', ') 
-          : 'no parameters';
+          : '';
         prompt += `${name}(${paramsStr})\n`;
       });
-      prompt += `\n\n`;
+      prompt += `\n`;
+      
+      // Add function and argument definitions
+      prompt += `Function and Argument Definitions:\n\n`;
+      prompt += `The following defines what each function and its arguments represent:\n\n`;
+      responseFunctions.forEach(({ name, definition, argumentDefinitions }) => {
+        prompt += `${name}:\n`;
+        if (definition) {
+          prompt += `  Purpose: ${definition}\n`;
+        }
+        if (argumentDefinitions.length > 0) {
+          argumentDefinitions.forEach(({ position, definition: argDef, type }) => {
+            const displayType = type === 'string' ? '"string..."' : type;
+            if (argDef) {
+              prompt += `  Argument ${position} (${displayType}): ${argDef}\n`;
+            } else {
+              prompt += `  Argument ${position} (${displayType})\n`;
+            }
+          });
+        }
+        prompt += `\n`;
+      });
+      prompt += `\n`;
     }
 
     if (furtherInstructions) {
