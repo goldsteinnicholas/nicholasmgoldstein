@@ -30,7 +30,8 @@ export class Profile {
               <div class="space-y-6">
                 <h2 class="text-3xl font-heading text-text text-center md:text-left">Nicholas M. Goldstein</h2>
                 <p class="text-lg text-text-secondary leading-relaxed text-center md:text-left">
-                  IT Consultant at Oracle Health and self-taught fullstack developer. Currently building PLATO5, 
+                  IT Consultant at Oracle Health and self-taught fullstack developer. Currently building Emstrata, 
+                  an emergent narrative cobuilder that enables human-AI collaborative storytelling, and PLATO5, 
                   a social networking platform focused on combating the growing loneliness epidemic. Unlike traditional 
                   social media, PLATO5 functions as a Social Engine, designed to facilitate real-world connections through 
                   personality-based matching and shared interests, encouraging users to meet offline and build meaningful relationships.
