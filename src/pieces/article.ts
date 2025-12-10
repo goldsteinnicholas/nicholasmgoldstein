@@ -14,6 +14,41 @@ export class Article {
   private container: HTMLElement | null = null;
   
   private articles: Record<string, ArticleContent> = {
+    'no-were-not-trying-to-replace-dungeon-masters-with-ai': {
+      slug: 'no-were-not-trying-to-replace-dungeon-masters-with-ai',
+      title: "No, We're Not Trying to Replace Dungeon Masters with AI",
+      content: `
+        <p class="mb-8 leading-loose first-letter:text-6xl first-letter:font-serif first-letter:float-left first-letter:mr-4 first-letter:leading-none first-letter:bg-gradient-to-br first-letter:from-secondary first-letter:to-purple first-letter:bg-clip-text first-letter:text-transparent first-letter:font-black">The closest thing to Emstrata's emergent narratives, in practice, is a well-structured Dungeons and Dragons campaign. This much is irrefutable. We borrowed many mechanics and parameters from the strategy game created by Gary Gygax and Dave Arneson, like rolling probabilities for realistic consequences. Albeit, we introduced new concepts on top of these mechanics, but clearly the influence is present.</p>
+
+        <p class="mb-8 leading-loose">It could be argued that Gygax and Arneson were well ahead of their time and essentially laid out the fundamental mechanisms with which stories could write themselves in perpetuity with realistic outcomes, even though they didn't have LLMs available to them to actually do the writing. So, it was left up to a human: A Dungeon Master. Even today, if you ran a D&D campaign without a human Dungeon Master and an AI in their stead, you would likely end up with either a mess or a worse experience, due to the resultant reduction in social cohesion.</p>
+
+        <p class="mb-8 leading-loose">Now, I don't necessarily feel the need to reassert my preference for humans over AIs, but there are obvious benefits to keeping a human in the loop. Unfortunately, I'm not positive that this is a belief that all my contemporaries share. There's a cohort of people who strive to replace traditional human arts, hobbies, and jobs with AI, rather than using AI as a foundational technology that can enable new forms of creativity and productivity for human beings.</p>
+
+        <p class="mb-8 leading-loose">A new coinage seems necessary to explain what's happening here: AI Replacementism (Replacementism for short) is the philosophical position of believing, in whole or in part, that the end goal of AI reasoning and generative capabilities is the replacement of human labor. Think of CEOs who seem giddy to pontificate about programmers that don't have to sleep and can't argue, or who remark about a 'new Industrial Revolution'. What they don't mention about the possible Industrial Revolution is that this won't result in better living standards. It would further entrench and accelerate the existing inequality in our system and crown the AI companies of today as the Sole Proprietors of agglomerated labor. This leaves nothing for the rest of us. Somehow, this is their idealist worldview. I'm sure it's compelling if you're a billionaire or just wish you were.</p>
+
+        <p class="mb-8 leading-loose">The alternative viewpoint on AI and the development of AI applications is using the capabilities of these systems to augment human skill, similar to how previous technologies bolstered human productivity and introduced new forms of art and new kinds of pastimes. It's not only a more likely outcome, but one that doesn't result in a dystopian hellscape… which is nice.</p>
+
+        <p class="mb-8 leading-loose">And to be clear, Emstrata isn't only built for D&D-esque fantasy scenarios. It was built to 'Democratize Experience' and allows you to generate any sort of reality that you can imagine and then inhabit it to its fullest.</p>
+
+        <p class="mb-8 leading-loose">Orchestrator Mode is the main step that Emstrata takes toward reasserting human autonomy over these simulated realities. This type of simulation allows one participant to become an Orchestrator that stands between the Discovery and Narration Layers of the Emstrata system. The Discovery Layer plans the next turn, establishes the potential consequences, then rolls them. The Orchestrator then has the opportunity to check those results, edit them, or even insert ideas of their own before they get sent to the Narration Layer for the following turn to be written. This gives complete control of the simulation's direction to a human actor. In theory, the Orchestrator could completely ignore the Discovery Layer and point the simulation in their preferred direction easily.</p>
+
+        <p class="mb-8 leading-loose">For D&D, having a human DM that uses the Orchestrator Mode to enforce a particular ruleset and may determine certain things on their end would be very helpful. The Emstrata system keeps track of the rules of the underlying reality, what has and hasn't happened, and the DM focuses on their area of expertise with full control.</p>
+
+        <p class="mb-8 leading-loose">I built Emstrata to help humans, not replace them. A number of AI Storytelling startups can't say the same. From projects that advertise themselves as AI Dungeon Masters or even AI Novelists, it's clear what the aim is. They want the humans out of the loop and to passively consume their AI's outputs. What a waste of human potential.</p>
+
+        <p class="mb-8 leading-loose">Honing and highlighting human creativity is a harder path, to be fair. Many of the financial interests in the tech world are inherently Replacementist. 'Wouldn't it be a boon to business if we didn't need to hire people?' They ask with an obvious answer in mind. 'What's more convenient than opening an app and the AI determines everything for you?' They ask with their pupils contorting into dollar signs.</p>
+
+        <p class="mb-8 leading-loose">If AI Storytelling becomes an automated process with little to no human input, we've already seen a bit of what that will look like on social media: AI-slop style memes and a complete free-for-all on creative output. In the coming years of rapid AI development, high-quality films will be drowned out by 1,000 similar pieces created with one prompt, resulting in a lack of incentive to make high-quality films, even if they're qualitatively better. Creative endeavors will be reduced to a number and the line between genuine human creation and AI generation will be further blurred.</p>
+
+        <p class="mb-8 leading-loose">What Emstrata does is fundamentally different. Humans are part and parcel of everything Emstrata blurts out. It's a genuine tool that humans can use to generate something that couldn't have existed before: a human-AI collaborative narrative. Will it replace films? No. Will it help plan and influence films? I have no doubt.</p>
+
+        <p class="mb-8 leading-loose">In our ideal future, we'll have delineated the appropriate place for AI in society. A place where humans can still create cool things, because that's what humans do, and a place where AI might make things go a little smoother along the way. Potentially acting as a sounding board or an ideator or a system to track narrative elements. There's a right way and a wrong way to proceed here. We can relegate humans to the fringes of relevance or empower them. Looking around, it's a bit concerning to see so many people on the anti-human side. At Emstrata, we'll build the alternative. Something pro-human. A system that doesn't write for you, but instead, writes with you.</p>
+
+        <p class="mb-8 leading-loose">We're working on it.</p>
+      `,
+      date: 'December 10, 2025',
+      category: 'Emstrata'
+    },
     'the-dystopian-future-of-ai-girlfriends': {
       slug: 'the-dystopian-future-of-ai-girlfriends',
       title: 'The Dystopian Future of AI Girlfriends',

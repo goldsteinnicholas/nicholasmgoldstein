@@ -15,6 +15,13 @@ export class Articles {
   
   private articles: Article[] = [
     {
+      slug: 'no-were-not-trying-to-replace-dungeon-masters-with-ai',
+      title: "No, We're Not Trying to Replace Dungeon Masters with AI",
+      excerpt: 'The closest thing to Emstrata\'s emergent narratives, in practice, is a well-structured Dungeons and Dragons campaign. This much is irrefutable. We borrowed many mechanics and parameters from the strategy game created by Gary Gygax and Dave Arneson, like rolling probabilities for realistic consequences.',
+      date: 'December 10, 2025',
+      category: 'Emstrata'
+    },
+    {
       slug: 'the-dystopian-future-of-ai-girlfriends',
       title: 'The Dystopian Future of AI Girlfriends',
       excerpt: 'Can anyone think of a more apt way our society comes to a screeching halt than through the monopolization of human attention? It seems we haven\'t learned much from our experiments in degrading people\'s dopamine receptors and neural circuits for decades at this point.',

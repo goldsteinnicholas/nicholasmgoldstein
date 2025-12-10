@@ -9,7 +9,7 @@
   </url>
   <url>
     <loc>https://nicholasmgoldstein.com/articles</loc>
-    <lastmod>2025-11-28</lastmod>
+    <lastmod>2025-12-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -21,6 +21,12 @@
   </url>
 
   <!-- Articles -->
+  <url>
+    <loc>https://nicholasmgoldstein.com/articles/no-were-not-trying-to-replace-dungeon-masters-with-ai</loc>
+    <lastmod>2025-12-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
   <url>
     <loc>https://nicholasmgoldstein.com/articles/the-dystopian-future-of-ai-girlfriends</loc>
     <lastmod>2025-11-19</lastmod>
