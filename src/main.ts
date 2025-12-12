@@ -7,6 +7,7 @@ import { Articles } from './pieces/articles';
 import { Article } from './pieces/article';
 import { Courses } from './pieces/courses';
 import { Course } from './pieces/course';
+import { CourseReader } from './pieces/course-reader';
 import { SystemPromptGenerator } from './pieces/system-prompt-generator';
 import { ScrollFade } from './scroll-fade';
 
@@ -21,6 +22,7 @@ class HomeScreen {
   private article: Article;
   private courses: Courses;
   private course: Course;
+  private courseReader: CourseReader;
   private systemPromptGenerator: SystemPromptGenerator;
 
   constructor() {
@@ -33,6 +35,7 @@ class HomeScreen {
     this.article = new Article();
     this.courses = new Courses();
     this.course = new Course();
+    this.courseReader = new CourseReader();
     this.systemPromptGenerator = new SystemPromptGenerator();
   }
 
@@ -51,8 +54,13 @@ class HomeScreen {
       this.showCoursesPage();
     } else if (path.startsWith('/course/')) {
       const coursePath = path.split('/course/')[1];
-      // Check if it's a module route: /course/{slug}/module/{number}
-      if (coursePath.includes('/module/')) {
+      // Check if it's a reader route: /course/{slug}/reader/module/{number}
+      if (coursePath.includes('/reader/module/')) {
+        const [courseSlug, modulePart] = coursePath.split('/reader/module/');
+        const moduleNumber = modulePart ? parseInt(modulePart, 10) : 1;
+        this.showCourseReaderPage(courseSlug, moduleNumber);
+      } else if (coursePath.includes('/module/')) {
+        // Check if it's a module route: /course/{slug}/module/{number}
         const [courseSlug, modulePart] = coursePath.split('/module/');
         const moduleNumber = modulePart ? parseInt(modulePart, 10) : 1;
         this.showCoursePage(courseSlug, moduleNumber);
@@ -83,8 +91,13 @@ class HomeScreen {
         this.showCoursesPage();
       } else if (newPath.startsWith('/course/')) {
         const coursePath = newPath.split('/course/')[1];
-        // Check if it's a module route: /course/{slug}/module/{number}
-        if (coursePath.includes('/module/')) {
+        // Check if it's a reader route: /course/{slug}/reader/module/{number}
+        if (coursePath.includes('/reader/module/')) {
+          const [courseSlug, modulePart] = coursePath.split('/reader/module/');
+          const moduleNumber = modulePart ? parseInt(modulePart, 10) : 1;
+          this.showCourseReaderPage(courseSlug, moduleNumber);
+        } else if (coursePath.includes('/module/')) {
+          // Check if it's a module route: /course/{slug}/module/{number}
           const [courseSlug, modulePart] = coursePath.split('/module/');
           const moduleNumber = modulePart ? parseInt(modulePart, 10) : 1;
           this.showCoursePage(courseSlug, moduleNumber);
@@ -178,6 +191,19 @@ class HomeScreen {
     // Mount navigation and course
     this.navigation.mount(this.container);
     this.course.mount(this.container, courseSlug, moduleNumber);
+
+    ScrollFade.init();
+    window.scrollTo(0, 0);
+  }
+
+  private showCourseReaderPage(courseSlug: string, moduleNumber?: number): void {
+    if (!this.container) return;
+    
+    this.container.innerHTML = ''; // Clear existing content
+    
+    // Mount navigation and course reader
+    this.navigation.mount(this.container);
+    this.courseReader.mount(this.container, courseSlug, moduleNumber);
 
     ScrollFade.init();
     window.scrollTo(0, 0);

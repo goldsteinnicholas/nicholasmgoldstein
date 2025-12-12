@@ -7,6 +7,7 @@ Allow: /articles/*
 Allow: /courses
 Allow: /course/*
 Allow: /course/*/module/*
+Allow: /course/*/reader/module/*
 
 # Disallow common non-content paths
 Disallow: /node_modules/

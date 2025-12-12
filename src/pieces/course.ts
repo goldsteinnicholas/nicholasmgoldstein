@@ -205,13 +205,20 @@ export class Course {
     section.innerHTML = `
       <div class="max-w-7xl mx-auto">
         <!-- Back Navigation -->
-        <div class="mb-8">
+        <div class="mb-8 flex items-center justify-between">
           <a 
             id="back-to-courses-btn"
             href="/courses" 
             class="inline-flex items-center gap-2 text-text-secondary hover:text-text transition-colors duration-300">
             <i class="fas fa-arrow-left"></i>
             Back to Courses
+          </a>
+          <a 
+            id="view-reader-btn"
+            href="/course/${courseSlug}/reader/module/${moduleNumber}" 
+            class="inline-flex items-center gap-2 px-4 py-2 bg-card-bg border border-text-secondary/20 rounded-full hover:border-accent/30 hover:bg-primary/10 transition-all duration-300 text-text-secondary hover:text-text text-sm">
+            <i class="fas fa-book"></i>
+            <span>Read Instead</span>
           </a>
         </div>
       </div>
@@ -332,6 +339,7 @@ export class Course {
     
     this.container.appendChild(section);
     this.setupBackButton();
+    this.setupReaderButton(courseSlug, moduleNumber);
     this.setupModuleLinks(courseSlug);
     this.setupSystemPromptGeneratorLink();
     this.setupSlideshow();
@@ -411,6 +419,17 @@ export class Course {
     backBtn.addEventListener('click', (e) => {
       e.preventDefault();
       window.history.pushState({}, '', '/courses');
+      window.dispatchEvent(new PopStateEvent('popstate'));
+    });
+  }
+
+  private setupReaderButton(courseSlug: string, moduleNumber: number): void {
+    const readerBtn = this.container?.querySelector('#view-reader-btn');
+    if (!readerBtn) return;
+
+    readerBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.history.pushState({}, '', `/course/${courseSlug}/reader/module/${moduleNumber}`);
       window.dispatchEvent(new PopStateEvent('popstate'));
     });
   }
