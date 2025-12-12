@@ -198,6 +198,7 @@ export class CourseReader {
       title: 'Setting Up Your Platform Prereqs',
       description: 'Developing the framework to iterate on your platforms, selecting a tech & productivity stack.',
       slideDeckPath: '/02 Build AI Platforms from Scratch - Slide Deck/index.html',
+      videoUrl: 'https://youtu.be/IxoTXA7dFMw?si=5WeVY10GYtOoxdHh',
       writtenContent: `
         <div class="space-y-8">
           <section>
@@ -340,6 +341,7 @@ export class CourseReader {
       title: 'Prompt Engineering',
       description: 'Learn effective prompt engineering techniques for building AI platforms.',
       slideDeckPath: '/03 Build AI Platforms from Scratch- Prompt Engineering/index.html',
+      videoUrl: 'https://youtu.be/w6yQaDm6-dE',
       writtenContent: `
         <div class="space-y-8">
           <section>

@@ -27,14 +27,16 @@ export class Course {
       chapter: 1,
       title: 'Setting Up Your Platform Prereqs',
       description: 'Developing the framework to iterate on your platforms, selecting a tech & productivity stack.',
-      slideDeckPath: '/02 Build AI Platforms from Scratch - Slide Deck/index.html'
+      slideDeckPath: '/02 Build AI Platforms from Scratch - Slide Deck/index.html',
+      videoUrl: 'https://youtu.be/IxoTXA7dFMw?si=5WeVY10GYtOoxdHh'
     },
     {
       number: '3',
       chapter: 1,
       title: 'Prompt Engineering',
       description: 'Learn effective prompt engineering techniques for building AI platforms.',
-      slideDeckPath: '/03 Build AI Platforms from Scratch- Prompt Engineering/index.html'
+      slideDeckPath: '/03 Build AI Platforms from Scratch- Prompt Engineering/index.html',
+      videoUrl: 'https://youtu.be/w6yQaDm6-dE'
     },
     {
       number: '4',
