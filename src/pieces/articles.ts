@@ -120,6 +120,16 @@ export class Articles {
     this.container.appendChild(section);
     this.setupArticleLinks();
     ScrollFade.init();
+    
+    // Trigger fade-in for main section immediately on load
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        section.classList.remove('opacity-0', 'translate-y-8');
+        section.classList.add('opacity-100', 'translate-y-0');
+      });
+    });
+    
+    window.scrollTo(0, 0);
   }
 
   private renderFeaturedArticle(): string {
