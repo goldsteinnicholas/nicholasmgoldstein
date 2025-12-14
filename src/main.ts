@@ -60,7 +60,7 @@ class HomeScreen {
         const moduleNumber = modulePart ? parseInt(modulePart, 10) : 1;
         this.showCourseReaderPage(courseSlug, moduleNumber);
       } else if (coursePath.includes('/module/')) {
-        // Check if it's a module route: /course/{slug}/module/{number}
+      // Check if it's a module route: /course/{slug}/module/{number}
         const [courseSlug, modulePart] = coursePath.split('/module/');
         const moduleNumber = modulePart ? parseInt(modulePart, 10) : 1;
         this.showCoursePage(courseSlug, moduleNumber);
@@ -97,7 +97,7 @@ class HomeScreen {
           const moduleNumber = modulePart ? parseInt(modulePart, 10) : 1;
           this.showCourseReaderPage(courseSlug, moduleNumber);
         } else if (coursePath.includes('/module/')) {
-          // Check if it's a module route: /course/{slug}/module/{number}
+        // Check if it's a module route: /course/{slug}/module/{number}
           const [courseSlug, modulePart] = coursePath.split('/module/');
           const moduleNumber = modulePart ? parseInt(modulePart, 10) : 1;
           this.showCoursePage(courseSlug, moduleNumber);
