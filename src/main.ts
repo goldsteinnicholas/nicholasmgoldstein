@@ -52,43 +52,56 @@ class HomeScreen {
       this.container.innerHTML = ''; // Clear existing content
       
       // Check current path and route accordingly
-      
-      if (path === '/articles') {
-        this.showArticlesPage();
-      } else if (path.startsWith('/articles/')) {
-        this.showArticlePage(path.split('/articles/')[1]);
-      } else if (path === '/courses') {
-        this.showCoursesPage();
-      } else if (path.startsWith('/course/')) {
-        const coursePath = path.split('/course/')[1];
+    
+    if (path === '/articles') {
+      this.showArticlesPage();
+    } else if (path.startsWith('/articles/')) {
+      this.showArticlePage(path.split('/articles/')[1]);
+    } else if (path === '/courses') {
+      this.showCoursesPage();
+    } else if (path.startsWith('/course/')) {
+      const coursePath = path.split('/course/')[1];
         // Check if it's a reader route: /course/{slug}/reader/module/{number}
         if (coursePath.includes('/reader/module/')) {
           const [courseSlug, modulePart] = coursePath.split('/reader/module/');
           const moduleNumber = modulePart ? parseInt(modulePart, 10) : 1;
           this.showCourseReaderPage(courseSlug, moduleNumber);
         } else if (coursePath.includes('/module/')) {
-        // Check if it's a module route: /course/{slug}/module/{number}
-          const [courseSlug, modulePart] = coursePath.split('/module/');
-          const moduleNumber = modulePart ? parseInt(modulePart, 10) : 1;
-          this.showCoursePage(courseSlug, moduleNumber);
-        } else {
-          // Redirect to module 1 if no module specified
-          window.history.replaceState({}, '', `/course/${coursePath}/module/1`);
-          this.showCoursePage(coursePath, 1);
-        }
-      } else if (path === '/system-prompt-generator') {
-        this.showSystemPromptGeneratorPage();
-      } else if (path === '/') {
-        this.showHomePage();
-      } else if (path === '/unknown-route') {
-        this.showNotFoundPage();
+      // Check if it's a module route: /course/{slug}/module/{number}
+        const [courseSlug, modulePart] = coursePath.split('/module/');
+        const moduleNumber = modulePart ? parseInt(modulePart, 10) : 1;
+        this.showCoursePage(courseSlug, moduleNumber);
       } else {
-        window.history.replaceState({}, '', '/unknown-route');
-        this.showNotFoundPage();
+        // Redirect to module 1 if no module specified
+        window.history.replaceState({}, '', `/course/${coursePath}/module/1`);
+        this.showCoursePage(coursePath, 1);
+      }
+    } else if (path === '/system-prompt-generator') {
+      this.showSystemPromptGeneratorPage();
+    } else if (path === '/') {
+      this.showHomePage();
+    } else if (path === '/unknown-route') {
+      this.showNotFoundPage();
+    } else {
+      window.history.replaceState({}, '', '/unknown-route');
+      this.showNotFoundPage();
       }
     } else {
       // Prerendered content exists and matches URL - preserve it and set up navigation handlers
       this.setupPrerenderedEventListeners();
+      
+      // Initialize quiz for Module 5 reader pages even with prerendered content
+      if (path.startsWith('/course/') && path.includes('/reader/module/')) {
+        const coursePath = path.split('/course/')[1];
+        if (coursePath.includes('/reader/module/')) {
+          const modulePart = coursePath.split('/reader/module/')[1];
+          const moduleNumber = modulePart ? parseInt(modulePart, 10) : 1;
+          // Wait for DOM to be ready, then initialize quiz
+          setTimeout(() => {
+            this.courseReader.initializeQuizIfNeeded(moduleNumber);
+          }, 100);
+        }
+      }
     }
 
     // Listen for navigation changes (always set up, works for both prerendered and normal)

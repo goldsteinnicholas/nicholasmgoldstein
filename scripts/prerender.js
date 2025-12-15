@@ -26,9 +26,13 @@ function getAllRoutes() {
     '/course/build-ai-platforms/module/1',
     '/course/build-ai-platforms/module/2',
     '/course/build-ai-platforms/module/3',
+    '/course/build-ai-platforms/module/4',
+    '/course/build-ai-platforms/module/5',
     '/course/build-ai-platforms/reader/module/1',
     '/course/build-ai-platforms/reader/module/2',
     '/course/build-ai-platforms/reader/module/3',
+    '/course/build-ai-platforms/reader/module/4',
+    '/course/build-ai-platforms/reader/module/5',
   ].map(route => {
     if (route !== '/' && route.endsWith('/')) {
       return route.slice(0, -1);

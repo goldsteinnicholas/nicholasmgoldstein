@@ -654,13 +654,368 @@ export class CourseReader {
       number: '4',
       chapter: 1,
       title: 'Multilayered Architectures',
-      description: 'Explore complex system architectures with multiple layers for building robust AI platforms.'
+      description: 'Explore complex system architectures with multiple layers for building robust AI platforms.',
+      slideDeckPath: '/04 Build AI Platforms from Scratch - Slide Deck/index.html',
+      writtenContent: `
+        <div class="space-y-8">
+          <section>
+            <h2 class="text-2xl font-heading text-text mb-4">What is a Multilayered AI Architecture?</h2>
+            <p class="text-text-secondary mb-4 italic">And how can it supercharge the power of your app?</p>
+            <ul class="list-disc list-inside space-y-3 text-text-secondary ml-4">
+              <li>If one prompt takes an input, runs it through a series of filters and rules and fundamentally transforms the input data then outputs it to you, multiple coordinated prompts compound those transformations substantially.</li>
+              <li>The separation of concerns between AI layers not only makes these systems more manageable, but it helps avoid confusing the AI with a million tasks, bolstering performance for the most important functionalities.</li>
+              <li>For systems that are aiming for near-perfect performance or just more consistent results.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 class="text-2xl font-heading text-text mb-4">An Example from Emstrata</h2>
+            <p class="text-text-secondary mb-4 italic">The Emstrata Cycle</p>
+            <div class="space-y-4 text-text-secondary">
+              <p>The Emstrata Cycle is a standardized series of prompts that run of every turn in an Emstrata simulation.</p>
+              <p>This cycle retains a comprehensive memory of all entities in the simulation, plans/positions entities on an interactive coordinate plane, writes prose according to exacting instruction, captures secrets and memories, and corrects all continuity errors after the narrative is written.</p>
+              <p><strong>No single prompt or backend wizardry would be able to accomplish this by itself.</strong></p>
+              <div>
+                <p class="mb-2"><strong>These are the layers (simplified for the example):</strong></p>
+                <ul class="list-disc list-inside space-y-2 ml-6">
+                  <li><strong>Groundskeeper</strong> (system memory)</li>
+                  <li><strong>Discovery</strong> (planning/consequence handling)</li>
+                  <li><strong>Narration</strong> (writing the narrative)</li>
+                  <li><strong>Chron-Con</strong> (correcting any minor errors)</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <h2 class="text-2xl font-heading text-text mb-4">Think Architecturally</h2>
+            <p class="text-text-secondary mb-4 italic">Strategize on the best ways to achieve great results for your platform</p>
+            <ul class="list-disc list-inside space-y-3 text-text-secondary ml-4">
+              <li><strong>Consider your actual goal and then break it down into steps.</strong> If you were to perform this action yourself, what steps would you need to follow. Write that down. That's your workflow.</li>
+              <li><strong>After formalizing your workflow, think of the type of data transformations you would need throughout that process</strong> and then build the prompts to automate, then chain them together.</li>
+              <li><strong>Illustrative example:</strong> Your platform depending on conversation history for context can cause your token count and performance to take a hit. Perhaps a conversation consolidator prompt would benefit you. And if you want a truly random number to be used in the determination of something in your system, perhaps you have the backend serve that up to your AI, rather than assuming that the LLM's training data can produce anything close to pure randomness.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 class="text-2xl font-heading text-text mb-4">Correction Layers</h2>
+            <p class="text-text-secondary mb-4 italic">The referee of your platform</p>
+            <ul class="list-disc list-inside space-y-3 text-text-secondary ml-4">
+              <li>Correction layers catch errors after other layers have done their work. They're your quality control layers. They spot continuity breaks, logical inconsistencies, or constraint violations that slipped through.</li>
+              <li><strong>In Emstrata:</strong> The Chron-Con layer runs after the narrative is written. It checks for things like: Did a character who was in the tavern suddenly appear in the forest without traveling? Did someone use an item they don't have? Are the spatial coordinates consistent with the described action?</li>
+              <li><strong>When you need one:</strong> If there are complex requirements and expectations that your platform needs to meet. Correcting before revealing the final answer can lower the chance of bad responses.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 class="text-2xl font-heading text-text mb-4">Reasoning/Strategy Layers</h2>
+            <p class="text-text-secondary mb-4 italic">The decision-maker of your platform</p>
+            <ul class="list-disc list-inside space-y-3 text-text-secondary ml-4">
+              <li>Reasoning layers make decisions before content gets generated. They evaluate the current state, consider available options, assess consequences, and choose a direction. Think of them as the 'planning brain' of your system.</li>
+              <li><strong>In Emstrata:</strong> Discovery handles this - it looks at what the participant wants to do, considers the simulation state, evaluates what outcomes make narrative sense, and determines how the action should resolve. It's not writing the story yet; it's deciding what should happen.</li>
+              <li><strong>When you need one:</strong> If you find yourself asking an LLM to both 'figure out what should happen AND write it beautifully,' you're overloading a single prompt. Split it. Reason first, write second.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 class="text-2xl font-heading text-text mb-4">Memory Consolidation Layers</h2>
+            <p class="text-text-secondary mb-4 italic">The stenographer of your platform</p>
+            <ul class="list-disc list-inside space-y-3 text-text-secondary ml-4">
+              <li>Memory consolidation layers distill what just happened into something retrievable later. They extract the important details from verbose content and store them in a format your system can efficiently query or format into future inputs.</li>
+              <li><strong>In Emstrata:</strong> Groundskeeper serves this function. After Discovery determines what happens and Narration writes it, Groundskeeper updates the comprehensive memory of all entities and the emergent narrative. It's maintaining the source of truth about the simulation state.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 class="text-2xl font-heading text-text mb-4">Content Layers</h2>
+            <p class="text-text-secondary mb-4 italic">The performer of your platform</p>
+            <ul class="list-disc list-inside space-y-3 text-text-secondary ml-4">
+              <li>Content layers generate the actual output users experience - the prose, dialogue, descriptions, or interface text. These layers take decisions from reasoning layers and context from memory layers, then craft the experience.</li>
+              <li><strong>Emstrata's Narration layer does this.</strong> It receives Discovery's decisions about what happened, checks Groundskeeper's simulation state, and writes the actual narrative text that players read. It's optimizing for atmosphere, pacing, and emotional resonance - not logic or consistency (that's handled elsewhere).</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 class="text-2xl font-heading text-text mb-4">Catch-All/Connector Layers</h2>
+            <p class="text-text-secondary mb-4 italic">The clean-up crew of your platform</p>
+            <ul class="list-disc list-inside space-y-3 text-text-secondary ml-4">
+              <li>Not every layer fits a clean category. Catch-all layers are hybrids that do complementary work for multiple other layers. They handle tasks that don't belong to any single specialized layer but are essential for the system to function cohesively.</li>
+              <li>These layers often emerge when you discover gaps like two layers need to work together but speak different 'languages,' or several layers all need the same preprocessing that none of them should be responsible for individually.</li>
+              <li><strong>In Emstrata:</strong> The Chron-Con does more than just error correction. It also tracks secrets and memories from the narrative, explicitly tagging them for Groundskeeper to integrate into system memory. You don't want Narration burdened with the unrelated task of extracting and categorizing secrets while it's trying to write high-quality prose. And Groundskeeper needs these pieces explicitly labeled as 'secrets' or 'memories' to properly integrate them into the simulation history. The Chron-Con bridges this gap.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 class="text-2xl font-heading text-text mb-4">Cyclical Vs Circumstantial Systems</h2>
+            <p class="text-text-secondary mb-4 italic">And everything in-between</p>
+            <div class="space-y-4 text-text-secondary">
+              <div>
+                <h3 class="text-xl font-heading text-text mb-2">Cyclical systems</h3>
+                <p>Cyclical systems run the same prompts every time. Emstrata follows this pattern: every turn runs Discovery, then Narration, then Chron-Con, then Groundskeeper, in that exact order. The flow is predictable and consistent regardless of what happens in the simulation. You always know what's executing next, which makes debugging straightforward and cost estimation more reliable.</p>
+              </div>
+              <div>
+                <h3 class="text-xl font-heading text-text mb-2">Circumstantial systems</h3>
+                <p>Circumstantial systems determine the pathway based on outcomes or AI direction. The route through your architecture changes depending on what happened in previous steps. Maybe an error detection layer decides whether correction is needed. Maybe a routing layer examines user intent and sends the request down completely different processing paths. The system adapts its own execution flow based on runtime conditions.</p>
+              </div>
+              <div>
+                <h3 class="text-xl font-heading text-text mb-2">Hybrid systems</h3>
+                <p>Hybrid systems are mostly cyclical at their base, but circumstantial at times when specific conditions warrant different handling. You might always run your core cycle, but branch to specialized subsystems when certain triggers fire. Many real-world systems end up here. It's a reliable backbone with conditional branches for edge cases. Emstrata has a number of circumstantial offshoots as well.</p>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <h2 class="text-2xl font-heading text-text mb-4">Agnostic Backend Interaction</h2>
+            <p class="text-text-secondary mb-4 italic">What happens between AI layers</p>
+            <ul class="list-disc list-inside space-y-3 text-text-secondary ml-4">
+              <li><strong>Data Persistence and Utility:</strong> Between AI layers, it's important to save important, transformed data to the backend for future retrieval, debugging, rerunning if there's an error, etc.</li>
+              <li><strong>Data Reusability and Presentation:</strong> Saving data also allows you to present that data in interesting ways later or feed that data into other layers in the future.</li>
+              <li><strong>Unbiased Decision-Making:</strong> Also, when you need an unbiased judge, the backend is the place to go. The backend is 'agnostic' to outcome, whereas the AI may or may not have a strong preference and display it.</li>
+              <li><strong>Emstrata Example (Weighted Randomness):</strong> In Emstrata, consequences are rolled and use weighted randomness. The Discovery layer determines the likelihood something happens, and then the backend returns a random number out of 1000. If that number is within the set likelihood range, the backend serves the confirmed consequence to the Narration layer, if it's outside of the range, it sends the failure outcome.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 class="text-2xl font-heading text-text mb-4">Randomness Injection</h2>
+            <p class="text-text-secondary mb-4 italic">A jolt of creativity</p>
+            <ul class="list-disc list-inside space-y-3 text-text-secondary ml-4">
+              <li>If you grow tired of tropes and clichés in your responses, I have an answer: Random Concept Injection.</li>
+              <li>This is something I do for parts of the system that do creative heavy-lifting. Oftentimes, AIs will hop to really tried and true answers to creative questions, which is great for reasoning well, but not so much for surprising an audience.</li>
+              <li>I use this to get names for characters that aren't baked into the training data, inject interesting concepts into simulations, and build out characters based on character archetypes.</li>
+              <li>It can be used for any list of random strings you'd like to be potentially incorporated into a particular decision-making process.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 class="text-2xl font-heading text-text mb-4">Cost Considerations</h2>
+            <p class="text-text-secondary mb-4 italic">Usage costs will likely increase</p>
+            <ul class="list-disc list-inside space-y-3 text-text-secondary ml-4">
+              <li>Multilayered architectures cost more than single-prompt systems. Each layer is an API call, and those add up. If you're running a four-layer cycle on every user interaction, you're potentially paying 4x what a single prompt would cost (depending on usage costs and tokens). That's the trade you're making for better results.</li>
+              <li>But they work better when properly configured. The question isn't 'should I add more layers to save money'; it's 'does the quality improvement justify the cost for my use case?' A customer service bot might not need four layers. A narrative engine generating premium content probably does.</li>
+              <li>Optimization strategies exist. Use cheaper models for simpler layers (correction doesn't need the most expensive model), cache aggressively for cyclical systems, and be honest about cutting layers that aren't pulling their weight. Every layer should earn its spot.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 class="text-2xl font-heading text-text mb-4">Performance Considerations</h2>
+            <p class="text-text-secondary mb-4 italic">Speed vs quality</p>
+            <ul class="list-disc list-inside space-y-3 text-text-secondary ml-4">
+              <li>More layers means more latency. If you need fast responses, waiting on three consecutive prompts to complete is probably a bad solution.</li>
+              <li>But parallelization can help. Some layers don't depend on each other and can run simultaneously. If your reasoning layer and your memory retrieval layer both only need the user input, run them in parallel.</li>
+              <li>Performance can be helped and hurt by layering. Adding a layer isn't always the answer. Sometimes consolidating two weak layers into one strong prompt improves both speed and quality.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 class="text-2xl font-heading text-text mb-4">Hallucination Considerations</h2>
+            <p class="text-text-secondary mb-4 italic">Avoiding architectures that tend to compound hallucinations</p>
+            <ul class="list-disc list-inside space-y-3 text-text-secondary ml-4">
+              <li>In multilayered systems, hallucinations compound. One layer's mistake becomes the next layer's input. If your reasoning layer hallucinates a fact and your content layer writes it beautifully, you've just produced confidently wrong output. The more layers, the more opportunities for errors to slip through and get amplified.</li>
+              <li>Correction layers should come before memory consolidation. If you don't catch errors before they enter your system's permanent memory, those minor mistakes slip into history and slowly expand. They reintroduce themselves ad infinitum, compounding with each cycle until your system's "source of truth" is corrupted.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 class="text-2xl font-heading text-text mb-4">Major Takeaways</h2>
+            <p class="text-text-secondary mb-4 italic">What to remember</p>
+            <ul class="list-disc list-inside space-y-3 text-text-secondary ml-4">
+              <li><strong>Multilayered architectures compound transformations.</strong> Each layer takes input, transforms it, and passes it forward. The power comes from coordinating these transformations to achieve results no single prompt could accomplish.</li>
+              <li><strong>Layer types provide a vocabulary for building.</strong> Correction, reasoning, memory consolidation, content, and catch-all layers each serve distinct purposes. Understanding these patterns helps you architect intentionally rather than intuitively.</li>
+              <li><strong>Cyclical systems run the same flow every time.</strong> Circumstantial systems adapt their pathway based on outcomes. Most production systems end up somewhere in-between.</li>
+              <li><strong>Backend integration handles what LLMs can't.</strong> True randomness, deterministic calculations, unbiased judgment, and data persistence belong outside the AI layers.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 class="text-2xl font-heading text-text mb-4">System Prompt Generator Tool</h2>
+            <p class="text-text-secondary mb-4 italic">Reminding you that this exists and is a great way to get started</p>
+            <ul class="list-disc list-inside space-y-3 text-text-secondary ml-4">
+              <li>Available now on <a href="/system-prompt-generator" class="text-accent hover:underline">https://nicholasmgoldstein.com/system-prompt-generator</a></li>
+              <li>Prebuilt modular system prompt skeleton that can give you a basis to build upon</li>
+              <li>Feel free to copy/paste this into Notion, Google Docs, Microsoft Word, or whatever you plan to use and add your own modules/rulesets and logic</li>
+            </ul>
+          </section>
+        </div>
+      `
     },
     {
       number: '5',
       chapter: 1,
-      title: 'Recap: Modules 1-5',
-      description: 'A comprehensive review of the foundational concepts: course introduction, platform prerequisites, prompt engineering, and multilayered architectures.'
+      title: 'Recap: Modules 1-4',
+      description: 'A comprehensive review of the foundational concepts: course introduction, platform prerequisites, prompt engineering, and multilayered architectures.',
+      writtenContent: `
+        <div class="space-y-8">
+          <section>
+            <h2 class="text-2xl font-heading text-text mb-4">Getting Started Recap</h2>
+            <p class="text-text-secondary mb-4 italic">What building AI platforms actually entails</p>
+            <ul class="list-disc list-inside space-y-3 text-text-secondary ml-4">
+              <li><strong>Not just coding</strong> - design, architecture, and engineering decisions</li>
+              <li>Complex projects need multi-layered AI architectures, data transformations, agents, ambient intelligence</li>
+              <li>Novel applications require architecture designed for that specific problem</li>
+              <li>Architecture choices define what's possible</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 class="text-2xl font-heading text-text mb-4">The Cost Reality</h2>
+            <ul class="list-disc list-inside space-y-3 text-text-secondary ml-4">
+              <li>AI API usage measured in tokens (MToks)</li>
+              <li>Input and output tokens priced differently (output typically costs more)</li>
+              <li>Context window size affects both price and performance</li>
+              <li>Applications generating large AI responses incur higher costs</li>
+              <li>Need to manage token counts sent to API</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 class="text-2xl font-heading text-text mb-4">Hallucinations are a Feature, Not a Bug</h2>
+            <ul class="list-disc list-inside space-y-3 text-text-secondary ml-4">
+              <li>Scale of hallucinations and downstream effects expand exponentially with poor architecture</li>
+              <li>Many hallucinations can be stamped out, accounted for, or predicted through design</li>
+              <li>Requires persistence, trial and error, systems-thinking</li>
+              <li>Same mechanism that causes hallucinations enables creativity and variation</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 class="text-2xl font-heading text-text mb-4">Tech Stack Doesn't Matter</h2>
+            <ul class="list-disc list-inside space-y-3 text-text-secondary ml-4">
+              <li>Architectural concepts apply regardless of stack</li>
+              <li><strong>Security critical:</strong> never expose API keys on frontend</li>
+              <li>All LLM API calls happen on backend</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 class="text-2xl font-heading text-text mb-4">Setup and Testing Recap</h2>
+            <p class="text-text-secondary mb-4 italic">Pick an LLM and learn by doing</p>
+            <ul class="list-disc list-inside space-y-3 text-text-secondary ml-4">
+              <li>Different LLMs have varying strengths and textual voices</li>
+              <li>Learn through iteration on system prompts, not just benchmarks</li>
+              <li>Consider multi-LLM strategy: expensive models for complex tasks, cheaper models for simple tasks</li>
+              <li>Claude 4.0 for heavy analysis, Mistral for simple tasks</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 class="text-2xl font-heading text-text mb-4">Workbench Anatomy</h2>
+            <ul class="list-disc list-inside space-y-3 text-text-secondary ml-4">
+              <li><strong>System prompt:</strong> static instruction defining AI behavior and context</li>
+              <li><strong>User request:</strong> specific data for this particular instance</li>
+              <li>Test and iterate before implementing in application</li>
+              <li>Use prompt library to organize high-volume testing</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 class="text-2xl font-heading text-text mb-4">Setup Creates Iteration Foundation</h2>
+            <ul class="list-disc list-inside space-y-3 text-text-secondary ml-4">
+              <li>Frontend, backend, database, mobile - get environment working first</li>
+              <li>AI-powered IDEs (Cursor) write code</li>
+              <li>Your job: understanding architecture, overseeing, troubleshooting</li>
+              <li>Learn coding through process, not syntax memorization</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 class="text-2xl font-heading text-text mb-4">Prompt Engineering Recap</h2>
+            <p class="text-text-secondary mb-4 italic">Prompts are control mechanisms</p>
+            <ul class="list-disc list-inside space-y-3 text-text-secondary ml-4">
+              <li>Vague prompts → AI invents interpretations</li>
+              <li>Contradictory prompts → AI picks randomly</li>
+              <li>Well-structured prompts → consistent behavior</li>
+              <li>Difference between working product and broken one comes down to prompt quality</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 class="text-2xl font-heading text-text mb-4">Modular Structure</h2>
+            <ul class="list-disc list-inside space-y-3 text-text-secondary ml-4">
+              <li><strong>Core Identity:</strong> what is this AI, what does it do</li>
+              <li><strong>Platform Specifics:</strong> context about where/how it operates</li>
+              <li><strong>Understanding Role:</strong> scope, responsibilities, boundaries</li>
+              <li><strong>Dissecting Requests:</strong> how to parse incoming data</li>
+              <li><strong>Response Expectations:</strong> exact output format</li>
+              <li><strong>Quality Standards:</strong> non-negotiable benchmarks</li>
+              <li>Each module handles one concern, update independently</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 class="text-2xl font-heading text-text mb-4">Structure Requests and Responses</h2>
+            <ul class="list-disc list-inside space-y-3 text-text-secondary ml-4">
+              <li><strong>Requests:</strong> key-value pairs (<code class="bg-card-bg px-2 py-1 rounded text-accent">user-input: "text"</code>, <code class="bg-card-bg px-2 py-1 rounded text-accent">convo-summary: "summary"</code>)</li>
+              <li><strong>Responses:</strong> predefined functions with strict argument types</li>
+              <li><strong>Examples:</strong> <code class="bg-card-bg px-2 py-1 rounded text-accent">speak("dialogue")</code>, <code class="bg-card-bg px-2 py-1 rounded text-accent">attack(damage, 20)</code>, <code class="bg-card-bg px-2 py-1 rounded text-accent">try("outcome1", "outcome2", 100/1000)</code></li>
+              <li>Structured outputs aid parsing, prevent hallucinations, maintain logical coherence</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 class="text-2xl font-heading text-text mb-4">Minimize to Essentials</h2>
+            <ul class="list-disc list-inside space-y-3 text-text-secondary ml-4">
+              <li>Input only what you need for expected output</li>
+              <li>Setup prioritization hierarchy: <code class="bg-card-bg px-2 py-1 rounded text-accent">user-input > convo-history > saved-prefs</code></li>
+              <li>Output only necessities</li>
+              <li>More elements = higher chance of confusion</li>
+              <li>Build → reduce → build → reduce</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 class="text-2xl font-heading text-text mb-4">Define and Enforce Rules</h2>
+            <ul class="list-disc list-inside space-y-3 text-text-secondary ml-4">
+              <li><strong>Critical rules:</strong> ALL CAPS, repetition, strategic placement</li>
+              <li>Eliminate contradictory instructions</li>
+              <li>Be explicit about constraints (what AI cannot do)</li>
+              <li>Define argument types strictly and repeat them</li>
+              <li><strong>Example bad rule:</strong> "Respond appropriately"</li>
+              <li><strong>Example good rule:</strong> "You must respond using only the functions defined in Response Expectations Module. Do not invent new functions or arguments."</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 class="text-2xl font-heading text-text mb-4">Preventing Hallucinations</h2>
+            <ul class="list-disc list-inside space-y-3 text-text-secondary ml-4">
+              <li>Restrict AI to specific formatted responses</li>
+              <li>Reiterate: cannot make up own functions or arguments</li>
+              <li>Be hyper-specific about requirements</li>
+              <li>Identify and eliminate contradictory prompting</li>
+              <li>ALL CAPS to stress critical aspects</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 class="text-2xl font-heading text-text mb-4">Test and Iterate</h2>
+            <ul class="list-disc list-inside space-y-3 text-text-secondary ml-4">
+              <li>All LLMs react differently to certain prompting</li>
+              <li>Testing, iterating, saving updates essential</li>
+              <li>Consider model size in proportion to task size</li>
+              <li>Massive response with complex logic needs bigger (more expensive) model</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 class="text-2xl font-heading text-text mb-4">Multilayered Architectures Recap</h2>
+            <ul class="list-disc list-inside space-y-3 text-text-secondary ml-4">
+              <li>Multiple coordinated prompts compound transformations substantially</li>
+              <li>Layer types: Correction, Reasoning/Strategy, Memory Consolidation, Content, Catch-All</li>
+              <li>System types: Cyclical (same flow), Circumstantial (adaptive), Hybrid (most real-world systems)</li>
+              <li>Backend handles: true randomness, deterministic calculations, unbiased judgment, data persistence</li>
+              <li>Tradeoffs: More layers = higher cost and latency, but better quality when properly configured</li>
+              <li>Correction layers must come before memory consolidation to prevent error compounding</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 class="text-2xl font-heading text-text mb-4">Quiz</h2>
+            <p class="text-text-secondary mb-6 italic">This quiz is designed to help with retention. Feel free to skip if you prefer, or use the "Reveal Answer" button to check your understanding.</p>
+            <div id="module-5-quiz" class="space-y-8" data-quiz-initialized="false">
+              <!-- Questions will be inserted here by JavaScript -->
+            </div>
+          </section>
+        </div>
+      `
     },
     // Chapter 2: Core Architecture & Data Operations
     {
@@ -921,6 +1276,12 @@ export class CourseReader {
     this.setupBackToCourseButton(courseSlug, moduleNumber);
     this.setupModuleLinks(courseSlug);
     this.setupSystemPromptGeneratorLink();
+    
+    // Initialize quiz for Module 5
+    if (moduleNumber === 5) {
+      this.initializeQuiz();
+    }
+    
     ScrollFade.init();
     
     // Trigger fade-in for main section immediately on load
@@ -1071,6 +1432,292 @@ export class CourseReader {
       document.head.appendChild(metaTag);
     }
     metaTag.content = content;
+  }
+
+  public initializeQuizIfNeeded(moduleNumber: number): void {
+    if (moduleNumber === 5) {
+      this.initializeQuiz();
+    }
+  }
+
+  private initializeQuiz(): void {
+    const quizContainer = document.getElementById('module-5-quiz');
+    if (!quizContainer || quizContainer.getAttribute('data-quiz-initialized') === 'true') {
+      return;
+    }
+
+    // Quiz questions with all choices
+    const questions = [
+      {
+        question: 'What is the primary purpose of modular prompt architecture?',
+        choices: [
+          { text: 'To make prompts as long as possible', isCorrect: false },
+          { text: 'To allow independent updates, reusability, and easier debugging', isCorrect: true },
+          { text: 'To ensure only one person can work on the system at a time', isCorrect: false },
+          { text: 'To replace the need for testing', isCorrect: false },
+          { text: 'To eliminate all API costs', isCorrect: false }
+        ]
+      },
+      {
+        question: 'In a multilayered AI system, why should correction layers come before memory consolidation layers?',
+        choices: [
+          { text: 'Correction layers are faster to execute', isCorrect: false },
+          { text: 'Memory consolidation is more expensive', isCorrect: false },
+          { text: 'Errors that enter permanent memory will compound and reintroduce themselves infinitely', isCorrect: true },
+          { text: 'It doesn\'t matter what order they run in', isCorrect: false },
+          { text: 'Correction layers need access to memory first', isCorrect: false }
+        ]
+      },
+      {
+        question: 'What\'s the difference between cyclical and circumstantial systems?',
+        choices: [
+          { text: 'Cyclical systems are cheaper to run', isCorrect: false },
+          { text: 'Cyclical systems run the same prompts every time; circumstantial systems adapt their pathway based on outcomes', isCorrect: true },
+          { text: 'Circumstantial systems are always better than cyclical systems', isCorrect: false },
+          { text: 'Cyclical systems use AI; circumstantial systems don\'t', isCorrect: false },
+          { text: 'There is no meaningful difference', isCorrect: false }
+        ]
+      },
+      {
+        question: 'Why use preset functions for AI outputs instead of unstructured text?',
+        choices: [
+          { text: 'Preset functions look more professional', isCorrect: false },
+          { text: 'Structured outputs aid parsing, maintain logical coherence, and prevent hallucinations', isCorrect: true },
+          { text: 'Unstructured text is too expensive', isCorrect: false },
+          { text: 'The AI can\'t generate unstructured text', isCorrect: false },
+          { text: 'It makes the prompts shorter', isCorrect: false }
+        ]
+      },
+      {
+        question: 'When building an AI platform, what should the backend handle instead of AI layers?',
+        choices: [
+          { text: 'Creative writing and narrative generation', isCorrect: false },
+          { text: 'True randomness, deterministic calculations, unbiased judgment, and data persistence', isCorrect: true },
+          { text: 'All user interactions', isCorrect: false },
+          { text: 'Nothing; AI should handle everything', isCorrect: false },
+          { text: 'Only database queries', isCorrect: false }
+        ]
+      }
+    ];
+
+    // Render quiz with randomized choices
+    let quizHTML = '';
+
+    questions.forEach((q, index) => {
+      // Randomize choices
+      const shuffledChoices = [...q.choices].sort(() => Math.random() - 0.5);
+      const correctIndex = shuffledChoices.findIndex(c => c.isCorrect);
+      const correctLetter = String.fromCharCode(65 + correctIndex); // A, B, C, D, E
+
+      quizHTML += `
+        <div class="quiz-question border border-text-secondary/20 rounded-lg p-6 bg-card-bg" data-question-index="${index}" data-correct-letter="${correctLetter}">
+          <h3 class="text-lg font-heading text-text mb-4">Question ${index + 1}: ${q.question}</h3>
+          <div class="space-y-3 mb-4">
+            ${shuffledChoices.map((choice, choiceIndex) => {
+              const letter = String.fromCharCode(65 + choiceIndex);
+              return `
+                <label class="flex items-start gap-3 p-3 rounded-lg hover:bg-primary/5 cursor-pointer transition-colors border border-transparent">
+                  <input type="radio" name="question-${index}" value="${letter}" class="mt-1 quiz-radio">
+                  <span class="text-text-secondary">${letter}) ${choice.text}</span>
+                </label>
+              `;
+            }).join('')}
+          </div>
+          <div class="answer-feedback mt-4 hidden"></div>
+          <div class="flex gap-3 mt-4">
+            <button 
+              class="reveal-answer-btn inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-accent/30 rounded-full hover:bg-primary/20 hover:border-accent/50 transition-all duration-300 text-text-secondary hover:text-text text-sm">
+              <i class="fas fa-eye"></i>
+              <span>Reveal Answer</span>
+            </button>
+            <button 
+              class="reset-question-btn hidden inline-flex items-center gap-2 px-4 py-2 bg-text-secondary/10 border border-text-secondary/30 rounded-full hover:bg-text-secondary/20 hover:border-text-secondary/50 transition-all duration-300 text-text-secondary hover:text-text text-sm">
+              <i class="fas fa-redo"></i>
+              <span>Reset</span>
+            </button>
+          </div>
+        </div>
+      `;
+    });
+
+    quizContainer.innerHTML = quizHTML;
+    quizContainer.setAttribute('data-quiz-initialized', 'true');
+
+    // Set up radio button handlers for answer checking
+    quizContainer.querySelectorAll('.quiz-radio').forEach(radio => {
+      radio.addEventListener('change', (e) => {
+        const input = e.target as HTMLInputElement;
+        const questionContainer = input.closest('.quiz-question') as HTMLElement;
+        if (!questionContainer) return;
+
+        const correctLetter = questionContainer.getAttribute('data-correct-letter') || '';
+        const selectedLetter = input.value;
+        const feedbackDiv = questionContainer.querySelector('.answer-feedback') as HTMLElement;
+        const allLabels = questionContainer.querySelectorAll('label');
+        const revealBtn = questionContainer.querySelector('.reveal-answer-btn') as HTMLElement;
+        const resetBtn = questionContainer.querySelector('.reset-question-btn') as HTMLElement;
+
+        // Disable all radios after selection
+        questionContainer.querySelectorAll('.quiz-radio').forEach(r => {
+          (r as HTMLInputElement).disabled = true;
+        });
+
+        // Check if answer is correct
+        const isCorrect = selectedLetter === correctLetter;
+
+        // Update feedback
+        if (feedbackDiv) {
+          feedbackDiv.classList.remove('hidden');
+          if (isCorrect) {
+            feedbackDiv.className = 'answer-feedback mt-4 text-accent font-medium';
+            feedbackDiv.innerHTML = `
+              <i class="fas fa-check-circle mr-2"></i>
+              Correct! Well done.
+            `;
+          } else {
+            feedbackDiv.className = 'answer-feedback mt-4 text-red-400 font-medium';
+            feedbackDiv.innerHTML = `
+              <i class="fas fa-times-circle mr-2"></i>
+              Incorrect. The correct answer is ${correctLetter}.
+            `;
+          }
+        }
+
+        // Highlight selected answer
+        allLabels.forEach(label => {
+          const labelInput = label.querySelector('input') as HTMLInputElement;
+          if (labelInput.value === selectedLetter) {
+            if (isCorrect) {
+              label.classList.add('bg-accent/10', 'border-accent/50');
+              label.classList.remove('hover:bg-primary/5', 'border-transparent');
+            } else {
+              label.classList.add('bg-red-500/10', 'border-red-500/50');
+              label.classList.remove('hover:bg-primary/5', 'border-transparent');
+            }
+          }
+        });
+
+        // Highlight correct answer if wrong was selected
+        if (!isCorrect) {
+          allLabels.forEach(label => {
+            const labelInput = label.querySelector('input') as HTMLInputElement;
+            if (labelInput.value === correctLetter) {
+              label.classList.add('bg-accent/10', 'border-accent/50');
+              label.classList.remove('hover:bg-primary/5', 'border-transparent');
+            } else if (labelInput.value !== selectedLetter) {
+              label.classList.add('opacity-50');
+            }
+          });
+        } else {
+          // Dim incorrect answers if correct was selected
+          allLabels.forEach(label => {
+            const labelInput = label.querySelector('input') as HTMLInputElement;
+            if (labelInput.value !== correctLetter) {
+              label.classList.add('opacity-50');
+            }
+          });
+        }
+
+        // Hide reveal button and show reset button after selection
+        if (revealBtn) {
+          revealBtn.classList.add('hidden');
+        }
+        if (resetBtn) {
+          resetBtn.classList.remove('hidden');
+        }
+      });
+    });
+
+    // Set up reveal answer button handlers (fallback)
+    quizContainer.querySelectorAll('.reveal-answer-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const button = e.target as HTMLElement;
+        const questionContainer = button.closest('.quiz-question') as HTMLElement;
+        if (!questionContainer) return;
+
+        const correctLetter = questionContainer.getAttribute('data-correct-letter') || '';
+        const feedbackDiv = questionContainer.querySelector('.answer-feedback') as HTMLElement;
+        const radioInputs = questionContainer.querySelectorAll('input[type="radio"]') as NodeListOf<HTMLInputElement>;
+        const resetBtn = questionContainer.querySelector('.reset-question-btn') as HTMLElement;
+
+        // Disable all radios
+        radioInputs.forEach(r => r.disabled = true);
+
+        // Show correct answer in feedback
+        if (feedbackDiv) {
+          feedbackDiv.classList.remove('hidden');
+          feedbackDiv.className = 'answer-feedback mt-4 text-accent font-medium';
+          feedbackDiv.innerHTML = `
+            <i class="fas fa-check-circle mr-2"></i>
+            Correct Answer: ${correctLetter}
+          `;
+        }
+
+        // Mark correct answer
+        radioInputs.forEach(input => {
+          const label = input.closest('label');
+          if (input.value === correctLetter) {
+            input.checked = true;
+            if (label) {
+              label.classList.add('bg-accent/10', 'border-accent/50');
+              label.classList.remove('hover:bg-primary/5', 'border-transparent');
+            }
+          } else {
+            if (label) {
+              label.classList.add('opacity-50');
+            }
+          }
+        });
+
+        // Hide reveal button and show reset button
+        button.classList.add('hidden');
+        if (resetBtn) {
+          resetBtn.classList.remove('hidden');
+        }
+      });
+    });
+
+    // Set up reset button handlers
+    quizContainer.querySelectorAll('.reset-question-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const button = e.target as HTMLElement;
+        const questionContainer = button.closest('.quiz-question') as HTMLElement;
+        if (!questionContainer) return;
+
+        const feedbackDiv = questionContainer.querySelector('.answer-feedback') as HTMLElement;
+        const radioInputs = questionContainer.querySelectorAll('input[type="radio"]') as NodeListOf<HTMLInputElement>;
+        const allLabels = questionContainer.querySelectorAll('label');
+        const revealBtn = questionContainer.querySelector('.reveal-answer-btn') as HTMLElement;
+
+        // Reset all radio buttons
+        radioInputs.forEach(r => {
+          r.disabled = false;
+          r.checked = false;
+        });
+
+        // Reset all labels styling
+        allLabels.forEach(label => {
+          label.classList.remove(
+            'bg-accent/10', 'border-accent/50',
+            'bg-red-500/10', 'border-red-500/50',
+            'opacity-50'
+          );
+          label.classList.add('border-transparent');
+        });
+
+        // Hide feedback
+        if (feedbackDiv) {
+          feedbackDiv.classList.add('hidden');
+          feedbackDiv.innerHTML = '';
+        }
+
+        // Show reveal button and hide reset button
+        if (revealBtn) {
+          revealBtn.classList.remove('hidden');
+        }
+        button.classList.add('hidden');
+      });
+    });
   }
 }
 
