@@ -91,6 +91,16 @@ class HomeScreen {
 
     // Listen for navigation changes (always set up, works for both prerendered and normal)
     window.addEventListener('popstate', () => {
+      // Check if new route has prerendered content (e.g., from browser back/forward)
+      const hasPrerenderedContent = this.checkPrerenderedContent();
+      
+      if (hasPrerenderedContent) {
+        // New route has prerendered content - preserve it and set up navigation
+        this.setupPrerenderedEventListeners();
+        return;
+      }
+      
+      // No prerendered content - handle route normally
       const newPath = window.location.pathname;
       if (newPath === '/articles') {
         this.showArticlesPage();
@@ -218,6 +228,12 @@ class HomeScreen {
   private showHomePage(): void {
     if (!this.container) return;
     
+    // Check if prerendered content exists for this route
+    if (this.checkPrerenderedContent()) {
+      this.setupPrerenderedEventListeners();
+      return;
+    }
+    
     this.container.innerHTML = ''; // Clear existing content
     
     // Update metadata
@@ -237,6 +253,12 @@ class HomeScreen {
   private showArticlesPage(): void {
     if (!this.container) return;
     
+    // Check if prerendered content exists for this route
+    if (this.checkPrerenderedContent()) {
+      this.setupPrerenderedEventListeners();
+      return;
+    }
+    
     this.container.innerHTML = ''; // Clear existing content
     
     // Update metadata
@@ -253,6 +275,12 @@ class HomeScreen {
   private showArticlePage(slug: string): void {
     if (!this.container) return;
     
+    // Check if prerendered content exists for this route
+    if (this.checkPrerenderedContent()) {
+      this.setupPrerenderedEventListeners();
+      return;
+    }
+    
     this.container.innerHTML = ''; // Clear existing content
     
     // Mount navigation and article
@@ -265,6 +293,12 @@ class HomeScreen {
 
   private showCoursesPage(): void {
     if (!this.container) return;
+    
+    // Check if prerendered content exists for this route
+    if (this.checkPrerenderedContent()) {
+      this.setupPrerenderedEventListeners();
+      return;
+    }
     
     this.container.innerHTML = ''; // Clear existing content
     
@@ -282,6 +316,12 @@ class HomeScreen {
   private showCoursePage(courseSlug: string, moduleNumber?: number): void {
     if (!this.container) return;
     
+    // Check if prerendered content exists for this route
+    if (this.checkPrerenderedContent()) {
+      this.setupPrerenderedEventListeners();
+      return;
+    }
+    
     this.container.innerHTML = ''; // Clear existing content
     
     // Mount navigation and course
@@ -295,6 +335,12 @@ class HomeScreen {
   private showCourseReaderPage(courseSlug: string, moduleNumber?: number): void {
     if (!this.container) return;
     
+    // Check if prerendered content exists for this route
+    if (this.checkPrerenderedContent()) {
+      this.setupPrerenderedEventListeners();
+      return;
+    }
+    
     this.container.innerHTML = ''; // Clear existing content
     
     // Mount navigation and course reader
@@ -307,6 +353,12 @@ class HomeScreen {
 
   private showSystemPromptGeneratorPage(): void {
     if (!this.container) return;
+    
+    // Check if prerendered content exists for this route
+    if (this.checkPrerenderedContent()) {
+      this.setupPrerenderedEventListeners();
+      return;
+    }
     
     this.container.innerHTML = ''; // Clear existing content
     
