@@ -7,6 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "prerender": "node scripts/prerender.js",
+    "build:deploy": "bash scripts/build-deploy.sh",
     "preview": "vite preview"
   },
   "devDependencies": {

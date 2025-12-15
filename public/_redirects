@@ -1,0 +1,10 @@
+# Serve prerendered static files when they exist
+/articles /articles/index.html 200
+/articles/* /articles/*/index.html 200
+/courses /courses/index.html 200
+/course/* /course/*/index.html 200
+/system-prompt-generator /system-prompt-generator/index.html 200
+
+# Fall back to SPA for all other routes
+/* /index.html 200
+

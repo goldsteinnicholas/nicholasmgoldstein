@@ -12,6 +12,17 @@ dist
 dist-ssr
 *.local
 
+# Allow prerendered HTML files
+!dist/index.html
+!dist/articles/
+!dist/articles/**/index.html
+!dist/courses/
+!dist/courses/index.html
+!dist/course/
+!dist/course/**/index.html
+!dist/system-prompt-generator/
+!dist/system-prompt-generator/index.html
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

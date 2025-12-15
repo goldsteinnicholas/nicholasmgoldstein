@@ -41,46 +41,55 @@ class HomeScreen {
 
   public mount(container: HTMLElement) {
     this.container = container;
-    this.container.innerHTML = ''; // Clear existing content
     
-    // Check current path and route accordingly
-    const path = window.location.pathname;
+    // Check if prerendered content exists
+    const hasPrerenderedContent = this.checkPrerenderedContent();
     
-    if (path === '/articles') {
-      this.showArticlesPage();
-    } else if (path.startsWith('/articles/')) {
-      this.showArticlePage(path.split('/articles/')[1]);
-    } else if (path === '/courses') {
-      this.showCoursesPage();
-    } else if (path.startsWith('/course/')) {
-      const coursePath = path.split('/course/')[1];
-      // Check if it's a reader route: /course/{slug}/reader/module/{number}
-      if (coursePath.includes('/reader/module/')) {
-        const [courseSlug, modulePart] = coursePath.split('/reader/module/');
-        const moduleNumber = modulePart ? parseInt(modulePart, 10) : 1;
-        this.showCourseReaderPage(courseSlug, moduleNumber);
-      } else if (coursePath.includes('/module/')) {
-      // Check if it's a module route: /course/{slug}/module/{number}
-        const [courseSlug, modulePart] = coursePath.split('/module/');
-        const moduleNumber = modulePart ? parseInt(modulePart, 10) : 1;
-        this.showCoursePage(courseSlug, moduleNumber);
+    if (!hasPrerenderedContent) {
+      this.container.innerHTML = ''; // Clear existing content
+      
+      // Check current path and route accordingly
+      const path = window.location.pathname;
+      
+      if (path === '/articles') {
+        this.showArticlesPage();
+      } else if (path.startsWith('/articles/')) {
+        this.showArticlePage(path.split('/articles/')[1]);
+      } else if (path === '/courses') {
+        this.showCoursesPage();
+      } else if (path.startsWith('/course/')) {
+        const coursePath = path.split('/course/')[1];
+        // Check if it's a reader route: /course/{slug}/reader/module/{number}
+        if (coursePath.includes('/reader/module/')) {
+          const [courseSlug, modulePart] = coursePath.split('/reader/module/');
+          const moduleNumber = modulePart ? parseInt(modulePart, 10) : 1;
+          this.showCourseReaderPage(courseSlug, moduleNumber);
+        } else if (coursePath.includes('/module/')) {
+        // Check if it's a module route: /course/{slug}/module/{number}
+          const [courseSlug, modulePart] = coursePath.split('/module/');
+          const moduleNumber = modulePart ? parseInt(modulePart, 10) : 1;
+          this.showCoursePage(courseSlug, moduleNumber);
+        } else {
+          // Redirect to module 1 if no module specified
+          window.history.replaceState({}, '', `/course/${coursePath}/module/1`);
+          this.showCoursePage(coursePath, 1);
+        }
+      } else if (path === '/system-prompt-generator') {
+        this.showSystemPromptGeneratorPage();
+      } else if (path === '/') {
+        this.showHomePage();
+      } else if (path === '/unknown-route') {
+        this.showNotFoundPage();
       } else {
-        // Redirect to module 1 if no module specified
-        window.history.replaceState({}, '', `/course/${coursePath}/module/1`);
-        this.showCoursePage(coursePath, 1);
+        window.history.replaceState({}, '', '/unknown-route');
+        this.showNotFoundPage();
       }
-    } else if (path === '/system-prompt-generator') {
-      this.showSystemPromptGeneratorPage();
-    } else if (path === '/') {
-      this.showHomePage();
-    } else if (path === '/unknown-route') {
-      this.showNotFoundPage();
     } else {
-      window.history.replaceState({}, '', '/unknown-route');
-      this.showNotFoundPage();
+      // Prerendered content exists - just set up navigation handlers
+      this.setupPrerenderedEventListeners();
     }
 
-    // Listen for navigation changes
+    // Listen for navigation changes (always set up, works for both prerendered and normal)
     window.addEventListener('popstate', () => {
       const newPath = window.location.pathname;
       if (newPath === '/articles') {
@@ -117,6 +126,93 @@ class HomeScreen {
         this.showNotFoundPage();
       }
     });
+  }
+
+  private checkPrerenderedContent(): boolean {
+    if (!this.container) return false;
+    
+    const app = this.container;
+    const hasMultipleChildren = app.children.length > 2;
+    const hasSubstantialText = app.textContent && app.textContent.trim().length > 200;
+    const hasVisibleContent = app.querySelectorAll('header, nav, section, article').length > 0;
+    
+    if (!hasMultipleChildren && !hasSubstantialText && !hasVisibleContent) return false;
+    
+    // Verify content matches current route
+    const currentPath = window.location.pathname;
+    const textContent = app.textContent || '';
+    
+    if (currentPath.startsWith('/articles/')) {
+      const hasArticle = app.querySelector('article') || 
+                        textContent.length > 500;
+      const hasWrongContent = textContent.includes('404') || 
+                             textContent.includes('Page not found');
+      return hasArticle && !hasWrongContent;
+    }
+    
+    if (currentPath === '/articles') {
+      const hasArticlesList = textContent.includes('Articles') || 
+                             app.querySelector('a[href^="/articles/"]');
+      return !!hasArticlesList;
+    }
+    
+    if (currentPath.startsWith('/course/')) {
+      const hasCourseContent = textContent.length > 300;
+      const hasWrongContent = textContent.includes('404');
+      return hasCourseContent && !hasWrongContent;
+    }
+    
+    if (currentPath === '/courses') {
+      const hasCoursesList = textContent.includes('Courses') || 
+                            app.querySelector('a[href^="/course/"]');
+      return !!hasCoursesList;
+    }
+    
+    if (currentPath === '/system-prompt-generator') {
+      const hasGenerator = textContent.includes('System Prompt') || 
+                            app.querySelector('[id*="prompt"]');
+      return !!hasGenerator;
+    }
+    
+    // Default: content exists and seems valid
+    return true;
+  }
+
+  private prerenderedLinkHandler: ((e: Event) => void) | null = null;
+
+  private setupPrerenderedEventListeners(): void {
+    // Remove existing listener first
+    if (this.prerenderedLinkHandler) {
+      document.removeEventListener('click', this.prerenderedLinkHandler, true);
+      this.prerenderedLinkHandler = null;
+    }
+    
+    // Create new handler with event delegation
+    this.prerenderedLinkHandler = (e: Event) => {
+      const target = e.target as HTMLElement;
+      const link = target.closest('a[href^="/"]') as HTMLAnchorElement;
+      
+      if (link && link.href) {
+        const href = link.getAttribute('href');
+        if (href && href.startsWith('/') && !href.startsWith('//')) {
+          e.preventDefault();
+          e.stopPropagation();
+          
+          // Normalize route
+          let normalizedRoute = href;
+          if (normalizedRoute !== '/' && normalizedRoute.endsWith('/')) {
+            normalizedRoute = normalizedRoute.slice(0, -1);
+          }
+          
+          // Navigate using history API
+          window.history.pushState({}, '', normalizedRoute);
+          window.dispatchEvent(new PopStateEvent('popstate'));
+        }
+      }
+    };
+    
+    // Add with capture to catch events early
+    document.addEventListener('click', this.prerenderedLinkHandler, true);
   }
 
   private showHomePage(): void {

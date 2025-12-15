@@ -1,0 +1,21 @@
+# SEO headers for prerendered content
+/articles/*
+  X-Robots-Tag: index, follow
+  Cache-Control: public, max-age=3600
+
+/articles
+  X-Robots-Tag: index, follow
+  Cache-Control: public, max-age=3600
+
+/courses
+  X-Robots-Tag: index, follow
+  Cache-Control: public, max-age=3600
+
+/course/*
+  X-Robots-Tag: index, follow
+  Cache-Control: public, max-age=3600
+
+/system-prompt-generator
+  X-Robots-Tag: index, follow
+  Cache-Control: public, max-age=3600
+
