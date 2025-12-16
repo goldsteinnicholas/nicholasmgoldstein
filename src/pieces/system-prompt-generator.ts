@@ -9,6 +9,7 @@ export class SystemPromptGenerator {
     const section = document.createElement('section');
     section.className = 'min-h-screen py-16 px-6 fade-in-scroll opacity-0 translate-y-8 transition-all duration-700 ease-out';
     section.innerHTML = `
+      <span data-route="/system-prompt-generator" style="display: none;"></span>
       <div class="max-w-4xl mx-auto">
         <div class="mb-8">
           <h1 class="text-4xl md:text-5xl lg:text-6xl font-heading text-text mb-6">System Prompt Generator</h1>

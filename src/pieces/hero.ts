@@ -40,6 +40,7 @@ export class Hero {
     const section = document.createElement('section');
     section.className = 'relative py-20 px-6 overflow-hidden';
     section.innerHTML = `
+      <span data-route="/" style="display: none;"></span>
       <div class="max-w-7xl mx-auto">
         <!-- Projects Grid -->
         <div class="mb-20">

@@ -206,6 +206,7 @@ export class Course {
     const section = document.createElement('section');
     section.className = 'min-h-screen py-8 px-6 fade-in-scroll opacity-0 translate-y-8 transition-all duration-700 ease-out';
     section.innerHTML = `
+      <span data-route="/course/${courseSlug}/module/${moduleNumber}" style="display: none;"></span>
       <div class="max-w-7xl mx-auto">
         <!-- Back Navigation -->
         <div class="mb-8 flex items-center justify-between">
@@ -281,8 +282,16 @@ export class Course {
                   allowfullscreen>
                 </iframe>
               ` : `
-                <div class="w-full aspect-video rounded-lg border border-text-secondary/20 bg-card-bg flex items-center justify-center">
-                  <p class="text-text-secondary">${moduleNumber === 5 ? 'No Slide Deck Available for this Module' : 'Slides coming soon'}</p>
+                <div class="w-full aspect-video rounded-lg border border-text-secondary/20 bg-card-bg flex flex-col items-center justify-center p-6">
+                  <p class="text-text-secondary mb-4">${moduleNumber === 5 ? 'No Slide Deck Available for this Module' : 'Slides coming soon'}</p>
+                  ${moduleNumber === 5 ? `
+                    <a 
+                      href="/course/${courseSlug}/reader/module/5" 
+                      class="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-accent/30 rounded-full hover:bg-primary/20 hover:border-accent/50 transition-all duration-300 text-text-secondary hover:text-text text-sm">
+                      <i class="fas fa-book"></i>
+                      <span>Go to Reader to Take Quiz & Refresh Memory</span>
+                    </a>
+                  ` : ''}
                 </div>
               `}
             </div>

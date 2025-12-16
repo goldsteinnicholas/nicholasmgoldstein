@@ -1172,6 +1172,7 @@ export class CourseReader {
     const section = document.createElement('section');
     section.className = 'min-h-screen py-8 px-6 fade-in-scroll opacity-0 translate-y-8 transition-all duration-700 ease-out';
     section.innerHTML = `
+      <span data-route="/course/${courseSlug}/reader/module/${moduleNumber}" style="display: none;"></span>
       <div class="max-w-7xl mx-auto">
         <!-- Back Navigation -->
         <div class="mb-8 flex items-center justify-between">

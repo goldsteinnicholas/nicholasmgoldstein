@@ -25,6 +25,7 @@ export class Courses {
     const section = document.createElement('section');
     section.className = 'py-16 px-6 fade-in-scroll opacity-0 translate-y-8 transition-all duration-700 ease-out';
     section.innerHTML = `
+      <span data-route="/courses" style="display: none;"></span>
       <div class="max-w-6xl mx-auto">
         <div class="text-center mb-16">
           <h1 class="text-3xl sm:text-4xl md:text-5xl font-heading text-text mb-6">

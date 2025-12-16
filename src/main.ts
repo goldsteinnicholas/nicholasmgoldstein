@@ -162,53 +162,21 @@ class HomeScreen {
     if (!this.container) return false;
     
     const app = this.container;
+    
+    // Simple check: look for the data-route attribute that matches the current path
+    const routeSpan = app.querySelector(`span[data-route="${path}"]`);
+    
+    if (routeSpan) {
+      return true; // Found matching route identifier
+    }
+    
+    // Fallback: check for wrong content markers
     const textContent = app.textContent || '';
+    const hasWrongContent = textContent.includes('404') || 
+                           textContent.includes('Page not found');
     
-    if (path.startsWith('/articles/')) {
-      const hasArticle = app.querySelector('article') || 
-                        textContent.length > 500;
-      const hasWrongContent = textContent.includes('404') || 
-                             textContent.includes('Page not found') ||
-                             (path !== '/' && textContent.includes('Home'));
-      return hasArticle && !hasWrongContent;
-    }
-    
-    if (path === '/articles') {
-      const hasArticlesList = textContent.includes('Articles') || 
-                             app.querySelector('a[href^="/articles/"]');
-      const hasWrongContent = textContent.includes('404') ||
-                             textContent.includes('Page not found');
-      return !!hasArticlesList && !hasWrongContent;
-    }
-    
-    if (path.startsWith('/course/')) {
-      const hasCourseContent = textContent.length > 300;
-      const hasWrongContent = textContent.includes('404') ||
-                             textContent.includes('Page not found');
-      return hasCourseContent && !hasWrongContent;
-    }
-    
-    if (path === '/courses') {
-      const hasCoursesList = textContent.includes('Courses') || 
-                            app.querySelector('a[href^="/course/"]');
-      const hasWrongContent = textContent.includes('404') ||
-                             textContent.includes('Page not found');
-      return !!hasCoursesList && !hasWrongContent;
-    }
-    
-    if (path === '/system-prompt-generator') {
-      const hasGenerator = textContent.includes('System Prompt') || 
-                            app.querySelector('[id*="prompt"]');
-      const hasWrongContent = textContent.includes('404') ||
-                             textContent.includes('Page not found');
-      return !!hasGenerator && !hasWrongContent;
-    }
-    
-    if (path === '/') {
-      const hasLandingContent = app.children.length > 0;
-      const hasWrongContent = textContent.includes('404') ||
-                             textContent.includes('Page not found');
-      return hasLandingContent && !hasWrongContent;
+    if (hasWrongContent) {
+      return false;
     }
     
     // For unknown routes, don't preserve content

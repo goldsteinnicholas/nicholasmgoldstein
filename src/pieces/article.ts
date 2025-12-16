@@ -454,6 +454,7 @@ export class Article {
     const section = document.createElement('section');
     section.className = 'py-16 px-6 fade-in-scroll opacity-0 translate-y-8 transition-all duration-700 ease-out';
     section.innerHTML = `
+      <span data-route="/articles/${slug}" style="display: none;"></span>
       <div class="max-w-4xl mx-auto">
         <!-- Back Navigation -->
         <div class="mb-8">
