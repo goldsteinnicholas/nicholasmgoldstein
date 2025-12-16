@@ -179,6 +179,16 @@ class HomeScreen {
       return false;
     }
     
+    // Route-specific content checks as fallback
+    if (path === '/system-prompt-generator') {
+      const hasGeneratorContent = textContent.includes('System Prompt Generator') ||
+                                 app.querySelector('[id*="prompt"]') ||
+                                 app.querySelector('form[id*="prompt"]');
+      if (hasGeneratorContent) {
+        return true;
+      }
+    }
+    
     // For unknown routes, don't preserve content
     return false;
   }
