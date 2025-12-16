@@ -182,9 +182,11 @@ class HomeScreen {
     // Route-specific content checks as fallback
     if (path === '/system-prompt-generator') {
       const hasGeneratorContent = textContent.includes('System Prompt Generator') ||
+                                 textContent.includes('Core Identity Module') ||
                                  app.querySelector('[id*="prompt"]') ||
-                                 app.querySelector('form[id*="prompt"]');
-      if (hasGeneratorContent) {
+                                 app.querySelector('form[id*="prompt"]') ||
+                                 app.querySelector('#prompt-generator-form');
+      if (hasGeneratorContent && !hasWrongContent) {
         return true;
       }
     }
