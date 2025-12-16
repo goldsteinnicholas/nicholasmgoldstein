@@ -662,7 +662,7 @@ export class CourseReader {
             <h2 class="text-2xl font-heading text-text mb-4">What is a Multilayered AI Architecture?</h2>
             <p class="text-text-secondary mb-4 italic">And how can it supercharge the power of your app?</p>
             <ul class="list-disc list-inside space-y-3 text-text-secondary ml-4">
-              <li>If one prompt takes an input, runs it through a series of filters and rules and fundamentally transforms the input data then outputs it to you, multiple coordinated prompts compound those transformations substantially.</li>
+              <li>If one prompt takes an input and runs it through a series of filters and rules and fundamentally transforms the input data, then outputs it to you, multiple coordinated prompts compound those transformations substantially.</li>
               <li>The separation of concerns between AI layers not only makes these systems more manageable, but it helps avoid confusing the AI with a million tasks, bolstering performance for the most important functionalities.</li>
               <li>For systems that are aiming for near-perfect performance or just more consistent results.</li>
             </ul>
@@ -672,8 +672,8 @@ export class CourseReader {
             <h2 class="text-2xl font-heading text-text mb-4">An Example from Emstrata</h2>
             <p class="text-text-secondary mb-4 italic">The Emstrata Cycle</p>
             <div class="space-y-4 text-text-secondary">
-              <p>The Emstrata Cycle is a standardized series of prompts that run of every turn in an Emstrata simulation.</p>
-              <p>This cycle retains a comprehensive memory of all entities in the simulation, plans/positions entities on an interactive coordinate plane, writes prose according to exacting instruction, captures secrets and memories, and corrects all continuity errors after the narrative is written.</p>
+              <p>The Emstrata Cycle is a standardized series of prompts that run on every turn in an Emstrata simulation.</p>
+              <p>This cycle retains a comprehensive memory of all entities in the simulation, plans/positions entities on an interactive coordinate plane, writes prose according to exacting instructions, captures secrets and memories, and corrects all continuity errors after the narrative is written.</p>
               <p><strong>No single prompt or backend wizardry would be able to accomplish this by itself.</strong></p>
               <div>
                 <p class="mb-2"><strong>These are the layers (simplified for the example):</strong></p>
@@ -691,9 +691,9 @@ export class CourseReader {
             <h2 class="text-2xl font-heading text-text mb-4">Think Architecturally</h2>
             <p class="text-text-secondary mb-4 italic">Strategize on the best ways to achieve great results for your platform</p>
             <ul class="list-disc list-inside space-y-3 text-text-secondary ml-4">
-              <li><strong>Consider your actual goal and then break it down into steps.</strong> If you were to perform this action yourself, what steps would you need to follow. Write that down. That's your workflow.</li>
+              <li><strong>Consider your actual goal, and then break it down into steps.</strong> If you were to perform this action yourself, what steps would you need to follow? Write that down. That's your workflow.</li>
               <li><strong>After formalizing your workflow, think of the type of data transformations you would need throughout that process</strong> and then build the prompts to automate, then chain them together.</li>
-              <li><strong>Illustrative example:</strong> Your platform depending on conversation history for context can cause your token count and performance to take a hit. Perhaps a conversation consolidator prompt would benefit you. And if you want a truly random number to be used in the determination of something in your system, perhaps you have the backend serve that up to your AI, rather than assuming that the LLM's training data can produce anything close to pure randomness.</li>
+              <li><strong>Illustrative example:</strong> If your platform depends on conversation history for context, it can cause your token count and performance to take a hit. Perhaps a conversation consolidator prompt would benefit you. And if you want a truly random number to be used in the determination of something in your system, perhaps you have the backend serve that up to your AI, rather than assuming that the LLM's training data can produce anything close to pure randomness.</li>
             </ul>
           </section>
 
@@ -703,7 +703,7 @@ export class CourseReader {
             <ul class="list-disc list-inside space-y-3 text-text-secondary ml-4">
               <li>Correction layers catch errors after other layers have done their work. They're your quality control layers. They spot continuity breaks, logical inconsistencies, or constraint violations that slipped through.</li>
               <li><strong>In Emstrata:</strong> The Chron-Con layer runs after the narrative is written. It checks for things like: Did a character who was in the tavern suddenly appear in the forest without traveling? Did someone use an item they don't have? Are the spatial coordinates consistent with the described action?</li>
-              <li><strong>When you need one:</strong> If there are complex requirements and expectations that your platform needs to meet. Correcting before revealing the final answer can lower the chance of bad responses.</li>
+              <li><strong>When you need one:</strong> Use correction layers when there are complex requirements and expectations that your platform needs to meet. Correcting before revealing the final answer can lower the chance of bad responses.</li>
             </ul>
           </section>
 
@@ -740,7 +740,7 @@ export class CourseReader {
             <p class="text-text-secondary mb-4 italic">The clean-up crew of your platform</p>
             <ul class="list-disc list-inside space-y-3 text-text-secondary ml-4">
               <li>Not every layer fits a clean category. Catch-all layers are hybrids that do complementary work for multiple other layers. They handle tasks that don't belong to any single specialized layer but are essential for the system to function cohesively.</li>
-              <li>These layers often emerge when you discover gaps like two layers need to work together but speak different 'languages,' or several layers all need the same preprocessing that none of them should be responsible for individually.</li>
+              <li>These layers often emerge when you discover gaps where two layers need to work together but speak different 'languages,' or several layers all need the same preprocessing that none of them should be responsible for individually.</li>
               <li><strong>In Emstrata:</strong> The Chron-Con does more than just error correction. It also tracks secrets and memories from the narrative, explicitly tagging them for Groundskeeper to integrate into system memory. You don't want Narration burdened with the unrelated task of extracting and categorizing secrets while it's trying to write high-quality prose. And Groundskeeper needs these pieces explicitly labeled as 'secrets' or 'memories' to properly integrate them into the simulation history. The Chron-Con bridges this gap.</li>
             </ul>
           </section>
@@ -771,7 +771,7 @@ export class CourseReader {
               <li><strong>Data Persistence and Utility:</strong> Between AI layers, it's important to save important, transformed data to the backend for future retrieval, debugging, rerunning if there's an error, etc.</li>
               <li><strong>Data Reusability and Presentation:</strong> Saving data also allows you to present that data in interesting ways later or feed that data into other layers in the future.</li>
               <li><strong>Unbiased Decision-Making:</strong> Also, when you need an unbiased judge, the backend is the place to go. The backend is 'agnostic' to outcome, whereas the AI may or may not have a strong preference and display it.</li>
-              <li><strong>Emstrata Example (Weighted Randomness):</strong> In Emstrata, consequences are rolled and use weighted randomness. The Discovery layer determines the likelihood something happens, and then the backend returns a random number out of 1000. If that number is within the set likelihood range, the backend serves the confirmed consequence to the Narration layer, if it's outside of the range, it sends the failure outcome.</li>
+              <li><strong>Emstrata Example (Weighted Randomness):</strong> In Emstrata, consequences are rolled and use weighted randomness. The Discovery layer determines the likelihood something happens, and then the backend returns a random number out of 1000. If that number is within the set likelihood range, the backend serves the confirmed consequence to the Narration layer; if it's outside of the range, it sends the failure outcome.</li>
             </ul>
           </section>
 
@@ -872,7 +872,7 @@ export class CourseReader {
             <ul class="list-disc list-inside space-y-3 text-text-secondary ml-4">
               <li>Scale of hallucinations and downstream effects expand exponentially with poor architecture</li>
               <li>Many hallucinations can be stamped out, accounted for, or predicted through design</li>
-              <li>Requires persistence, trial and error, systems-thinking</li>
+              <li>Requires persistence, trial and error, systems thinking</li>
               <li>Same mechanism that causes hallucinations enables creativity and variation</li>
             </ul>
           </section>
@@ -937,7 +937,7 @@ export class CourseReader {
               <li><strong>Dissecting Requests:</strong> how to parse incoming data</li>
               <li><strong>Response Expectations:</strong> exact output format</li>
               <li><strong>Quality Standards:</strong> non-negotiable benchmarks</li>
-              <li>Each module handles one concern, update independently</li>
+              <li>Each module handles one concern, updated independently</li>
             </ul>
           </section>
 
@@ -978,7 +978,7 @@ export class CourseReader {
             <h2 class="text-2xl font-heading text-text mb-4">Preventing Hallucinations</h2>
             <ul class="list-disc list-inside space-y-3 text-text-secondary ml-4">
               <li>Restrict AI to specific formatted responses</li>
-              <li>Reiterate: cannot make up own functions or arguments</li>
+              <li>Reiterate: cannot make up its own functions or arguments</li>
               <li>Be hyper-specific about requirements</li>
               <li>Identify and eliminate contradictory prompting</li>
               <li>ALL CAPS to stress critical aspects</li>
@@ -989,9 +989,9 @@ export class CourseReader {
             <h2 class="text-2xl font-heading text-text mb-4">Test and Iterate</h2>
             <ul class="list-disc list-inside space-y-3 text-text-secondary ml-4">
               <li>All LLMs react differently to certain prompting</li>
-              <li>Testing, iterating, saving updates essential</li>
+              <li>Testing, iterating, and saving updates is essential</li>
               <li>Consider model size in proportion to task size</li>
-              <li>Massive response with complex logic needs bigger (more expensive) model</li>
+              <li>A massive response with complex logic needs a bigger (more expensive) model</li>
             </ul>
           </section>
 
