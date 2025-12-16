@@ -282,7 +282,7 @@ export class Course {
                 </iframe>
               ` : `
                 <div class="w-full aspect-video rounded-lg border border-text-secondary/20 bg-card-bg flex items-center justify-center">
-                  <p class="text-text-secondary">Slides coming soon</p>
+                  <p class="text-text-secondary">${moduleNumber === 5 ? 'No Slide Deck Available for this Module' : 'Slides coming soon'}</p>
                 </div>
               `}
             </div>
