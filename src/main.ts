@@ -90,6 +90,21 @@ class HomeScreen {
       // Prerendered content exists and matches URL - preserve it and set up navigation handlers
       this.setupPrerenderedEventListeners();
       
+      // Initialize fade-in animations for homepage when prerendered content is preserved
+      if (path === '/') {
+        ScrollFade.init();
+        // Immediately fade in elements that are already in viewport
+        const fadeElements = document.querySelectorAll('.fade-in-scroll');
+        fadeElements.forEach(el => {
+          const rect = el.getBoundingClientRect();
+          const isInViewport = rect.top < window.innerHeight && rect.bottom > 0;
+          if (isInViewport) {
+            el.classList.remove('opacity-0', 'translate-y-8');
+            el.classList.add('opacity-100', 'translate-y-0');
+          }
+        });
+      }
+      
       // Initialize quiz for Module 5 reader pages even with prerendered content
       if (path.startsWith('/course/') && path.includes('/reader/module/')) {
         const coursePath = path.split('/course/')[1];
