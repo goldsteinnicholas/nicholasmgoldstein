@@ -42,9 +42,16 @@ class HomeScreen {
   public mount(container: HTMLElement) {
     this.container = container;
     
+    // Normalize path (remove trailing slash except for root)
+    let path = window.location.pathname;
+    if (path !== '/' && path.endsWith('/')) {
+      path = path.slice(0, -1);
+      // Update URL without trailing slash
+      window.history.replaceState({}, '', path);
+    }
+    
     // Check if prerendered content exists and matches current URL
     const hasPrerenderedContent = this.checkPrerenderedContent();
-    const path = window.location.pathname;
     const pathMatches = hasPrerenderedContent && this.verifyPathMatchesContent(path);
     
     if (!pathMatches) {
@@ -56,7 +63,14 @@ class HomeScreen {
     if (path === '/articles') {
       this.showArticlesPage();
     } else if (path.startsWith('/articles/')) {
-      this.showArticlePage(path.split('/articles/')[1]);
+      const slug = path.split('/articles/')[1];
+      if (slug && slug.trim()) {
+        this.showArticlePage(slug);
+      } else {
+        // Empty slug, redirect to articles list
+        window.history.replaceState({}, '', '/articles');
+        this.showArticlesPage();
+      }
     } else if (path === '/courses') {
       this.showCoursesPage();
     } else if (path.startsWith('/course/')) {
@@ -121,7 +135,13 @@ class HomeScreen {
 
     // Listen for navigation changes (always set up, works for both prerendered and normal)
     window.addEventListener('popstate', () => {
-      const newPath = window.location.pathname;
+      // Normalize path (remove trailing slash except for root)
+      let newPath = window.location.pathname;
+      if (newPath !== '/' && newPath.endsWith('/')) {
+        newPath = newPath.slice(0, -1);
+        // Update URL without trailing slash
+        window.history.replaceState({}, '', newPath);
+      }
       
       // On navigation (client-side or back/forward), always remount
       // Prerendered content is only preserved on initial page load, not on navigation
@@ -129,7 +149,14 @@ class HomeScreen {
       if (newPath === '/articles') {
         this.showArticlesPage();
       } else if (newPath.startsWith('/articles/')) {
-        this.showArticlePage(newPath.split('/articles/')[1]);
+        const slug = newPath.split('/articles/')[1];
+        if (slug && slug.trim()) {
+          this.showArticlePage(slug);
+        } else {
+          // Empty slug, redirect to articles list
+          window.history.replaceState({}, '', '/articles');
+          this.showArticlesPage();
+        }
       } else if (newPath === '/courses') {
         this.showCoursesPage();
       } else if (newPath.startsWith('/course/')) {
@@ -202,6 +229,17 @@ class HomeScreen {
                                  app.querySelector('form[id*="prompt"]') ||
                                  app.querySelector('#prompt-generator-form');
       if (hasGeneratorContent && !hasWrongContent) {
+        return true;
+      }
+    }
+    
+    if (path === '/articles') {
+      const hasArticlesList = textContent.includes('Articles') && 
+                             (app.querySelector('a[href^="/articles/"]') || 
+                              textContent.includes('All Articles') ||
+                              textContent.includes('Latest'));
+      const hasArticleContent = app.querySelector('article'); // Individual article page
+      if (hasArticlesList && !hasArticleContent && !hasWrongContent) {
         return true;
       }
     }
