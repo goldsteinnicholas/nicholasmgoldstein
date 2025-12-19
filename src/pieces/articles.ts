@@ -15,6 +15,13 @@ export class Articles {
   
   private articles: Article[] = [
     {
+      slug: 'the-sad-life-of-the-solopreneur-billionaire',
+      title: 'The Sad Life of the Solopreneur Billionaire',
+      excerpt: 'If you listen closely to what AI Execs say about how AI will change the world, you\'ll likely come away with amazement, horror, or some unholy combination of the two. One particular outcome that many of these sorts seem drawn to is the advent of the \'Solopreneur billionaire\': a man or woman who\'s come to the threshold of capitalist glory all by themselves (and an army of yet-to-be-developed AI agents).',
+      date: 'December 19, 2025',
+      category: 'Society & Culture'
+    },
+    {
       slug: 'no-were-not-trying-to-replace-dungeon-masters-with-ai',
       title: "No, We're Not Trying to Replace Dungeon Masters with AI",
       excerpt: 'The closest thing to Emstrata\'s emergent narratives, in practice, is a well-structured Dungeons and Dragons campaign. This much is irrefutable. We borrowed many mechanics and parameters from the strategy game created by Gary Gygax and Dave Arneson, like rolling probabilities for realistic consequences.',

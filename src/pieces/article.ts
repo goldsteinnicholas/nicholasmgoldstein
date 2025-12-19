@@ -14,6 +14,57 @@ export class Article {
   private container: HTMLElement | null = null;
   
   private articles: Record<string, ArticleContent> = {
+    'the-sad-life-of-the-solopreneur-billionaire': {
+      slug: 'the-sad-life-of-the-solopreneur-billionaire',
+      title: 'The Sad Life of the Solopreneur Billionaire',
+      content: `
+        <p class="mb-8 leading-loose first-letter:text-6xl first-letter:font-serif first-letter:float-left first-letter:mr-4 first-letter:leading-none first-letter:bg-gradient-to-br first-letter:from-secondary first-letter:to-purple first-letter:bg-clip-text first-letter:text-transparent first-letter:font-black">If you listen closely to what AI Execs say about how AI will change the world, you'll likely come away with amazement, horror, or some unholy combination of the two. Personally, I think many of their pronouncements are overblown, but that's beside the point. One particular outcome that many of these sorts seem drawn to is the advent of the 'Solopreneur billionaire': a man or woman who's come to the threshold of capitalist glory all by themselves (and an army of yet-to-be-developed AI agents).</p>
+
+        <p class="mb-8 leading-loose">On its face, this seems like a worthy aspiration. The hyper-independent founder-type finally getting their opportunity to frolic in the glowing sun amongst other titans of industry and robber barons alike that have also broken through to the other side. Digging a little beneath the surface, you might ask, 'what does this really look like?'. What does this person do in their free time? Is the Solopreneur billionaire a happy person or a slave to the very agents that he used to actualize his fortune?</p>
+
+        <p class="mb-8 leading-loose">Meet Larry, a fictional Solopreneur of this ilk, who bought into the mythology of the Solopreneur billionaire and hopes to one day make it a reality for himself. He is hypnotized by the grandiosity and audacity of the project and will stake his reputation on its success. AI Farm, his fictional startup, is a B2B SaaS that automates various workflows that business owners typically had to rely on people for. He has no qualms with replacing that human labor because he believes they could be more productive elsewhere (perhaps starting their own B2B SaaS, going to Trade School, doing gig economy work, or becoming an Influencer). Larry has been using these same agents that he's built for his clients to automate his own work processes and believes that this will scale indefinitely. More and more time is poured into managing this agentic swarm, and less is spent actually coding, designing, communicating, or even living.</p>
+
+        <p class="mb-8 leading-loose">Working with the agents can be irritating. While they don't talk back and don't need sleep or meal breaks, they don't understand certain things that a human would intuitively get. The interface of AI Farm is dull and unimaginative, the microcopy is corporate new-speak, and the customer service recordings that he keeps for analysis are filled with people yelling through their microphones to speak to an actual human.</p>
+
+        <p class="mb-8 leading-loose">As for his social life… Can you guess? It pretty much consists of discussing the happenings at work with a non-company-related AI, looking for some semblance of someone understanding the underlying struggle of trying to make AIs more like humans and trying to manage his mental health accordingly. He could date or join a run club or just go to a bar, but that's a distraction. He needs to become something meaningful. His path to meaning is unfortunately tied up in this tiring work of his own design.</p>
+
+        <p class="mb-8 leading-loose">As for his valuation targets, they're going up. He's soaring past the competition and in theory, he's getting exactly what he wants: the life of the Solopreneur billionaire-to-be. In the coming year, his AI valuation analysis agent tells him that he's set to pass the big B and finally arrive at his big dream. The thought of what to do after comes into his mind, but he has no ideas.</p>
+
+        <p class="mb-8 leading-loose">---</p>
+
+        <p class="mb-8 leading-loose">In a year, his valuation target has come and gone. He celebrated by sending an AI-generated press release out and taking a couple remote interviews with some financial rags and even some national papers and TV stations that were interested in the story. Still, not much has really changed. He has a net worth most people would dream of, but no time to use it for anything but reinvestment (which happens on an automated schedule).</p>
+
+        <p class="mb-8 leading-loose">There's not much of a choice but to keep growing. And so he does. He pushes into new sectors, continuing to automate workflows and indirectly pass out resignation slips to unsuspecting workers with families, home loans, and aspirations of their own. Soon he's set his sights on the valuation target of $10B.</p>
+
+        <p class="mb-8 leading-loose">By this point, I'd be lying if I said Larry was a healthy man physically, psychologically, or otherwise. He's a prisoner to his desk and his AI 'subordinates'. Somehow he gets up and starts the grind over every morning without too many second thoughts. I suppose it's the only thing he truly knows at this point. Not to mention, many agents are explicitly prompted and designed to 'motivate him to maximum efficiency and prioritize his productivity over all' leaving him with a constant streaming dialogue that forces the outcome of more work, less life. He's Sisyphus walking alongside a tied-up boulder, observing a pulley contraption at the top of the hill lug it upward, hoping the rope doesn't snap.</p>
+
+        <p class="mb-8 leading-loose">---</p>
+
+        <p class="mb-8 leading-loose">And one rainy autumn morning, he woke up. He's now 50 years old. What a storied career paired with a life of far fewer stories to share.</p>
+
+        <p class="mb-8 leading-loose">At 50, Larry remains unmarried, not in the market to date, with no friends (at least not the human sort), and time has rendered him into something less inspired, despite the constant whispers from his machines to keep working. He cracked $100B valuation some time ago. A feat that should've been significant was met with little fanfare as many other solo founders have figured out Larry's playbook and made comparable amounts, doubtless resorting to a similar hermetic lifestyle. Those stories have been written many times over. A Solopreneur billionaire (even centi-billionaire) is old news in a world where agents have taken over the US economy.</p>
+
+        <p class="mb-8 leading-loose">On this day, as the sky climbs like that same boulder hoisting up the hill and the raindrops patter on the roof of Larry's compound, a profound sadness has found its home in his heart. Woe and all its accoutrements have been building in Larry for decades at this point. He feels a new calling. A normal one.</p>
+
+        <p class="mb-8 leading-loose">To leave his house and go to the bagel shop. Something normal people do on a weekly basis is genuinely a novel concept to this institutionalized man. So he does it. He trudges to his garage, gets in his car, and drives. He had been holed up in his home for what felt like years, doing something that sometimes felt akin to building, but mostly felt like floundering.</p>
+
+        <p class="mb-8 leading-loose">He rolls out of the sedan, meanders through the drizzle, until his hand rests on the bagel shop's door handle, and he pulls. Inside he joins a line of fellow humans and takes in a whiff of everything bagel seasoning that permeates the air here. Ambient chatter overwhelms him slightly, but it's a welcome discomfort.</p>
+
+        <p class="mb-8 leading-loose">A baby's cry subsides near the door as her mother slowly rocks her. Many people in the line look to be grabbing a coffee to-go before their shifts. For the most part, they look to be blue-collar workers in a hurry. Some people seem to just be living. A couple people have their laptops out, trying to avoid getting bagel crumbs in the keyboard, maybe working on a novel or the next killer app.</p>
+
+        <p class="mb-8 leading-loose">Larry reaches the front counter and orders a plain bagel toasted with cream cheese, then walks over to the pick-up counter to stand awkwardly by the trash can, hoping to avoid an impromptu discussion, though secretly wishing one is forced upon him.</p>
+
+        <p class="mb-8 leading-loose">In the corner of the coffee shop, he sees what looks like a meeting of five twenty-somethings talking with a certain ambition that reminded him of how he used to talk. They're having a meeting it seems. They're wearing button ups and business casual dress just talking and enjoying the food before tearing into some work. This is a rare sight, in a world where so many have gone the same path as Larry. Larry averts his eyes, so as not to seem nosey. He twiddles his thumbs attempting to avoid pulling out his phone and getting a barrage of reports on the company. He sits and sits, looking up only to glance at the front counter once in a while, checking for his order that he plans to eat in his sedan.</p>
+
+        <p class="mb-8 leading-loose">A young man suddenly approaches Larry. "Hey, I know you!", he says enthusiastically, "You founded AI Farm, right? This is crazy, I didn't know you lived nearby." Larry clears his throat nervously, "Yea- yeah, I live right down the road actually. You guys are having a meeting?" The man replies, "You know, we're trying to do the in-person thing. Everything's remote or automated these days, we personally think that people are leaning more toward human-built products today. I know that's like against your whole business model and all, but it's why we do what we do." He chuckles nervously knowing that he may have insulted Larry. "No, no. I get it… I get it. Um, you're doing it right… And... keep the spark." He says contemplatively as his order is called from the front counter, "Order for Larry."</p>
+
+        <p class="mb-8 leading-loose">He shakes the young man's hand and wishes him luck with everything, more graciously than he expected to just seconds prior. He walks to the counter and grabs his order, retreating to his car to eat.</p>
+
+        <p class="mb-8 leading-loose">He took his first steps this day.</p>
+      `,
+      date: 'December 19, 2025',
+      category: 'Society & Culture'
+    },
     'no-were-not-trying-to-replace-dungeon-masters-with-ai': {
       slug: 'no-were-not-trying-to-replace-dungeon-masters-with-ai',
       title: "No, We're Not Trying to Replace Dungeon Masters with AI",
