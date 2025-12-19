@@ -30,7 +30,11 @@ export class Article {
 
         <p class="mb-8 leading-loose">As for his valuation targets, they're going up. He's soaring past the competition and in theory, he's getting exactly what he wants: the life of the Solopreneur billionaire-to-be. In the coming year, his AI valuation analysis agent tells him that he's set to pass the big B and finally arrive at his big dream. The thought of what to do after comes into his mind, but he has no ideas.</p>
 
-        <p class="mb-8 leading-loose">---</p>
+        <div class="my-12 flex items-center justify-center">
+          <div class="h-px w-32 bg-gradient-to-r from-transparent via-text-secondary to-transparent"></div>
+          <div class="mx-4 h-1.5 w-1.5 rounded-full bg-text-secondary"></div>
+          <div class="h-px w-32 bg-gradient-to-r from-transparent via-text-secondary to-transparent"></div>
+        </div>
 
         <p class="mb-8 leading-loose">In a year, his valuation target has come and gone. He celebrated by sending an AI-generated press release out and taking a couple remote interviews with some financial rags and even some national papers and TV stations that were interested in the story. Still, not much has really changed. He has a net worth most people would dream of, but no time to use it for anything but reinvestment (which happens on an automated schedule).</p>
 
@@ -38,7 +42,11 @@ export class Article {
 
         <p class="mb-8 leading-loose">By this point, I'd be lying if I said Larry was a healthy man physically, psychologically, or otherwise. He's a prisoner to his desk and his AI 'subordinates'. Somehow he gets up and starts the grind over every morning without too many second thoughts. I suppose it's the only thing he truly knows at this point. Not to mention, many agents are explicitly prompted and designed to 'motivate him to maximum efficiency and prioritize his productivity over all' leaving him with a constant streaming dialogue that forces the outcome of more work, less life. He's Sisyphus walking alongside a tied-up boulder, observing a pulley contraption at the top of the hill lug it upward, hoping the rope doesn't snap.</p>
 
-        <p class="mb-8 leading-loose">---</p>
+        <div class="my-12 flex items-center justify-center">
+          <div class="h-px w-32 bg-gradient-to-r from-transparent via-text-secondary to-transparent"></div>
+          <div class="mx-4 h-1.5 w-1.5 rounded-full bg-text-secondary"></div>
+          <div class="h-px w-32 bg-gradient-to-r from-transparent via-text-secondary to-transparent"></div>
+        </div>
 
         <p class="mb-8 leading-loose">And one rainy autumn morning, he woke up. He's now 50 years old. What a storied career paired with a life of far fewer stories to share.</p>
 
@@ -60,7 +68,7 @@ export class Article {
 
         <p class="mb-8 leading-loose">He shakes the young man's hand and wishes him luck with everything, more graciously than he expected to just seconds prior. He walks to the counter and grabs his order, retreating to his car to eat.</p>
 
-        <p class="mb-8 leading-loose">He took his first steps this day.</p>
+        <p class="mb-8 leading-loose">Larry took his first steps this day.</p>
       `,
       date: 'December 19, 2025',
       category: 'Society & Culture'
