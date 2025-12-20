@@ -181,7 +181,8 @@ export class SystemPromptGenerator {
           <!-- Generate Button -->
           <div class="flex justify-center">
             <button
-              type="submit"
+              type="button"
+              id="generate-prompt-btn"
               class="px-8 py-4 bg-gradient-to-r from-secondary to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white rounded-full font-medium shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 text-lg"
             >
               Generate System Prompt
@@ -219,6 +220,7 @@ export class SystemPromptGenerator {
     const addKeyValueBtn = this.container?.querySelector('#add-key-value-btn');
     const addFunctionBtn = this.container?.querySelector('#add-function-btn');
     const copyBtn = this.container?.querySelector('#copy-prompt-btn');
+    const generateBtn = this.container?.querySelector('#generate-prompt-btn');
 
     // Add initial key-value pair
     this.addKeyValuePair();
@@ -233,7 +235,12 @@ export class SystemPromptGenerator {
       this.addFunction();
     });
 
-    // Form submission
+    // Generate button
+    generateBtn?.addEventListener('click', () => {
+      this.generatePrompt();
+    });
+
+    // Form submission (prevent default in case of Enter key)
     form?.addEventListener('submit', (e) => {
       e.preventDefault();
       this.generatePrompt();
