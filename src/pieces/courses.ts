@@ -16,6 +16,12 @@ export class Courses {
       title: 'Build AI Platforms from Scratch',
       description: 'Learn to build powerful AI-powered applications and platforms from the ground up. Master LLM integration, embeddings, and create production-ready AI applications.',
       category: 'AI Development'
+    },
+    {
+      slug: 'communicating-vision',
+      title: 'Communicating Vision',
+      description: 'Learn how to effectively communicate your vision, ideas, and projects to others. Master the art of storytelling, presentation, and conveying complex concepts clearly.',
+      category: 'Communication'
     }
   ];
 

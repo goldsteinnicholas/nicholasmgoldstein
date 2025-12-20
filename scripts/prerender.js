@@ -34,6 +34,8 @@ function getAllRoutes() {
     '/course/build-ai-platforms/reader/module/3',
     '/course/build-ai-platforms/reader/module/4',
     '/course/build-ai-platforms/reader/module/5',
+    '/course/communicating-vision/module/1',
+    '/course/communicating-vision/reader/module/1',
   ].map(route => {
     if (route !== '/' && route.endsWith('/')) {
       return route.slice(0, -1);

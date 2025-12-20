@@ -10,11 +10,52 @@ interface CourseModule {
   writtenContent?: string; // Placeholder for written content
 }
 
+interface CourseReaderData {
+  title: string;
+  description: string;
+  modules: CourseModule[];
+  externalResources?: Array<{
+    title: string;
+    url: string;
+    description: string;
+    isExternal?: boolean;
+  }>;
+}
+
 export class CourseReader {
   private container: HTMLElement | null = null;
   
-  // Reuse the same modules structure from Course
-  private modules: CourseModule[] = [
+  private courses: Record<string, CourseReaderData> = {
+    'build-ai-platforms': {
+      title: 'Build AI Platforms from Scratch',
+      description: 'Learn to build powerful AI-powered applications and platforms from scratch. This course focuses on design, architecture, and engineering, NOT coding.',
+      externalResources: [
+        {
+          title: 'Repo w/ Common Code Patterns',
+          url: 'https://github.com/goldsteinnicholas/build-ai-platforms-from-scratch',
+          description: 'Common code patterns and examples from the course.',
+          isExternal: true
+        },
+        {
+          title: 'System Prompt Generator',
+          url: '/system-prompt-generator',
+          description: 'A tool for generating effective system prompts for AI platforms.',
+          isExternal: false
+        },
+        {
+          title: 'Emstrata',
+          url: 'https://emstrata.com',
+          description: 'A platform for creating immersive narrative experiences using AI to generate emergent storylines.',
+          isExternal: true
+        },
+        {
+          title: 'PLATO5',
+          url: 'https://plato5.us',
+          description: 'A social engine designed to turn online connections into real-world friendships, with AI integration to facilitate conversations.',
+          isExternal: true
+        }
+      ],
+      modules: [
     // Chapter 1: Foundations
     {
       number: '1',
@@ -1159,12 +1200,52 @@ export class CourseReader {
       title: 'Wrap-Up: Building AI Platforms from Scratch',
       description: 'Final thoughts and key takeaways from the course, summarizing the journey from foundational concepts to building complete AI platforms.'
     }
-  ];
+      ]
+    },
+    'communicating-vision': {
+      title: 'Communicating Vision',
+      description: 'Learn how to effectively communicate your vision, ideas, and projects to others. Master the art of storytelling, presentation, and conveying complex concepts clearly.',
+      externalResources: [],
+      modules: [
+        {
+          number: '1',
+          chapter: 1,
+          title: 'Steve Jobs | 1994 Interview with John McLaughlin',
+          description: 'A deep dive into how Steve Jobs communicates his vision, philosophy, and approach to building products that change the world.',
+          writtenContent: `
+            <div class="space-y-8">
+              <section>
+                <h2 class="text-2xl font-heading text-text mb-4">Steve Jobs | 1994 Interview with John McLaughlin</h2>
+                <p class="text-text-secondary mb-4">Content for this module is coming soon. Check back later or view the <a href="/course/communicating-vision/module/1" class="text-accent hover:underline">video and slides version</a>.</p>
+              </section>
+            </div>
+          `
+        }
+      ]
+    }
+  };
+  
+  private getCourseData(courseSlug: string): CourseReaderData | null {
+    return this.courses[courseSlug] || null;
+  }
+  
+  private getModules(courseSlug: string): CourseModule[] {
+    const courseData = this.getCourseData(courseSlug);
+    return courseData?.modules || [];
+  }
 
   public mount(container: HTMLElement, courseSlug: string, moduleNumber: number = 1): void {
     this.container = container;
     
-    const currentModule = this.modules.find(m => m.number === moduleNumber.toString()) || this.modules[0];
+    const courseData = this.getCourseData(courseSlug);
+    if (!courseData) {
+      // Course not found, show error or redirect
+      container.innerHTML = '<div class="p-8 text-center"><h1 class="text-2xl text-text mb-4">Course Not Found</h1><p class="text-text-secondary">The requested course does not exist.</p></div>';
+      return;
+    }
+    
+    const modules = this.getModules(courseSlug);
+    const currentModule = modules.find(m => m.number === moduleNumber.toString()) || modules[0];
     
     // Update metadata for SEO
     this.updateMetadata(currentModule, courseSlug, moduleNumber);
@@ -1207,8 +1288,8 @@ export class CourseReader {
         <main class="flex-1 w-full md:max-w-4xl">
           <!-- Header Section -->
           <div class="mb-8 md:mb-12">
-            <h1 class="text-2xl sm:text-3xl md:text-4xl font-heading text-text mb-3 md:mb-4">${moduleNumber === 1 ? 'Build AI Platforms from Scratch' : currentModule.title}</h1>
-            <p class="text-base sm:text-lg text-text-secondary mb-4 md:mb-6">${moduleNumber === 1 ? 'Learn to build powerful AI-powered applications and platforms from scratch. This course focuses on design, architecture, and engineering, NOT coding.' : currentModule.description}</p>
+            <h1 class="text-2xl sm:text-3xl md:text-4xl font-heading text-text mb-3 md:mb-4">${moduleNumber === 1 ? courseData.title : currentModule.title}</h1>
+            <p class="text-base sm:text-lg text-text-secondary mb-4 md:mb-6">${moduleNumber === 1 ? courseData.description : currentModule.description}</p>
           </div>
 
           <!-- Written Content Section -->
@@ -1221,53 +1302,25 @@ export class CourseReader {
           </article>
 
           <!-- External Resources Section -->
+          ${courseData.externalResources && courseData.externalResources.length > 0 ? `
           <div class="mt-12">
             <h2 class="text-xl sm:text-2xl font-heading text-text mb-6">External Resources</h2>
             <div class="space-y-4">
+              ${courseData.externalResources.map(resource => `
               <div class="max-w-md">
                 <a 
-                  href="https://github.com/goldsteinnicholas/build-ai-platforms-from-scratch" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
+                  href="${resource.url}" 
+                  ${resource.isExternal ? 'target="_blank" rel="noopener noreferrer"' : ''}
                   class="text-text hover:text-accent transition-colors duration-300 inline-flex items-center gap-2">
-                  <span class="font-medium">Repo w/ Common Code Patterns</span>
-                  <i class="fas fa-external-link-alt text-xs text-text-secondary/50"></i>
+                  <span class="font-medium">${resource.title}</span>
+                  <i class="fas ${resource.isExternal ? 'fa-external-link-alt' : 'fa-arrow-right'} text-xs text-text-secondary/50"></i>
                 </a>
-                <p class="text-sm text-text-secondary mt-1">Common code patterns and examples from the course.</p>
+                <p class="text-sm text-text-secondary mt-1">${resource.description}</p>
               </div>
-              <div class="max-w-md">
-                <a 
-                  href="/system-prompt-generator" 
-                  class="text-text hover:text-accent transition-colors duration-300 inline-flex items-center gap-2">
-                  <span class="font-medium">System Prompt Generator</span>
-                  <i class="fas fa-arrow-right text-xs text-text-secondary/50"></i>
-                </a>
-                <p class="text-sm text-text-secondary mt-1">A tool for generating effective system prompts for AI platforms.</p>
-              </div>
-              <div class="max-w-md">
-                <a 
-                  href="https://emstrata.com" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  class="text-text hover:text-accent transition-colors duration-300 inline-flex items-center gap-2">
-                  <span class="font-medium">Emstrata</span>
-                  <i class="fas fa-external-link-alt text-xs text-text-secondary/50"></i>
-                </a>
-                <p class="text-sm text-text-secondary mt-1">A platform for creating immersive narrative experiences using AI to generate emergent storylines.</p>
-              </div>
-              <div class="max-w-md">
-                <a 
-                  href="https://plato5.us" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  class="text-text hover:text-accent transition-colors duration-300 inline-flex items-center gap-2">
-                  <span class="font-medium">PLATO5</span>
-                  <i class="fas fa-external-link-alt text-xs text-text-secondary/50"></i>
-                </a>
-                <p class="text-sm text-text-secondary mt-1">A social engine designed to turn online connections into real-world friendships, with AI integration to facilitate conversations.</p>
-              </div>
+              `).join('')}
             </div>
           </div>
+          ` : ''}
         </main>
       </div>
     `;
@@ -1276,7 +1329,9 @@ export class CourseReader {
     this.setupBackButton();
     this.setupBackToCourseButton(courseSlug, moduleNumber);
     this.setupModuleLinks(courseSlug);
-    this.setupSystemPromptGeneratorLink();
+    if (courseData.externalResources) {
+      this.setupExternalResources(courseData.externalResources);
+    }
     
     // Initialize quiz for Module 5
     if (moduleNumber === 5) {
@@ -1297,24 +1352,37 @@ export class CourseReader {
   }
 
   private renderModulesByChapter(courseSlug: string, currentModule: CourseModule): string {
-    const chapterNames = [
-      '', // 0-indexed, so chapter 1 is at index 1
-      'Chapter 1: Foundations',
-      'Chapter 2: Core Architecture & Data Operations',
-      'Chapter 3: Real-World Applications, Design & Communication',
-      'Chapter 4: Infrastructure & Integration',
-      'Chapter 5: Ethics, Operations, Audience Building'
-    ];
+    const chapterNames: Record<string, string[]> = {
+      'build-ai-platforms': [
+        '', // 0-indexed, so chapter 1 is at index 1
+        'Chapter 1: Foundations',
+        'Chapter 2: Core Architecture & Data Operations',
+        'Chapter 3: Real-World Applications, Design & Communication',
+        'Chapter 4: Infrastructure & Integration',
+        'Chapter 5: Ethics, Operations, Audience Building'
+      ],
+      'communicating-vision': [
+        '',
+        'Chapter 1: Foundations',
+        'Chapter 2: Advanced Communication Techniques',
+        'Chapter 3: Practical Applications',
+        'Chapter 4: Refinement & Delivery',
+        'Chapter 5: Putting It All Together'
+      ]
+    };
 
+    const names = chapterNames[courseSlug] || chapterNames['build-ai-platforms'];
+    const modules = this.getModules(courseSlug);
+    
     let currentChapter = 0;
     let html = '';
 
-    this.modules.forEach(module => {
+    modules.forEach(module => {
       if (module.chapter !== currentChapter) {
         currentChapter = module.chapter;
         html += `
           <div class="hidden md:block mt-4 mb-2 first:mt-0">
-            <h3 class="text-sm font-heading text-text-secondary/70 font-semibold uppercase tracking-wide">${chapterNames[currentChapter]}</h3>
+            <h3 class="text-sm font-heading text-text-secondary/70 font-semibold uppercase tracking-wide">${names[currentChapter] || ''}</h3>
           </div>
         `;
       }
@@ -1353,12 +1421,16 @@ export class CourseReader {
     });
   }
 
-  private setupSystemPromptGeneratorLink(): void {
-    const link = this.container?.querySelector('a[href="/system-prompt-generator"]');
-    link?.addEventListener('click', (e) => {
-      e.preventDefault();
-      window.history.pushState({}, '', '/system-prompt-generator');
-      window.dispatchEvent(new PopStateEvent('popstate'));
+  private setupExternalResources(resources: Array<{ url: string; isExternal?: boolean }>): void {
+    resources.forEach(resource => {
+      if (!resource.isExternal) {
+        const link = this.container?.querySelector(`a[href="${resource.url}"]`);
+        link?.addEventListener('click', (e) => {
+          e.preventDefault();
+          window.history.pushState({}, '', resource.url);
+          window.dispatchEvent(new PopStateEvent('popstate'));
+        });
+      }
     });
   }
 
@@ -1385,11 +1457,13 @@ export class CourseReader {
   }
 
   private updateMetadata(module: CourseModule, courseSlug: string, moduleNumber: number): void {
+    const courseData = this.getCourseData(courseSlug);
+    const courseTitle = courseData?.title || 'Course';
     const canonicalUrl = `https://nicholasmgoldstein.com/course/${courseSlug}/reader/module/${moduleNumber}`;
-    const title = `${module.title} - Module ${moduleNumber} | Build AI Platforms from Scratch`;
+    const title = `${module.title} - Module ${moduleNumber} | ${courseTitle}`;
     const description = module.writtenContent 
       ? module.writtenContent.replace(/<[^>]*>/g, '').substring(0, 160) + '...'
-      : `${module.description} Read the full written guide for ${module.title} from the Build AI Platforms from Scratch course.`;
+      : `${module.description} Read the full written guide for ${module.title} from the ${courseTitle} course.`;
     
     // Update canonical link
     let canonicalLink = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
