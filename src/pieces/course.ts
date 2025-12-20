@@ -336,6 +336,7 @@ export class Course {
           </div>
 
           <!-- Slideshow Section -->
+          ${courseSlug !== 'communicating-vision' ? `
           <div>
             <div class="flex items-center justify-between mb-4 md:mb-6">
               <h2 class="text-xl sm:text-2xl font-heading text-text">Course Slides</h2>
@@ -370,6 +371,7 @@ export class Course {
               `}
             </div>
           </div>
+          ` : ''}
 
           <!-- External Resources Section -->
           ${courseData.externalResources && courseData.externalResources.length > 0 ? `
@@ -402,7 +404,9 @@ export class Course {
     if (courseData.externalResources) {
       this.setupExternalResources(courseData.externalResources);
     }
-    this.setupSlideshow();
+    if (courseSlug !== 'communicating-vision') {
+      this.setupSlideshow();
+    }
     ScrollFade.init();
   }
 
