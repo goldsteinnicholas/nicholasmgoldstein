@@ -117,6 +117,10 @@ class HomeScreen {
             el.classList.add('opacity-100', 'translate-y-0');
           }
         });
+        // Reinitialize experience timeline filter listeners
+        setTimeout(() => {
+          this.experience.reinitializeListeners();
+        }, 100);
       }
       
       // Initialize quiz for Module 5 reader pages even with prerendered content

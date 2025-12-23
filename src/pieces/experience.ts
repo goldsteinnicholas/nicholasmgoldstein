@@ -176,6 +176,18 @@ export class Experience {
     });
   }
 
+  public reinitializeListeners(): void {
+    // This method is called when prerendered content is preserved
+    // It reattaches event listeners without recreating the DOM
+    const appContainer = document.querySelector('#app') as HTMLElement;
+    if (appContainer) {
+      // Set container to the app container
+      this.container = appContainer;
+      // Reattach filter button listeners
+      this.setupFilterListeners();
+    }
+  }
+
   private renderEntries(): void {
     const entriesContainer = this.container?.querySelector('#timeline-entries');
     if (!entriesContainer) return;
