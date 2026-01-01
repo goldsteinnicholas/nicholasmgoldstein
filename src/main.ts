@@ -135,6 +135,13 @@ class HomeScreen {
           }, 100);
         }
       }
+      
+      // Reinitialize system prompt generator listeners when prerendered content is preserved
+      if (path === '/system-prompt-generator') {
+        setTimeout(() => {
+          this.systemPromptGenerator.reinitializeListeners();
+        }, 100);
+      }
     }
 
     // Listen for navigation changes (always set up, works for both prerendered and normal)

@@ -215,15 +215,32 @@ export class SystemPromptGenerator {
     ScrollFade.init();
   }
 
+  public reinitializeListeners(): void {
+    // This method is called when prerendered content is preserved
+    // It reattaches event listeners without recreating the DOM
+    const appContainer = document.querySelector('#app') as HTMLElement;
+    if (appContainer) {
+      // Set container to the app container
+      this.container = appContainer;
+      // Reattach form listeners (skip adding initial key-value pair since content is already rendered)
+      this.attachFormListeners();
+    }
+  }
+
   private setupForm(): void {
+    // Add initial key-value pair
+    this.addKeyValuePair();
+
+    // Attach all form listeners
+    this.attachFormListeners();
+  }
+
+  private attachFormListeners(): void {
     const form = this.container?.querySelector('#prompt-generator-form') as HTMLFormElement;
     const addKeyValueBtn = this.container?.querySelector('#add-key-value-btn');
     const addFunctionBtn = this.container?.querySelector('#add-function-btn');
     const copyBtn = this.container?.querySelector('#copy-prompt-btn');
     const generateBtn = this.container?.querySelector('#generate-prompt-btn');
-
-    // Add initial key-value pair
-    this.addKeyValuePair();
 
     // Add key-value pair button
     addKeyValueBtn?.addEventListener('click', () => {
