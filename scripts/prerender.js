@@ -13,6 +13,7 @@ function getAllRoutes() {
     '/articles',
     '/courses',
     '/system-prompt-generator',
+    '/articles/conversion-funnels-and-the-banality-of-success',
     '/articles/the-sad-life-of-the-solopreneur-billionaire',
     '/articles/no-were-not-trying-to-replace-dungeon-masters-with-ai',
     '/articles/the-dystopian-future-of-ai-girlfriends',

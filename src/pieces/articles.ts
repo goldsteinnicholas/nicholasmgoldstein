@@ -15,6 +15,13 @@ export class Articles {
   
   private articles: Article[] = [
     {
+      slug: 'conversion-funnels-and-the-banality-of-success',
+      title: 'Conversion Funnels & the Banality of Success',
+      excerpt: 'What happens after you build the thing? Some might expect a profound feeling of satisfaction or some kind of parade, either figurative or literal. Maybe a media blitz of stupefied journalists amazed by your accomplishment. Maybe an outpouring of interest from a myriad of Venture Capital firms and an invite to a couple billionaire parties. If only it was that easy. After you build the thing, you\'ve only just begun.',
+      date: 'January 7, 2026',
+      category: 'Startups'
+    },
+    {
       slug: 'the-sad-life-of-the-solopreneur-billionaire',
       title: 'The Sad Life of the Solopreneur Billionaire',
       excerpt: 'If you listen closely to what AI Execs say about how AI will change the world, you\'ll likely come away with amazement, horror, or some unholy combination of the two. One particular outcome that many of these sorts seem drawn to is the advent of the \'Solopreneur billionaire\': a man or woman who\'s come to the threshold of capitalist glory all by themselves (and an army of yet-to-be-developed AI agents).',

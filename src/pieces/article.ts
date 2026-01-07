@@ -14,6 +14,27 @@ export class Article {
   private container: HTMLElement | null = null;
   
   private articles: Record<string, ArticleContent> = {
+    'conversion-funnels-and-the-banality-of-success': {
+      slug: 'conversion-funnels-and-the-banality-of-success',
+      title: 'Conversion Funnels & the Banality of Success',
+      content: `
+        <p class="mb-8 leading-loose first-letter:text-6xl first-letter:font-serif first-letter:float-left first-letter:mr-4 first-letter:leading-none first-letter:bg-gradient-to-br first-letter:from-secondary first-letter:to-purple first-letter:bg-clip-text first-letter:text-transparent first-letter:font-black">What happens after you build <strong class="text-text">the thing</strong>? Some might expect a profound feeling of satisfaction or some kind of parade, either figurative or literal. Maybe a media blitz of stupefied journalists amazed by your accomplishment. Maybe an outpouring of interest from a myriad of Venture Capital firms and an invite to a couple billionaire parties. If only it were that easy. After you build the thing, you've only just begun.</p>
+
+        <p class="mb-8 leading-loose">Few people actually get to this point, so kudos if you have. Maybe if the world were fair we would hold a parade in your honor. You accomplished something incredibly difficult, but… no one knows it or you exist, which is a bit of an issue if you intend to make any money whatsoever.</p>
+
+        <p class="mb-8 leading-loose">Now, I don't mean to speak as if I'm above it all and know the ins and outs of this because, admittedly, I'm in the slog of messaging as well. I'm slowly shifting from insane creative full-stack mad scientist developer mode into a lowly content creator who's completely new to this set of processes and workflows. I might as well be writing this essay to myself in a way. Maybe I can inspire myself to record something after this, but who knows, maybe Emstrata needs a thousand more features first.</p>
+
+        <p class="mb-8 leading-loose">The jump from founder to influencer is jarring. I don't think of myself as a person that needs all this attention on me, so being the face of a project is a tough one to compute. There are other concerns that people don't talk about quite as often, like 'What will person X I knew from high school think about me if I'm actually trying to follow my dreams?', 'What if I'm creating a living record of a future failure and this project doesn't pan out to the level of my most grandiose fantasies?' The answer to all these things I suppose, is 'Do <em>you</em> actually care?' or is this just some sort of failsafe evolutionarily rooted mechanism hardwired into human beings to prevent us from falling out of the in-group? I'd say that you need to make a decision about how much you want this or not, but by this point, you probably should've already had that conversation with yourself, so… just live with it and trudge on anyway because videos don't record themselves.</p>
+
+        <p class="mb-8 leading-loose">The other counterintuitive thing to understand and reframe in your mind is that while development rewards creativity and brilliant architectural decisions, content creation rewards disciplined, incremental improvement and persistence. Keeping yourself organized, building out sustainable workflows, templatizing things that work, and building on small successes is much more important in this new paradigm. Also, you'll likely need to spend some money on promotion without clear expectations for a great return.</p>
+
+        <p class="mb-8 leading-loose">My advice for paid promotion is to collect useful analytics early so you can track improvement and develop clear pipelines for signup and subscriptions. I'm doing this now. I've set up a whole dashboard that tracks my signup conversion funnel so I can see what might be preventing people who are trying an Emstrata demo from signing up for the real thing. Without these analytics, it could be a thousand things. Maybe the demo is boring, maybe the fundamentals aren't as interesting as I think, or maybe it's just too difficult and unobvious to signup. For instance, I just recently added Google signups to my authentication system to make it even more simple to get started with Emstrata and now I can track how much of a dent that makes.</p>
+
+        <p class="mb-8 leading-loose">So yes, we're not in fantasy creation land anymore. We're building according to the numbers now. We're turning in our visionary ambitions for a methodical, numbers-based approach. It's worth mentioning that the analytics collection and the conversion funnels are the sacrifices that visionary founders need to make so that their message doesn't fall on deaf ears and maybe one day that parade will come.</p>
+      `,
+      date: 'January 7, 2026',
+      category: 'Startups'
+    },
     'the-sad-life-of-the-solopreneur-billionaire': {
       slug: 'the-sad-life-of-the-solopreneur-billionaire',
       title: 'The Sad Life of the Solopreneur Billionaire',
@@ -532,7 +553,8 @@ export class Article {
           </div>
           <h1 class="text-4xl md:text-5xl font-heading text-text mb-4">${article.title}</h1>
           <div class="flex flex-col gap-2">
-            <time class="text-text-secondary text-lg" datetime="${publishedDateISO}">
+            <p class="text-text-secondary text-lg">Essay Written by Nick Goldstein</p>
+            <time class="text-text-secondary text-sm" datetime="${publishedDateISO}">
               Published: ${article.date}
             </time>
             ${article.updatedAt ? `
