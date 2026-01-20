@@ -119,10 +119,33 @@ export class Navigation {
     });
   }
 
+  public reinitializeListeners(): void {
+    // Reinitialize listeners for prerendered content
+    // First, find the container if it exists
+    if (!this.container) {
+      this.container = document.querySelector('#app') as HTMLElement;
+    }
+    
+    // Find nav panel if it exists
+    if (!this.navPanel) {
+      const existingPanel = document.querySelector('#nav-panel');
+      if (existingPanel) {
+        this.navPanel = existingPanel as HTMLElement;
+      } else if (this.container) {
+        // Nav panel doesn't exist, need to mount
+        this.mount(this.container);
+        return;
+      }
+    }
+    
+    this.setupNavigation();
+    this.updateNavVisibility();
+  }
+
   private setupNavigation(): void {
     // Setup name click to go home
     const nameElement = this.container?.querySelector('h1');
-    if (nameElement) {
+    if (nameElement && !(nameElement as any).__navListenerAttached) {
       nameElement.addEventListener('click', () => {
         // Add shake animation class
         nameElement.classList.add('animate-shake');
@@ -141,16 +164,20 @@ export class Navigation {
           nameElement.classList.remove('animate-shake');
         }, 500);
       });
+      (nameElement as any).__navListenerAttached = true;
     }
 
     // Setup menu button
     const menuButton = this.container?.querySelector('#nav-menu-button');
-    menuButton?.addEventListener('click', () => {
-      this.toggleNav();
-    });
+    if (menuButton && !(menuButton as any).__navListenerAttached) {
+      menuButton.addEventListener('click', () => {
+        this.toggleNav();
+      });
+      (menuButton as any).__navListenerAttached = true;
+    }
 
     // Setup close button using event delegation for reliability
-    if (this.navPanel) {
+    if (this.navPanel && !(this.navPanel as any).__navListenerAttached) {
       this.navPanel.addEventListener('click', (e) => {
         const target = e.target as HTMLElement;
         const closeButton = target.closest('#nav-close-button');
@@ -160,38 +187,33 @@ export class Navigation {
           this.closeNav();
         }
       });
+      (this.navPanel as any).__navListenerAttached = true;
     }
 
     // Setup overlay click to close
     const overlay = document.querySelector('#nav-overlay');
-    overlay?.addEventListener('click', () => {
-      this.closeNav();
-    });
+    if (overlay && !(overlay as any).__navListenerAttached) {
+      overlay.addEventListener('click', () => {
+        this.closeNav();
+      });
+      (overlay as any).__navListenerAttached = true;
+    }
 
     // Setup navigation links
     const navLinks = document.querySelectorAll('.nav-link');
     navLinks.forEach(link => {
-      link.addEventListener('click', (e) => {
-        const href = (link as HTMLAnchorElement).getAttribute('href');
-        if (href && href.startsWith('/')) {
-          e.preventDefault();
-          this.closeNav();
-          window.history.pushState({}, '', href);
-          window.dispatchEvent(new PopStateEvent('popstate'));
-          this.updateNavVisibility();
-        }
-      });
-    });
-    
-    // Update visibility when path changes
-    window.addEventListener('popstate', () => {
-      this.updateNavVisibility();
-    });
-
-    // Close on escape key
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && this.isOpen) {
-        this.closeNav();
+      if (!(link as any).__navListenerAttached) {
+        link.addEventListener('click', (e) => {
+          const href = (link as HTMLAnchorElement).getAttribute('href');
+          if (href && href.startsWith('/')) {
+            e.preventDefault();
+            this.closeNav();
+            window.history.pushState({}, '', href);
+            window.dispatchEvent(new PopStateEvent('popstate'));
+            this.updateNavVisibility();
+          }
+        });
+        (link as any).__navListenerAttached = true;
       }
     });
   }

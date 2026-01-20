@@ -116,6 +116,11 @@ class HomeScreen {
       // Prerendered content exists and matches URL - preserve it and set up navigation handlers
       this.setupPrerenderedEventListeners();
       
+      // Reinitialize navigation listeners for prerendered content
+      setTimeout(() => {
+        this.navigation.reinitializeListeners();
+      }, 100);
+      
       // Initialize fade-in animations for homepage when prerendered content is preserved
       if (path === '/') {
         ScrollFade.init();
