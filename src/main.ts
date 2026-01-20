@@ -15,7 +15,6 @@ import { ScrollFade } from './scroll-fade';
 class HomeScreen {
   private container: HTMLElement | null = null;
   private navigation: Navigation;
-  private hero: Hero;
   private profile: Profile;
   private experience: Experience;
   private contact: Contact;
@@ -29,7 +28,6 @@ class HomeScreen {
 
   constructor() {
     this.navigation = new Navigation();
-    this.hero = new Hero();
     this.profile = new Profile();
     this.experience = new Experience();
     this.contact = new Contact();

@@ -1,5 +1,9 @@
-const fs = require('fs');
-const path = require('path');
+import { readFileSync, writeFileSync, mkdirSync } from 'fs';
+import { join, dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 // Simple parser to extract episodes from podcast.ts
 // This is a basic implementation - for production, consider using a TypeScript parser
@@ -36,8 +40,8 @@ function parseEpisodesFromTS(content) {
 }
 
 function generateRSSFeed() {
-  const podcastPath = path.join(__dirname, '../src/pieces/podcast.ts');
-  const podcastContent = fs.readFileSync(podcastPath, 'utf-8');
+  const podcastPath = join(__dirname, '../src/pieces/podcast.ts');
+  const podcastContent = readFileSync(podcastPath, 'utf-8');
   
   // Parse episodes from TypeScript file
   const episodes = parseEpisodesFromTS(podcastContent);
@@ -111,21 +115,21 @@ ${rssItems}
 </rss>`;
   
   // Write RSS feed to public directory
-  const outputPath = path.join(__dirname, '../public/countercultural-tech/rss.xml');
-  const outputDir = path.dirname(outputPath);
+  const outputPath = join(__dirname, '../public/countercultural-tech/rss.xml');
+  const outputDir = dirname(outputPath);
   
   // Create directory if it doesn't exist
-  if (!fs.existsSync(outputDir)) {
-    fs.mkdirSync(outputDir, { recursive: true });
+  if (!mkdirSync(outputDir, { recursive: true })) {
+    // Directory already exists or was created
   }
   
-  fs.writeFileSync(outputPath, rssXml, 'utf-8');
+  writeFileSync(outputPath, rssXml, 'utf-8');
   console.log(`RSS feed generated at: ${outputPath}`);
 }
 
 // Run if called directly
-if (require.main === module) {
+if (import.meta.url === `file://${process.argv[1]}`) {
   generateRSSFeed();
 }
 
-module.exports = { generateRSSFeed };
+export { generateRSSFeed };
