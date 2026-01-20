@@ -163,6 +163,9 @@ class HomeScreen {
 
     // Listen for navigation changes (always set up, works for both prerendered and normal)
     window.addEventListener('popstate', () => {
+      // Close nav on any navigation
+      this.navigation.closeNav();
+      
       // Normalize path (remove trailing slash except for root)
       let newPath = window.location.pathname;
       if (newPath !== '/' && newPath.endsWith('/')) {
@@ -303,15 +306,21 @@ class HomeScreen {
           e.preventDefault();
           e.stopPropagation();
           
+          // Close nav if open
+          this.navigation.closeNav();
+          
           // Normalize route
           let normalizedRoute = href;
           if (normalizedRoute !== '/' && normalizedRoute.endsWith('/')) {
             normalizedRoute = normalizedRoute.slice(0, -1);
           }
           
-          // Always navigate - let popstate handler decide if prerendered content should be preserved
-          window.history.pushState({}, '', normalizedRoute);
-          window.dispatchEvent(new PopStateEvent('popstate'));
+          // Small delay to ensure nav closes before navigation
+          setTimeout(() => {
+            // Always navigate - let popstate handler decide if prerendered content should be preserved
+            window.history.pushState({}, '', normalizedRoute);
+            window.dispatchEvent(new PopStateEvent('popstate'));
+          }, 100);
         }
       }
     };

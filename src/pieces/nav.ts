@@ -207,15 +207,28 @@ export class Navigation {
           const href = (link as HTMLAnchorElement).getAttribute('href');
           if (href && href.startsWith('/')) {
             e.preventDefault();
+            e.stopPropagation();
             this.closeNav();
-            window.history.pushState({}, '', href);
-            window.dispatchEvent(new PopStateEvent('popstate'));
-            this.updateNavVisibility();
+            // Small delay to ensure nav closes before navigation
+            setTimeout(() => {
+              window.history.pushState({}, '', href);
+              window.dispatchEvent(new PopStateEvent('popstate'));
+              this.updateNavVisibility();
+            }, 100);
           }
         });
         (link as any).__navListenerAttached = true;
       }
     });
+    
+    // Close nav on popstate (back/forward navigation)
+    if (!(window as any).__navPopstateListenerAttached) {
+      window.addEventListener('popstate', () => {
+        this.closeNav();
+        this.updateNavVisibility();
+      });
+      (window as any).__navPopstateListenerAttached = true;
+    }
   }
 
   private toggleNav(): void {
@@ -241,7 +254,7 @@ export class Navigation {
     document.body.style.overflow = 'hidden';
   }
 
-  private closeNav(): void {
+  public closeNav(): void {
     if (!this.navPanel) return;
     this.isOpen = false;
     this.navPanel.classList.remove('translate-x-0');
