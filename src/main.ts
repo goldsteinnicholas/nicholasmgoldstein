@@ -1,5 +1,4 @@
 import { Navigation } from './pieces/nav';
-import { Hero } from './pieces/hero';
 import { Profile } from './pieces/profile';
 import { Experience } from './pieces/experience';
 import { Contact } from './pieces/contact';
