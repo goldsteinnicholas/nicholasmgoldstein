@@ -12,6 +12,7 @@ function getAllRoutes() {
     '/',
     '/articles',
     '/courses',
+    '/countercultural-tech',
     '/system-prompt-generator',
     '/articles/conversion-funnels-and-the-banality-of-success',
     '/articles/the-sad-life-of-the-solopreneur-billionaire',

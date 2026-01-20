@@ -13,6 +13,27 @@ export class Experience {
   private activeFilter: 'ALL' | 'PROFESSIONAL' | 'PROJECT' | 'EDUCATION' | 'CERTIFICATION' = 'ALL';
   private entries: TimelineEntry[] = [
     {
+      date: 'January 2026',
+      title: 'Launched Emstrata',
+      description: [
+        'Officially launched Emstrata, an AI-driven text-based simulation platform for immersive narrative experiences',
+        'Committing to focus exclusively on Emstrata to refine its collaborative storytelling capabilities and expand its user base',
+        'Prioritizing platform development to establish Emstrata as the premier destination for AI-human narrative collaboration'
+      ],
+      category: 'PROJECT'
+    },
+    {
+      date: 'December 2025–Present',
+      title: 'PMP Certification Studies',
+      company: 'PMI',
+      description: [
+        'Pursuing Project Management Professional (PMP) certification from the Project Management Institute',
+        'Studying project management methodologies, frameworks, and best practices to enhance leadership and organizational skills',
+        'Preparing for PMP exam to formalize expertise in project planning, execution, and delivery'
+      ],
+      category: 'EDUCATION'
+    },
+    {
       date: 'August 2025',
       title: 'Relaunched PLATO5',
       description: [

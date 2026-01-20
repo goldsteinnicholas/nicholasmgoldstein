@@ -9,6 +9,7 @@ import { Courses } from './pieces/courses';
 import { Course } from './pieces/course';
 import { CourseReader } from './pieces/course-reader';
 import { SystemPromptGenerator } from './pieces/system-prompt-generator';
+import { Podcast } from './pieces/podcast';
 import { ScrollFade } from './scroll-fade';
 
 class HomeScreen {
@@ -24,6 +25,7 @@ class HomeScreen {
   private course: Course;
   private courseReader: CourseReader;
   private systemPromptGenerator: SystemPromptGenerator;
+  private podcast: Podcast;
 
   constructor() {
     this.navigation = new Navigation();
@@ -37,6 +39,12 @@ class HomeScreen {
     this.course = new Course();
     this.courseReader = new CourseReader();
     this.systemPromptGenerator = new SystemPromptGenerator();
+    this.podcast = new Podcast();
+  }
+
+  private isStaticFile(path: string): boolean {
+    const staticExtensions = ['.pdf', '.png', '.jpg', '.jpeg', '.gif', '.svg', '.ico', '.webp', '.css', '.js', '.json', '.xml', '.txt'];
+    return staticExtensions.some(ext => path.toLowerCase().endsWith(ext));
   }
 
   public mount(container: HTMLElement) {
@@ -48,6 +56,11 @@ class HomeScreen {
       path = path.slice(0, -1);
       // Update URL without trailing slash
       window.history.replaceState({}, '', path);
+    }
+    
+    // Don't handle static files - let the browser handle them naturally
+    if (this.isStaticFile(path)) {
+      return;
     }
     
     // Check if prerendered content exists and matches current URL
@@ -92,6 +105,8 @@ class HomeScreen {
       }
     } else if (path === '/system-prompt-generator') {
       this.showSystemPromptGeneratorPage();
+    } else if (path === '/countercultural-tech') {
+      this.showPodcastPage();
     } else if (path === '/') {
       this.showHomePage();
     } else if (path === '/unknown-route') {
@@ -154,6 +169,11 @@ class HomeScreen {
         window.history.replaceState({}, '', newPath);
       }
       
+      // Don't handle static files - let the browser handle them naturally
+      if (this.isStaticFile(newPath)) {
+        return;
+      }
+      
       // On navigation (client-side or back/forward), always remount
       // Prerendered content is only preserved on initial page load, not on navigation
       // This ensures the page always updates when the URL changes
@@ -189,6 +209,8 @@ class HomeScreen {
         }
       } else if (newPath === '/system-prompt-generator') {
         this.showSystemPromptGeneratorPage();
+      } else if (newPath === '/countercultural-tech') {
+        this.showPodcastPage();
       } else if (newPath === '/') {
         this.showHomePage();
       } else if (newPath === '/unknown-route') {
@@ -306,7 +328,6 @@ class HomeScreen {
     
     // Mount components in order with new dark theme layout
     this.navigation.mount(this.container);
-    this.hero.mount(this.container);
     this.profile.mount(this.container);
     this.experience.mount(this.container);
     this.contact.mount(this.container);
@@ -421,6 +442,22 @@ class HomeScreen {
     // Mount navigation and system prompt generator
     this.navigation.mount(this.container);
     this.systemPromptGenerator.mount(this.container);
+
+    ScrollFade.init();
+    window.scrollTo(0, 0);
+  }
+
+  private showPodcastPage(): void {
+    if (!this.container) return;
+    
+    this.container.innerHTML = ''; // Clear existing content
+    
+    // Update metadata
+    document.title = 'Countercultural Tech - Podcast by Nick Goldstein';
+    
+    // Mount navigation and podcast
+    this.navigation.mount(this.container);
+    this.podcast.mount(this.container);
 
     ScrollFade.init();
     window.scrollTo(0, 0);

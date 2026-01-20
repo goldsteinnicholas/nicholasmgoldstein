@@ -59,20 +59,23 @@ export class Course {
       chapter: 1,
       title: 'Multilayered Architectures',
       description: 'Explore complex system architectures with multiple layers for building robust AI platforms.',
-      slideDeckPath: '/04 Build AI Platforms from Scratch- Multilayer Architectures/index.html'
+      slideDeckPath: '/04 Build AI Platforms from Scratch- Multilayer Architectures/index.html',
+      videoUrl: 'https://youtu.be/RgRO4qMl8Ds?si=8oj8Bun6AcivADJD'
     },
     {
       number: '5',
       chapter: 1,
       title: 'Recap: Modules 1-4',
-      description: 'A comprehensive review of the foundational concepts: course introduction, platform prerequisites, prompt engineering, and multilayered architectures.'
+      description: 'A comprehensive review of the foundational concepts: course introduction, platform prerequisites, prompt engineering, and multilayered architectures.',
+      videoUrl: 'https://youtu.be/5rDHkFCEpFI?si=L9dMQri7OIQMeFZS'
     },
     // Chapter 2: Core Architecture & Data Operations
     {
       number: '6',
       chapter: 2,
       title: 'CRUD, Transformations, & Parsing',
-      description: 'Understand data operations, transformations, and parsing techniques essential for AI platform development.'
+      description: 'Understand data operations, transformations, and parsing techniques essential for AI platform development.',
+      videoUrl: 'https://youtu.be/gG7hnREWtkY?si=KM1SiQ52jOD1iZX8'
     },
     {
       number: '7',
