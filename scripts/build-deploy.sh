@@ -1,10 +1,6 @@
 #!/bin/bash
 set -e
 
-# Generate RSS feed before building
-echo "Generating RSS feed..."
-node scripts/generate-rss.js
-
 # Build the project
 npm run build
 
