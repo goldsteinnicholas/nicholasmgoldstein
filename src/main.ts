@@ -1,4 +1,7 @@
 import { Navigation } from './pieces/nav';
+
+/** When true, the home route (`/`) omits the global header and slide-out nav. Other routes are unchanged. */
+const portfolioMode = true;
 import { Profile } from './pieces/profile';
 import { Experience } from './pieces/experience';
 import { Contact } from './pieces/contact';
@@ -116,10 +119,16 @@ class HomeScreen {
       // Prerendered content exists and matches URL - preserve it and set up navigation handlers
       this.setupPrerenderedEventListeners();
       
-      // Reinitialize navigation listeners for prerendered content
-      setTimeout(() => {
-        this.navigation.reinitializeListeners();
-      }, 100);
+      // Reinitialize navigation listeners for prerendered content (skip on `/` in portfolio mode)
+      if (!(portfolioMode && path === '/')) {
+        setTimeout(() => {
+          this.navigation.reinitializeListeners();
+        }, 100);
+      } else {
+        this.container.querySelector('header:has(#nav-menu-button)')?.remove();
+        document.getElementById('nav-panel')?.remove();
+        document.getElementById('nav-overlay')?.remove();
+      }
       
       // Initialize fade-in animations for homepage when prerendered content is preserved
       if (path === '/') {
@@ -338,7 +347,12 @@ class HomeScreen {
     document.title = 'Nick Goldstein';
     
     // Mount components in order with new dark theme layout
-    this.navigation.mount(this.container);
+    if (!portfolioMode) {
+      this.navigation.mount(this.container);
+    } else {
+      document.getElementById('nav-panel')?.remove();
+      document.getElementById('nav-overlay')?.remove();
+    }
     this.profile.mount(this.container);
     this.experience.mount(this.container);
     this.contact.mount(this.container);
