@@ -80,7 +80,9 @@ class HomeScreen {
       this.container.innerHTML = '';
       this.routeTo(path);
     } else {
-      this.setupPrerenderedEventListeners();
+      if (!(portfolioMode && path === '/')) {
+        this.setupPrerenderedEventListeners();
+      }
       
       if (!(portfolioMode && path === '/')) {
         setTimeout(() => {
@@ -228,6 +230,11 @@ class HomeScreen {
       if (link && link.href) {
         const href = link.getAttribute('href');
         if (href && href.startsWith('/') && !href.startsWith('//')) {
+          const path = href.split('?')[0].split('#')[0];
+          if (this.isStaticFile(path)) {
+            return;
+          }
+
           e.preventDefault();
           e.stopPropagation();
           

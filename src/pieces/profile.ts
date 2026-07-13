@@ -18,6 +18,7 @@ export class Profile {
           <a
             href="/Nicholas_Goldstein_Resume_NoPersonalInfo.pdf"
             target="_blank"
+            rel="noopener noreferrer"
             class="panel-cta inline-flex items-center gap-2.5 px-6 py-2.5 text-base bg-gradient-to-r from-secondary to-blue-600 text-white rounded-full font-medium hover:shadow-lg hover:scale-105 transition-all duration-300 w-fit"
           >
             <i class="far fa-file-pdf"></i>
