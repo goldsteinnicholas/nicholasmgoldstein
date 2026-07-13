@@ -1,45 +1,50 @@
 import { Navigation } from './pieces/nav';
+import { Profile } from './pieces/profile';
+import { Experience } from './pieces/experience';
+import { HomepageTimeline } from './pieces/homepage-timeline';
+// import { Articles } from './pieces/articles';
+// import { Article } from './pieces/article';
+// import { Courses } from './pieces/courses';
+// import { Course } from './pieces/course';
+// import { CourseReader } from './pieces/course-reader';
+// import { SystemPromptGenerator } from './pieces/system-prompt-generator';
+// import { Podcast } from './pieces/podcast';
+import { ScrollFade, PanelReveal } from './scroll-fade';
 
 /** When true, the home route (`/`) omits the global header and slide-out nav. Other routes are unchanged. */
 const portfolioMode = true;
-import { Profile } from './pieces/profile';
-import { Experience } from './pieces/experience';
-import { Contact } from './pieces/contact';
-import { Articles } from './pieces/articles';
-import { Article } from './pieces/article';
-import { Courses } from './pieces/courses';
-import { Course } from './pieces/course';
-import { CourseReader } from './pieces/course-reader';
-import { SystemPromptGenerator } from './pieces/system-prompt-generator';
-import { Podcast } from './pieces/podcast';
-import { ScrollFade } from './scroll-fade';
+
+/** When true, only the homepage is served; all other routes redirect to `/`. */
+const homepageOnlyMode = true;
 
 class HomeScreen {
   private container: HTMLElement | null = null;
   private navigation: Navigation;
   private profile: Profile;
   private experience: Experience;
-  private contact: Contact;
-  private articles: Articles;
-  private article: Article;
-  private courses: Courses;
-  private course: Course;
-  private courseReader: CourseReader;
-  private systemPromptGenerator: SystemPromptGenerator;
-  private podcast: Podcast;
+  private homepageTimeline: HomepageTimeline;
+  // private articles: Articles;
+  // private article: Article;
+  // private courses: Courses;
+  // private course: Course;
+  // private courseReader: CourseReader;
+  // private systemPromptGenerator: SystemPromptGenerator;
+  // private podcast: Podcast;
+  private horizontalWheelHandler: EventListener | null = null;
+  private horizontalScrollContainer: HTMLElement | null = null;
 
   constructor() {
     this.navigation = new Navigation();
     this.profile = new Profile();
     this.experience = new Experience();
-    this.contact = new Contact();
-    this.articles = new Articles();
-    this.article = new Article();
-    this.courses = new Courses();
-    this.course = new Course();
-    this.courseReader = new CourseReader();
-    this.systemPromptGenerator = new SystemPromptGenerator();
-    this.podcast = new Podcast();
+    this.homepageTimeline = new HomepageTimeline();
+    // this.articles = new Articles();
+    // this.article = new Article();
+    // this.courses = new Courses();
+    // this.course = new Course();
+    // this.courseReader = new CourseReader();
+    // this.systemPromptGenerator = new SystemPromptGenerator();
+    // this.podcast = new Podcast();
   }
 
   private isStaticFile(path: string): boolean {
@@ -54,7 +59,6 @@ class HomeScreen {
     let path = window.location.pathname;
     if (path !== '/' && path.endsWith('/')) {
       path = path.slice(0, -1);
-      // Update URL without trailing slash
       window.history.replaceState({}, '', path);
     }
     
@@ -62,64 +66,22 @@ class HomeScreen {
     if (this.isStaticFile(path)) {
       return;
     }
+
+    if (homepageOnlyMode && path !== '/') {
+      window.history.replaceState({}, '', '/');
+      path = '/';
+    }
     
     // Check if prerendered content exists and matches current URL
     const hasPrerenderedContent = this.checkPrerenderedContent();
     const pathMatches = hasPrerenderedContent && this.verifyPathMatchesContent(path);
     
     if (!pathMatches) {
-      // No prerendered content or content doesn't match URL - clear and route normally
-      this.container.innerHTML = ''; // Clear existing content
-      
-      // Check current path and route accordingly
-    
-    if (path === '/articles') {
-      this.showArticlesPage();
-    } else if (path.startsWith('/articles/')) {
-      const slug = path.split('/articles/')[1];
-      if (slug && slug.trim()) {
-        this.showArticlePage(slug);
-      } else {
-        // Empty slug, redirect to articles list
-        window.history.replaceState({}, '', '/articles');
-        this.showArticlesPage();
-      }
-    } else if (path === '/courses') {
-      this.showCoursesPage();
-    } else if (path.startsWith('/course/')) {
-      const coursePath = path.split('/course/')[1];
-        // Check if it's a reader route: /course/{slug}/reader/module/{number}
-        if (coursePath.includes('/reader/module/')) {
-          const [courseSlug, modulePart] = coursePath.split('/reader/module/');
-          const moduleNumber = modulePart ? parseInt(modulePart, 10) : 1;
-          this.showCourseReaderPage(courseSlug, moduleNumber);
-        } else if (coursePath.includes('/module/')) {
-      // Check if it's a module route: /course/{slug}/module/{number}
-        const [courseSlug, modulePart] = coursePath.split('/module/');
-        const moduleNumber = modulePart ? parseInt(modulePart, 10) : 1;
-        this.showCoursePage(courseSlug, moduleNumber);
-      } else {
-        // Redirect to module 1 if no module specified
-        window.history.replaceState({}, '', `/course/${coursePath}/module/1`);
-        this.showCoursePage(coursePath, 1);
-      }
-    } else if (path === '/system-prompt-generator') {
-      this.showSystemPromptGeneratorPage();
-    } else if (path === '/countercultural-tech') {
-      this.showPodcastPage();
-    } else if (path === '/') {
-      this.showHomePage();
-    } else if (path === '/unknown-route') {
-      this.showNotFoundPage();
+      this.container.innerHTML = '';
+      this.routeTo(path);
     } else {
-      window.history.replaceState({}, '', '/unknown-route');
-      this.showNotFoundPage();
-      }
-    } else {
-      // Prerendered content exists and matches URL - preserve it and set up navigation handlers
       this.setupPrerenderedEventListeners();
       
-      // Reinitialize navigation listeners for prerendered content (skip on `/` in portfolio mode)
       if (!(portfolioMode && path === '/')) {
         setTimeout(() => {
           this.navigation.reinitializeListeners();
@@ -130,110 +92,97 @@ class HomeScreen {
         document.getElementById('nav-overlay')?.remove();
       }
       
-      // Initialize fade-in animations for homepage when prerendered content is preserved
       if (path === '/') {
+        this.enableHomepageLayout();
+        const scrollContainer = this.container?.querySelector('.homepage-horizontal-scroll') as HTMLElement;
+        if (scrollContainer) {
+          PanelReveal.init(scrollContainer);
+        }
         ScrollFade.init();
-        // Immediately fade in elements that are already in viewport
         const fadeElements = document.querySelectorAll('.fade-in-scroll');
         fadeElements.forEach(el => {
           const rect = el.getBoundingClientRect();
-          const isInViewport = rect.top < window.innerHeight && rect.bottom > 0;
+          const isInViewport = rect.left < window.innerWidth && rect.right > 0;
           if (isInViewport) {
-            el.classList.remove('opacity-0', 'translate-y-8');
-            el.classList.add('opacity-100', 'translate-y-0');
+            el.classList.remove('opacity-0', 'translate-x-8');
+            el.classList.add('opacity-100', 'translate-x-0');
           }
         });
-        // Reinitialize experience timeline filter listeners
         setTimeout(() => {
           this.experience.reinitializeListeners();
         }, 100);
       }
-      
-      // Initialize quiz for Module 5 reader pages even with prerendered content
-      if (path.startsWith('/course/') && path.includes('/reader/module/')) {
-        const coursePath = path.split('/course/')[1];
-        if (coursePath.includes('/reader/module/')) {
-          const modulePart = coursePath.split('/reader/module/')[1];
-          const moduleNumber = modulePart ? parseInt(modulePart, 10) : 1;
-          // Wait for DOM to be ready, then initialize quiz
-          setTimeout(() => {
-            this.courseReader.initializeQuizIfNeeded(moduleNumber);
-          }, 100);
-        }
-      }
-      
-      // Reinitialize system prompt generator listeners when prerendered content is preserved
-      if (path === '/system-prompt-generator') {
-        setTimeout(() => {
-          this.systemPromptGenerator.reinitializeListeners();
-        }, 100);
-      }
     }
 
-    // Listen for navigation changes (always set up, works for both prerendered and normal)
     window.addEventListener('popstate', () => {
-      // Close nav on any navigation
       this.navigation.closeNav();
       
-      // Normalize path (remove trailing slash except for root)
       let newPath = window.location.pathname;
       if (newPath !== '/' && newPath.endsWith('/')) {
         newPath = newPath.slice(0, -1);
-        // Update URL without trailing slash
         window.history.replaceState({}, '', newPath);
       }
       
-      // Don't handle static files - let the browser handle them naturally
       if (this.isStaticFile(newPath)) {
         return;
       }
-      
-      // On navigation (client-side or back/forward), always remount
-      // Prerendered content is only preserved on initial page load, not on navigation
-      // This ensures the page always updates when the URL changes
-      if (newPath === '/articles') {
-        this.showArticlesPage();
-      } else if (newPath.startsWith('/articles/')) {
-        const slug = newPath.split('/articles/')[1];
-        if (slug && slug.trim()) {
-          this.showArticlePage(slug);
-        } else {
-          // Empty slug, redirect to articles list
-          window.history.replaceState({}, '', '/articles');
-          this.showArticlesPage();
-        }
-      } else if (newPath === '/courses') {
-        this.showCoursesPage();
-      } else if (newPath.startsWith('/course/')) {
-        const coursePath = newPath.split('/course/')[1];
-        // Check if it's a reader route: /course/{slug}/reader/module/{number}
-        if (coursePath.includes('/reader/module/')) {
-          const [courseSlug, modulePart] = coursePath.split('/reader/module/');
-          const moduleNumber = modulePart ? parseInt(modulePart, 10) : 1;
-          this.showCourseReaderPage(courseSlug, moduleNumber);
-        } else if (coursePath.includes('/module/')) {
-        // Check if it's a module route: /course/{slug}/module/{number}
-          const [courseSlug, modulePart] = coursePath.split('/module/');
-          const moduleNumber = modulePart ? parseInt(modulePart, 10) : 1;
-          this.showCoursePage(courseSlug, moduleNumber);
-        } else {
-          // Redirect to module 1 if no module specified
-          window.history.replaceState({}, '', `/course/${coursePath}/module/1`);
-          this.showCoursePage(coursePath, 1);
-        }
-      } else if (newPath === '/system-prompt-generator') {
-        this.showSystemPromptGeneratorPage();
-      } else if (newPath === '/countercultural-tech') {
-        this.showPodcastPage();
-      } else if (newPath === '/') {
-        this.showHomePage();
-      } else if (newPath === '/unknown-route') {
-        this.showNotFoundPage();
-      } else {
-        window.history.replaceState({}, '', '/unknown-route');
-        this.showNotFoundPage();
+
+      if (homepageOnlyMode && newPath !== '/') {
+        window.history.replaceState({}, '', '/');
+        newPath = '/';
       }
+
+      this.routeTo(newPath);
     });
+  }
+
+  private routeTo(path: string): void {
+    if (path === '/') {
+      this.showHomePage();
+    } else {
+      // Non-home routes disabled in homepageOnlyMode; redirect handled before this is called
+      window.history.replaceState({}, '', '/');
+      this.showHomePage();
+    }
+
+    /* Disabled routes — uncomment to restore articles, courses, podcast, etc.
+    if (path === '/articles') {
+      this.showArticlesPage();
+    } else if (path.startsWith('/articles/')) {
+      const slug = path.split('/articles/')[1];
+      if (slug && slug.trim()) {
+        this.showArticlePage(slug);
+      } else {
+        window.history.replaceState({}, '', '/articles');
+        this.showArticlesPage();
+      }
+    } else if (path === '/courses') {
+      this.showCoursesPage();
+    } else if (path.startsWith('/course/')) {
+      const coursePath = path.split('/course/')[1];
+      if (coursePath.includes('/reader/module/')) {
+        const [courseSlug, modulePart] = coursePath.split('/reader/module/');
+        const moduleNumber = modulePart ? parseInt(modulePart, 10) : 1;
+        this.showCourseReaderPage(courseSlug, moduleNumber);
+      } else if (coursePath.includes('/module/')) {
+        const [courseSlug, modulePart] = coursePath.split('/module/');
+        const moduleNumber = modulePart ? parseInt(modulePart, 10) : 1;
+        this.showCoursePage(courseSlug, moduleNumber);
+      } else {
+        window.history.replaceState({}, '', `/course/${coursePath}/module/1`);
+        this.showCoursePage(coursePath, 1);
+      }
+    } else if (path === '/system-prompt-generator') {
+      this.showSystemPromptGeneratorPage();
+    } else if (path === '/countercultural-tech') {
+      this.showPodcastPage();
+    } else if (path === '/unknown-route') {
+      this.showNotFoundPage();
+    } else {
+      window.history.replaceState({}, '', '/unknown-route');
+      this.showNotFoundPage();
+    }
+    */
   }
 
   private checkPrerenderedContent(): boolean {
@@ -251,15 +200,12 @@ class HomeScreen {
     if (!this.container) return false;
     
     const app = this.container;
-    
-    // Simple check: look for the data-route attribute that matches the current path
     const routeSpan = app.querySelector(`span[data-route="${path}"]`);
     
     if (routeSpan) {
-      return true; // Found matching route identifier
+      return true;
     }
     
-    // Fallback: check for wrong content markers
     const textContent = app.textContent || '';
     const hasWrongContent = textContent.includes('404') || 
                            textContent.includes('Page not found');
@@ -267,44 +213,26 @@ class HomeScreen {
     if (hasWrongContent) {
       return false;
     }
-    
-    // Route-specific content checks as fallback
-    if (path === '/system-prompt-generator') {
-      const hasGeneratorContent = textContent.includes('System Prompt Generator') ||
-                                 textContent.includes('Core Identity Module') ||
-                                 app.querySelector('[id*="prompt"]') ||
-                                 app.querySelector('form[id*="prompt"]') ||
-                                 app.querySelector('#prompt-generator-form');
-      if (hasGeneratorContent && !hasWrongContent) {
+
+    if (path === '/') {
+      const hasHomeContent = app.querySelector('.homepage-horizontal-scroll') ||
+                            textContent.includes('Healthcare IT Consultant');
+      if (hasHomeContent && !hasWrongContent) {
         return true;
       }
     }
     
-    if (path === '/articles') {
-      const hasArticlesList = textContent.includes('Articles') && 
-                             (app.querySelector('a[href^="/articles/"]') || 
-                              textContent.includes('All Articles') ||
-                              textContent.includes('Latest'));
-      const hasArticleContent = app.querySelector('article'); // Individual article page
-      if (hasArticlesList && !hasArticleContent && !hasWrongContent) {
-        return true;
-      }
-    }
-    
-    // For unknown routes, don't preserve content
     return false;
   }
 
   private prerenderedLinkHandler: ((e: Event) => void) | null = null;
 
   private setupPrerenderedEventListeners(): void {
-    // Remove existing listener first
     if (this.prerenderedLinkHandler) {
       document.removeEventListener('click', this.prerenderedLinkHandler, true);
       this.prerenderedLinkHandler = null;
     }
     
-    // Create new handler with event delegation
     this.prerenderedLinkHandler = (e: Event) => {
       const target = e.target as HTMLElement;
       const link = target.closest('a[href^="/"]') as HTMLAnchorElement;
@@ -315,18 +243,18 @@ class HomeScreen {
           e.preventDefault();
           e.stopPropagation();
           
-          // Close nav if open
           this.navigation.closeNav();
           
-          // Normalize route
           let normalizedRoute = href;
           if (normalizedRoute !== '/' && normalizedRoute.endsWith('/')) {
             normalizedRoute = normalizedRoute.slice(0, -1);
           }
+
+          if (homepageOnlyMode && normalizedRoute !== '/') {
+            normalizedRoute = '/';
+          }
           
-          // Small delay to ensure nav closes before navigation
           setTimeout(() => {
-            // Always navigate - let popstate handler decide if prerendered content should be preserved
             window.history.pushState({}, '', normalizedRoute);
             window.dispatchEvent(new PopStateEvent('popstate'));
           }, 100);
@@ -334,116 +262,150 @@ class HomeScreen {
       }
     };
     
-    // Add with capture to catch events early
     document.addEventListener('click', this.prerenderedLinkHandler, true);
+  }
+
+  private enableHomepageLayout(): void {
+    document.body.classList.add('homepage-mode');
+    this.container?.classList.add('homepage-mode');
+
+    const scrollContainer = this.container?.querySelector('.homepage-horizontal-scroll') as HTMLElement;
+    if (scrollContainer) {
+      this.setupHorizontalScroll(scrollContainer);
+    }
+  }
+
+  private disableHomepageLayout(): void {
+    document.body.classList.remove('homepage-mode');
+    this.container?.classList.remove('homepage-mode');
+    this.homepageTimeline.destroy();
+    PanelReveal.destroy();
+
+    if (this.horizontalWheelHandler) {
+      document.removeEventListener('wheel', this.horizontalWheelHandler);
+      this.horizontalWheelHandler = null;
+    }
+    this.horizontalScrollContainer = null;
+  }
+
+  private setupHorizontalScroll(scrollContainer: HTMLElement): void {
+    if (this.horizontalWheelHandler) {
+      document.removeEventListener('wheel', this.horizontalWheelHandler);
+    }
+
+    this.horizontalScrollContainer = scrollContainer;
+
+    this.horizontalWheelHandler = (e: Event) => {
+      if (!this.horizontalScrollContainer || !document.body.classList.contains('homepage-mode')) {
+        return;
+      }
+
+      const wheelEvent = e as WheelEvent;
+      if (Math.abs(wheelEvent.deltaY) > Math.abs(wheelEvent.deltaX)) {
+        e.preventDefault();
+        this.horizontalScrollContainer.scrollLeft += wheelEvent.deltaY;
+      }
+    };
+
+    document.addEventListener('wheel', this.horizontalWheelHandler, { passive: false });
   }
 
   private showHomePage(): void {
     if (!this.container) return;
     
-    this.container.innerHTML = ''; // Clear existing content
+    this.disableHomepageLayout();
+    this.container.innerHTML = '';
     
-    // Update metadata
     document.title = 'Nick Goldstein';
     
-    // Mount components in order with new dark theme layout
     if (!portfolioMode) {
       this.navigation.mount(this.container);
     } else {
       document.getElementById('nav-panel')?.remove();
       document.getElementById('nav-overlay')?.remove();
     }
-    this.profile.mount(this.container);
-    this.experience.mount(this.container);
-    this.contact.mount(this.container);
 
+    const scrollContainer = document.createElement('div');
+    scrollContainer.className = 'homepage-horizontal-scroll';
+    scrollContainer.setAttribute('role', 'region');
+    scrollContainer.setAttribute('aria-label', 'Nick Goldstein story');
+    this.container.appendChild(scrollContainer);
+
+    this.profile.mount(scrollContainer);
+    this.experience.mount(scrollContainer);
+
+    const panelCount = scrollContainer.querySelectorAll('.homepage-panel').length;
+    if (this.container) {
+      this.homepageTimeline.mount(this.container, scrollContainer, panelCount);
+    }
+
+    this.enableHomepageLayout();
+    PanelReveal.init(scrollContainer);
     ScrollFade.init();
-    window.scrollTo(0, 0);
+    scrollContainer.scrollLeft = 0;
   }
+
+  /* Disabled page methods — uncomment alongside route handlers above to restore.
 
   private showArticlesPage(): void {
     if (!this.container) return;
-    
-    this.container.innerHTML = ''; // Clear existing content
-    
-    // Update metadata
+    this.disableHomepageLayout();
+    this.container.innerHTML = '';
     document.title = 'Articles by Nick Goldstein';
-    
-    // Mount navigation and articles
     this.navigation.mount(this.container);
     this.articles.mount(this.container);
-
     ScrollFade.init();
     window.scrollTo(0, 0);
   }
 
   private showArticlePage(slug: string): void {
     if (!this.container) return;
-    
-    this.container.innerHTML = ''; // Clear existing content
-    
-    // Mount navigation and article
+    this.disableHomepageLayout();
+    this.container.innerHTML = '';
     this.navigation.mount(this.container);
     this.article.mount(this.container, slug);
-
     ScrollFade.init();
     window.scrollTo(0, 0);
   }
 
   private showCoursesPage(): void {
     if (!this.container) return;
-    
-    this.container.innerHTML = ''; // Clear existing content
-    
-    // Update metadata
+    this.disableHomepageLayout();
+    this.container.innerHTML = '';
     document.title = 'Courses by Nick Goldstein';
-    
-    // Mount navigation and courses
     this.navigation.mount(this.container);
     this.courses.mount(this.container);
-
     ScrollFade.init();
     window.scrollTo(0, 0);
   }
 
   private showCoursePage(courseSlug: string, moduleNumber?: number): void {
     if (!this.container) return;
-    
-    this.container.innerHTML = ''; // Clear existing content
-    
-    // Mount navigation and course
+    this.disableHomepageLayout();
+    this.container.innerHTML = '';
     this.navigation.mount(this.container);
     this.course.mount(this.container, courseSlug, moduleNumber);
-
     ScrollFade.init();
     window.scrollTo(0, 0);
   }
 
   private showCourseReaderPage(courseSlug: string, moduleNumber?: number): void {
     if (!this.container) return;
-    
-    this.container.innerHTML = ''; // Clear existing content
-    
-    // Mount navigation and course reader
+    this.disableHomepageLayout();
+    this.container.innerHTML = '';
     this.navigation.mount(this.container);
     this.courseReader.mount(this.container, courseSlug, moduleNumber);
-
     ScrollFade.init();
     window.scrollTo(0, 0);
   }
 
   private showSystemPromptGeneratorPage(): void {
     if (!this.container) return;
-    
-    this.container.innerHTML = ''; // Clear existing content
-    
-    // Update metadata
-    const description = 'Build production-ready system prompts for Claude, GPT-4, and other AI platforms with our free modular prompt engineering tool. The System Prompt Generator helps developers, AI engineers, and businesses create structured, maintainable AI instructions using industry best practices.';
-    const fullDescription = 'Build production-ready system prompts for Claude, GPT-4, and other AI platforms with our free modular prompt engineering tool. The System Prompt Generator helps developers, AI engineers, and businesses create structured, maintainable AI instructions using industry best practices. Design custom AI assistants, chatbots, and automation tools with clearly defined modules for identity, platform context, quality standards, request parsing, and response formatting. Features dynamic function builders, key-value mapping tools, and quality check processes. Perfect for enterprise AI deployment, custom GPT development, conversational AI applications, and AI-powered workflow automation. Export professional-grade system prompts that ensure consistent AI behavior, accurate response formatting, and scalable architecture. No prompt engineering expertise required - our intuitive interface guides you through creating effective AI instructions with modular components that can be updated, tested, and reused across projects.';
-    
+    this.disableHomepageLayout();
+    this.container.innerHTML = '';
+    const description = 'Build production-ready system prompts for Claude, GPT-4, and other AI platforms with our free modular prompt engineering tool.';
+    const fullDescription = description;
     document.title = 'System Prompt Generator - Professional AI Instruction Design Tool | Nick Goldstein';
-    
-    // Update meta description
     let metaDescription = document.querySelector('meta[name="description"]') as HTMLMetaElement;
     if (!metaDescription) {
       metaDescription = document.createElement('meta');
@@ -451,39 +413,27 @@ class HomeScreen {
       document.head.appendChild(metaDescription);
     }
     metaDescription.content = fullDescription;
-    
-    // Update Open Graph tags
     this.updateMetaTag('property', 'og:type', 'website');
     this.updateMetaTag('property', 'og:url', 'https://nicholasmgoldstein.com/system-prompt-generator');
     this.updateMetaTag('property', 'og:title', 'System Prompt Generator - Professional AI Instruction Design Tool');
     this.updateMetaTag('property', 'og:description', description);
-    
-    // Update Twitter tags
     this.updateMetaTag('property', 'twitter:card', 'summary_large_image');
     this.updateMetaTag('property', 'twitter:url', 'https://nicholasmgoldstein.com/system-prompt-generator');
     this.updateMetaTag('property', 'twitter:title', 'System Prompt Generator - Professional AI Instruction Design Tool');
     this.updateMetaTag('property', 'twitter:description', description);
-    
-    // Mount navigation and system prompt generator
     this.navigation.mount(this.container);
     this.systemPromptGenerator.mount(this.container);
-
     ScrollFade.init();
     window.scrollTo(0, 0);
   }
 
   private showPodcastPage(): void {
     if (!this.container) return;
-    
-    this.container.innerHTML = ''; // Clear existing content
-    
-    // Update metadata
+    this.disableHomepageLayout();
+    this.container.innerHTML = '';
     document.title = 'Countercultural Tech - Podcast by Nick Goldstein';
-    
-    // Mount navigation and podcast
     this.navigation.mount(this.container);
     this.podcast.mount(this.container);
-
     ScrollFade.init();
     window.scrollTo(0, 0);
   }
@@ -500,12 +450,9 @@ class HomeScreen {
 
   private showNotFoundPage(): void {
     if (!this.container) return;
-    
-    this.container.innerHTML = ''; // Clear existing content
-    
-    // Mount navigation
+    this.disableHomepageLayout();
+    this.container.innerHTML = '';
     this.navigation.mount(this.container);
-    
     const section = document.createElement('section');
     section.className = 'min-h-screen py-16 px-6 fade-in-scroll opacity-0 translate-y-8 transition-all duration-700 ease-out flex items-center justify-center';
     section.innerHTML = `
@@ -521,23 +468,19 @@ class HomeScreen {
         </a>
       </div>
     `;
-    
     this.container.appendChild(section);
-    
-    // Setup home link
     const homeLink = section.querySelector('a[href="/"]');
     homeLink?.addEventListener('click', (e) => {
       e.preventDefault();
       window.history.pushState({}, '', '/');
       window.dispatchEvent(new PopStateEvent('popstate'));
     });
-    
     ScrollFade.init();
     window.scrollTo(0, 0);
   }
+  */
 }
 
-// Initialize the application
 document.addEventListener('DOMContentLoaded', () => {
   const appContainer = document.querySelector('#app') as HTMLElement;
   if (!appContainer) {

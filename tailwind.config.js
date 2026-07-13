@@ -17,9 +17,10 @@ export default {
         'card-bg': 'var(--card-bg)',
       },
       fontFamily: {
-        heading: ['Montserrat', 'sans-serif'],
-        body: ['Montserrat', 'sans-serif'],
-        serif: ['Playfair Display', 'serif'],
+        sans: ['"forma-djr-deck"', 'sans-serif'],
+        heading: ['"caslonian-std-l"', 'sans-serif'],
+        body: ['"forma-djr-deck"', 'sans-serif'],
+        serif: ['"forma-djr-deck"', 'sans-serif'],
       },
       keyframes: {
         blink: {

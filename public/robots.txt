@@ -1,19 +1,16 @@
 User-agent: *
 Allow: /
 
-# Allow all pages to be crawled
-Allow: /articles
-Allow: /articles/*
-Allow: /courses
-Allow: /course/*
-Allow: /course/*/module/*
-Allow: /course/*/reader/module/*
+# Homepage-only portfolio; legacy app routes redirect to /
+Disallow: /articles
+Disallow: /courses
+Disallow: /course/
+Disallow: /system-prompt-generator
+Disallow: /countercultural-tech
 
-# Disallow common non-content paths
+# Non-content paths
 Disallow: /node_modules/
 Disallow: /*.json$
 Disallow: /*.jsonp$
 
-# Sitemap location
 Sitemap: https://nicholasmgoldstein.com/sitemap.xml
-

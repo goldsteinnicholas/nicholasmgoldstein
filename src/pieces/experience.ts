@@ -1,284 +1,124 @@
-import { ScrollFade } from '../scroll-fade';
-
-interface TimelineEntry {
-  date: string;
-  title: string;
-  company?: string;
-  description: string[];
-  category: 'PROFESSIONAL' | 'PROJECT' | 'EDUCATION' | 'CERTIFICATION';
+interface StoryChapter {
+  marker: string;
+  headline: string;
+  bodyLeft: string;
+  bodyRight?: string;
+  icon: string;
+  iconColor: string;
+  aside?: string;
+  showContactLinks?: boolean;
 }
 
+const CONTACT_LINKS_HTML = `
+  <div class="connect-links">
+    <p class="connect-label">Connect with me on:</p>
+    <a
+      href="https://www.linkedin.com/in/nicholas-goldstein-362a13179"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="panel-cta connect-btn connect-btn--primary inline-flex items-center gap-2.5 px-6 py-2.5 text-base bg-gradient-to-r from-secondary to-blue-600 text-white rounded-full font-medium hover:shadow-lg hover:scale-105 transition-all duration-300"
+    >
+      <i class="fab fa-linkedin text-lg"></i>
+      <span>LinkedIn</span>
+    </a>
+    <a
+      href="https://github.com/goldsteinnicholas"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="connect-btn connect-btn--secondary inline-flex items-center gap-2.5 px-6 py-2.5 text-sm rounded-full font-medium"
+    >
+      <i class="fab fa-github text-lg"></i>
+      <span>GitHub</span>
+    </a>
+  </div>
+`;
+
 export class Experience {
-  private container: HTMLElement | null = null;
-  private activeFilter: 'ALL' | 'PROFESSIONAL' | 'PROJECT' | 'EDUCATION' | 'CERTIFICATION' = 'ALL';
-  private entries: TimelineEntry[] = [
+  private chapters: StoryChapter[] = [
     {
-      date: 'January 2026',
-      title: 'Launched Emstrata',
-      description: [
-        'Officially launched Emstrata, an AI-driven text-based simulation platform for immersive narrative experiences',
-        'Committing to focus exclusively on Emstrata to refine its collaborative storytelling capabilities and expand its user base',
-        'Prioritizing platform development to establish Emstrata as the premier destination for AI-human narrative collaboration'
-      ],
-      category: 'PROJECT'
+      marker: 'Coding',
+      headline: 'At 17 I started learning to build web apps',
+      icon: 'fa-solid fa-code',
+      iconColor: '#6366f1',
+      bodyLeft:
+        'Starting out, it was a creative outlet and a great opportunity to learn something new, but over time my interest in the technical aspects of building web apps grew and became the start of my technical journey.',
+      bodyRight:
+        'Building, designing, debugging, and rebuilding applications is what inevitably made me want a job in the tech industry. To this day, I work on things that I find interesting and read up on the newest technologies and trends surrounding app development.',
+      aside:
+        'I also built my own projects along the way. PLATO5 was a social platform I built around personality-based matching and pushing connection into real life; it is no longer in operation. My most recent project is <a href="https://emstrata.com/try" target="_blank" rel="noopener noreferrer" class="panel-link">Emstrata</a>, an AI world-building platform where people and LLMs shape worlds that evolve with real continuity.',
     },
     {
-      date: 'December 2025–Present',
-      title: 'PMP Certification Studies',
-      company: 'PMI',
-      description: [
-        'Pursuing Project Management Professional (PMP) certification from the Project Management Institute',
-        'Studying project management methodologies, frameworks, and best practices to enhance leadership and organizational skills',
-        'Preparing for PMP exam to formalize expertise in project planning, execution, and delivery'
-      ],
-      category: 'EDUCATION'
+      marker: 'University &middot; 2019-2022',
+      headline: 'Later, I studied Business Economics',
+      icon: 'fa-solid fa-graduation-cap',
+      iconColor: '#10b981',
+      bodyLeft:
+        'I transferred to SUNY Oneonta and graduated with a BS in Business Economics, learning how organizations think, decide, and deliver. I\'ve always been interested in entrepreneurship and business, as well as the numbers that drive them, so this was a natural fit for me.',
+      bodyRight:
+        'I kept teaching myself technical skills outside class. Thinking up new startup ideas and trying them out was something I pursued a lot in college. Juggling classes, jobs, and self-directed learning helped me develop a strong work ethic and a knack for problem-solving.',
     },
     {
-      date: 'August 2025',
-      title: 'Relaunched PLATO5',
-      description: [
-        'Decided to take down and rebuild PLATO5 to focus on optimizing the pipeline from online connection to real life friendships',
-        'Refined the social engine approach with improved matching algorithms and user experience',
-        'Integrated AI into every aspect of the platform to enhance user connections'
-      ],
-      category: 'PROJECT'
+      marker: 'Oracle &middot; October 2022',
+      headline: 'Then, Oracle Health offered me a job',
+      icon: 'fa-solid fa-briefcase-medical',
+      iconColor: '#ef4444',
+      bodyLeft:
+        'I joined as a Consultant and got my start in Transaction Services, independently leading client communications across engagements spanning EDI, claims editing, eligibility verification, Automated Messaging, and Payment Terminals/POS systems. I got a ton of experience with direct client contact and learned a lot about the technical and financial aspects of healthcare systems.',
+      bodyRight:
+        'Helping coordinate with third-party vendors and clients from all over the country gave me an understanding of the fundamentals of Consulting and the importance of clear communication and stakeholder management. My technical chops developed with more and more exposure to the complexities of implementation. Later on, I transitioned to the Federal Cerner Patient Accounting (CPA) team and crosstrained on Cerner Contract Management (CCM).',
     },
     {
-      date: 'November 2024',
-      title: 'PLATO5 Web App Launch',
-      description: [
-        'Successfully launched social networking platform at plato5.us',
-        'Web application release with mobile apps following shortly'
-      ],
-      category: 'PROJECT'
+      marker: 'Specialization &middot; 2022-Present',
+      headline: 'Healthcare IT became the focus',
+      icon: 'fa-solid fa-heart-pulse',
+      iconColor: '#06b6d4',
+      bodyLeft:
+        'More and more I\'ve gotten comfortable with Healthcare IT being the path forward and a great niche in tech for me to inhabit. I still build interesting projects in my freetime, but I\'m dedicated to deepening my expertise in EHR systems and the technology that helps Healthcare organizations do their work.',
+      bodyRight:
+        'Under an active federal security clearance, I advise Government Healthcare clients on this work. Today I guide CPA and CCM delivery for a large Federal Healthcare client, including integration and validation of billing, charge capture, and claims/accounts receivable workflows, as well as Contract Management to support accurate reimbursement and revenue recovery.',
     },
     {
-      date: 'March 2024',
-      title: 'Microsoft Azure AI Fundamentals',
-      company: 'Microsoft',
-      description: ['Microsoft Certified: Azure AI Fundamentals'],
-      category: 'CERTIFICATION'
+      marker: 'Now',
+      headline: 'Deepening my knowledge',
+      icon: 'fa-solid fa-cloud',
+      iconColor: '#d946ef',
+      bodyLeft:
+        'I\u2019m pursuing my PMP while continuing to grow in cloud computing and AI, including AWS, Azure, OCI, and Azure AI Fundamentals. I plan to use my knowledge of Project Management, Cloud, AI, and more to bolster my Consulting skills and supplement my Healthcare IT experience.',
+      showContactLinks: true,
     },
-    {
-      date: 'June 2023–Present',
-      title: 'Developing PLATO5...',
-      description: [
-        'Developed a full-stack social networking platform using Flutter, TypeScript, PostgreSQL, and Go',
-        'Implemented scalable backend architecture focusing on security and performance',
-        'Integrated features promoting safe and positive user interactions'
-      ],
-      category: 'PROJECT'
-    },
-    {
-      date: 'May 2023',
-      title: 'Cloud Certifications',
-      description: [
-        'AWS Certified Cloud Practitioner',
-        'Oracle Cloud Infrastructure 2023 Certified Foundations Associate'
-      ],
-      category: 'CERTIFICATION'
-    },
-    {
-        date: '2022-2023',
-        title: 'Oracle Cloud Infrastructure',
-        description: ['OCI 2022 Foundations Associate'],
-        category: 'CERTIFICATION'
-      },
-    {
-      date: 'Oct. 2022–Present',
-      title: 'IT Consultant',
-      company: 'Oracle Health',
-      description: [
-        'Troubleshoot complex device and software issues, providing timely and effective solutions',
-        'Navigate intricate professional scenarios, demonstrating strong problem-solving skills',
-        'Maintain clear communication with clients throughout project lifecycles',
-        'Collaborate with cross-functional teams to deliver comprehensive IT solutions'
-      ],
-      category: 'PROFESSIONAL'
-    },
-    {
-      date: 'August 2022',
-      title: 'Business Economics',
-      company: 'SUNY Oneonta',
-      description: [
-        'Graduated with Bachelor\'s Degree',
-        'Vice President of Fundraising for SUNY OnMark (Marketing Club)',
-        'Led marketing initiatives and fundraising campaigns'
-      ],
-      category: 'EDUCATION'
-    },
-    {
-      date: '2020',
-      title: 'Jam\'s Lunch Website',
-      description: [
-        'Developed and deployed a restaurant website focusing on user experience and mobile responsiveness'
-      ],
-      category: 'PROJECT'
-    },
-    {
-      date: '2019',
-      title: 'SUNY Oneonta',
-      description: ['Transferred to pursue Business Economics'],
-      category: 'EDUCATION'
-    },
-    {
-      date: '2015',
-      title: 'Started Programming Journey',
-      description: [
-        'Began self-teaching programming fundamentals and web development'
-      ],
-      category: 'EDUCATION'
-    }
   ];
 
   public mount(container: HTMLElement): void {
-    this.container = container;
-    
-    const section = document.createElement('section');
-    section.id = 'experience';
-    section.className = 'py-16 px-6 fade-in-scroll opacity-0 translate-y-8 transition-all duration-700 ease-out';
-    section.innerHTML = `
-      <div class="max-w-4xl mx-auto">
-        <h2 class="text-3xl font-heading text-text text-center mb-8">Experience Timeline</h2>
-        
-        <!-- Category Filters -->
-        <div class="flex flex-wrap justify-center gap-3 mb-16">
-          <button class="px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 bg-gradient-to-r from-secondary to-blue-600 text-white shadow-lg" data-filter="ALL">
-            All
-          </button>
-          <button class="px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 text-text-secondary hover:text-text hover:bg-card-bg" data-filter="PROFESSIONAL">
-            Professional
-          </button>
-          <button class="px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 text-text-secondary hover:text-text hover:bg-card-bg" data-filter="PROJECT">
-            Projects
-          </button>
-          <button class="px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 text-text-secondary hover:text-text hover:bg-card-bg" data-filter="EDUCATION">
-            Education
-          </button>
-          <button class="px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 text-text-secondary hover:text-text hover:bg-card-bg" data-filter="CERTIFICATION">
-            Certifications
-          </button>
+    this.chapters.forEach((chapter, index) => {
+      const panel = document.createElement('section');
+      panel.id = index === 0 ? 'story' : `story-${index + 1}`;
+      panel.className = 'homepage-panel';
+      panel.dataset.panelIndex = String(index + 1);
+      panel.innerHTML = `
+        <div class="panel-split panel-split--story">
+          <header class="story-header panel-rise panel-rise--delay-1">
+            <span class="story-icon" style="--story-icon-color: ${chapter.iconColor}" aria-hidden="true">
+              <i class="${chapter.icon}"></i>
+            </span>
+            <span class="story-marker text-text-secondary/70 tracking-[0.22em] uppercase font-medium">${chapter.marker}</span>
+            <span class="story-headline font-heading text-text leading-snug">
+              ${chapter.headline}
+            </span>
+          </header>
+          <div class="panel-col panel-col--left panel-rise panel-rise--delay-2">
+            <p class="panel-text">${chapter.bodyLeft}</p>
+          </div>
+          <div class="panel-col panel-col--right${chapter.showContactLinks ? ' panel-col--connect' : ''} panel-rise panel-rise--delay-3">
+            ${chapter.showContactLinks ? CONTACT_LINKS_HTML : `<p class="panel-text">${chapter.bodyRight}</p>`}
+          </div>
+          ${chapter.aside ? `<p class="panel-aside panel-rise panel-rise--delay-4">${chapter.aside}</p>` : ''}
         </div>
-
-        <div class="relative">
-          <!-- Timeline line with gradient -->
-          <div class="absolute left-[22px] md:left-1/2 -translate-x-1/2 h-full w-1 bg-gradient-to-b from-secondary via-secondary to-secondary/30 rounded-full"></div>
-          
-          <!-- Timeline entries -->
-          <div class="space-y-16" id="timeline-entries"></div>
-        </div>
-      </div>
-    `;
-    
-    this.container.appendChild(section);
-    this.setupFilterListeners();
-    this.renderEntries();
-    ScrollFade.init();
-  }
-
-  private setupFilterListeners(): void {
-    const buttons = this.container?.querySelectorAll('button[data-filter]');
-    buttons?.forEach(button => {
-      button.addEventListener('click', () => {
-        // Remove active class from all buttons
-        buttons.forEach(btn => {
-          btn.classList.remove('bg-gradient-to-r', 'from-secondary', 'to-blue-600', 'text-white', 'shadow-lg');
-          btn.classList.add('text-text-secondary', 'hover:text-text', 'hover:bg-card-bg');
-        });
-        
-        // Add active class to clicked button
-        button.classList.add('bg-gradient-to-r', 'from-secondary', 'to-blue-600', 'text-white', 'shadow-lg');
-        button.classList.remove('text-text-secondary', 'hover:text-text', 'hover:bg-card-bg');
-        
-        // Update filter and re-render
-        this.activeFilter = button.getAttribute('data-filter') as typeof this.activeFilter;
-        this.renderEntries();
-      });
+      `;
+      container.appendChild(panel);
     });
   }
 
   public reinitializeListeners(): void {
-    // This method is called when prerendered content is preserved
-    // It reattaches event listeners without recreating the DOM
-    const appContainer = document.querySelector('#app') as HTMLElement;
-    if (appContainer) {
-      // Set container to the app container
-      this.container = appContainer;
-      // Reattach filter button listeners
-      this.setupFilterListeners();
-    }
+    // Story panels have no interactive listeners
   }
-
-  private renderEntries(): void {
-    const entriesContainer = this.container?.querySelector('#timeline-entries');
-    if (!entriesContainer) return;
-
-    const categoryColors = {
-      'PROFESSIONAL': 'bg-accent/30 border-accent',
-      'PROJECT': 'bg-purple/30 border-purple',
-      'EDUCATION': 'bg-secondary/30 border-secondary',
-      'CERTIFICATION': 'bg-accent/30 border-accent'
-    };
-
-    const categoryBulletColors = {
-      'PROFESSIONAL': 'text-accent',
-      'PROJECT': 'text-purple',
-      'EDUCATION': 'text-secondary',
-      'CERTIFICATION': 'text-accent'
-    };
-        
-    // Clear existing entries
-    entriesContainer.innerHTML = '';
-
-    // Filter entries
-    const filteredEntries = this.activeFilter === 'ALL' 
-      ? this.entries 
-      : this.entries.filter(entry => entry.category === this.activeFilter);
-
-    filteredEntries.forEach((entry, index) => {
-      const entryElement = document.createElement('div');
-      entryElement.className = `flex flex-col md:flex-row ${index % 2 === 0 ? '' : 'md:flex-row-reverse'} gap-8 relative group`;
-      
-      entryElement.innerHTML = `
-        <!-- Timeline dot with pulse effect -->
-        <div class="absolute left-[22px] md:left-1/2 -translate-x-1/2">
-          <div class="w-4 h-4 bg-secondary rounded-full mt-2 z-10 relative"></div>
-          <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-6 h-6 bg-secondary/30 rounded-full group-hover:scale-150 transition-transform duration-300"></div>
-        </div>
-        
-        <!-- Timeline connector -->
-        <div class="absolute left-[22px] md:left-1/2 top-[14px] w-8 h-0.5 bg-secondary/30 ${index % 2 === 0 ? 'md:-translate-x-full' : 'md:translate-x-0'}"></div>
-        
-        <!-- Date -->
-        <div class="ml-16 md:ml-0 md:w-1/2 ${index % 2 === 0 ? 'md:text-right md:pr-12' : 'md:pl-12'}">
-          <span class="text-text-secondary text-sm font-medium bg-card-bg px-4 py-1 rounded-full shadow-sm border border-text-secondary/20">${entry.date}</span>
-        </div>
-        
-        <!-- Content -->
-        <div class="ml-16 md:ml-0 md:w-1/2 ${index % 2 === 0 ? 'md:pl-12' : 'md:pr-12'} relative">
-          <div class="${categoryColors[entry.category]} rounded-xl shadow-lg p-6 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 hover:translate-x-0.5 animate-float border-2">
-            <div class="flex items-start justify-between">
-              <div>
-                <h3 class="text-xl font-semibold text-text">${entry.title}</h3>
-                ${entry.company ? `<div class="text-text-secondary font-medium mt-1">${entry.company}</div>` : ''}
-              </div>
-              <span class="hidden md:block px-3 py-1 bg-card-bg/50 rounded-full text-sm text-text-secondary border border-text-secondary/20">${entry.category}</span>
-            </div>
-            <ul class="mt-4 space-y-2">
-              ${entry.description.map(desc => `
-                <li class="flex gap-2 text-text-secondary">
-                  <span class="${categoryBulletColors[entry.category]}">•</span>
-                  <span>${desc}</span>
-                </li>
-              `).join('')}
-            </ul>
-          </div>
-        </div>
-      `;
-      
-      entriesContainer.appendChild(entryElement);
-    });
-
-  }
-  
 }
