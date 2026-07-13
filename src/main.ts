@@ -93,24 +93,14 @@ class HomeScreen {
       }
       
       if (path === '/') {
-        this.enableHomepageLayout();
-        const scrollContainer = this.container?.querySelector('.homepage-horizontal-scroll') as HTMLElement;
+        const scrollContainer = this.container?.querySelector(
+          '.homepage-horizontal-scroll',
+        ) as HTMLElement | null;
         if (scrollContainer) {
-          PanelReveal.init(scrollContainer);
+          this.initializeHomepage(scrollContainer);
+        } else {
+          this.showHomePage();
         }
-        ScrollFade.init();
-        const fadeElements = document.querySelectorAll('.fade-in-scroll');
-        fadeElements.forEach(el => {
-          const rect = el.getBoundingClientRect();
-          const isInViewport = rect.left < window.innerWidth && rect.right > 0;
-          if (isInViewport) {
-            el.classList.remove('opacity-0', 'translate-x-8');
-            el.classList.add('opacity-100', 'translate-x-0');
-          }
-        });
-        setTimeout(() => {
-          this.experience.reinitializeListeners();
-        }, 100);
       }
     }
 
@@ -215,11 +205,9 @@ class HomeScreen {
     }
 
     if (path === '/') {
-      const hasHomeContent = app.querySelector('.homepage-horizontal-scroll') ||
-                            textContent.includes('Healthcare IT Consultant');
-      if (hasHomeContent && !hasWrongContent) {
-        return true;
-      }
+      const scrollContainer = app.querySelector('.homepage-horizontal-scroll');
+      const panelCount = app.querySelectorAll('.homepage-panel').length;
+      return scrollContainer !== null && panelCount >= 6;
     }
     
     return false;
@@ -263,6 +251,25 @@ class HomeScreen {
     };
     
     document.addEventListener('click', this.prerenderedLinkHandler, true);
+  }
+
+  private initializeHomepage(scrollContainer: HTMLElement): void {
+    if (!this.container) return;
+
+    if (portfolioMode) {
+      this.container.querySelector('header:has(#nav-menu-button)')?.remove();
+      document.getElementById('nav-panel')?.remove();
+      document.getElementById('nav-overlay')?.remove();
+    }
+
+    this.enableHomepageLayout();
+
+    const panelCount = scrollContainer.querySelectorAll('.homepage-panel').length;
+    this.homepageTimeline.mount(this.container, scrollContainer, panelCount);
+    PanelReveal.init(scrollContainer);
+    ScrollFade.init();
+    this.profile.bindListeners(scrollContainer);
+    this.experience.bindListeners(scrollContainer);
   }
 
   private enableHomepageLayout(): void {
@@ -334,14 +341,7 @@ class HomeScreen {
     this.profile.mount(scrollContainer);
     this.experience.mount(scrollContainer);
 
-    const panelCount = scrollContainer.querySelectorAll('.homepage-panel').length;
-    if (this.container) {
-      this.homepageTimeline.mount(this.container, scrollContainer, panelCount);
-    }
-
-    this.enableHomepageLayout();
-    PanelReveal.init(scrollContainer);
-    ScrollFade.init();
+    this.initializeHomepage(scrollContainer);
     scrollContainer.scrollLeft = 0;
   }
 

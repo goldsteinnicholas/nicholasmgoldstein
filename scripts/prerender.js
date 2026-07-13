@@ -8,42 +8,7 @@ const __dirname = dirname(__filename);
 const rootDir = join(__dirname, '..');
 
 function getAllRoutes() {
-  return [
-    '/',
-    '/articles',
-    '/courses',
-    '/countercultural-tech',
-    '/system-prompt-generator',
-    '/articles/conversion-funnels-and-the-banality-of-success',
-    '/articles/the-sad-life-of-the-solopreneur-billionaire',
-    '/articles/no-were-not-trying-to-replace-dungeon-masters-with-ai',
-    '/articles/the-dystopian-future-of-ai-girlfriends',
-    '/articles/learning-german-through-ai-simulations-part-i',
-    '/articles/can-emstrata-dethrone-chatgpt-in-storytelling',
-    '/articles/building-to-build-what-should-exist',
-    '/articles/corrosive-convenience',
-    '/articles/why-plato5-matters',
-    '/articles/either-paradise-or-paralysis',
-    '/articles/my-big-play',
-    '/articles/zero-to-five',
-    '/course/build-ai-platforms/module/1',
-    '/course/build-ai-platforms/module/2',
-    '/course/build-ai-platforms/module/3',
-    '/course/build-ai-platforms/module/4',
-    '/course/build-ai-platforms/module/5',
-    '/course/build-ai-platforms/reader/module/1',
-    '/course/build-ai-platforms/reader/module/2',
-    '/course/build-ai-platforms/reader/module/3',
-    '/course/build-ai-platforms/reader/module/4',
-    '/course/build-ai-platforms/reader/module/5',
-    '/course/communicating-vision/module/1',
-    '/course/communicating-vision/reader/module/1',
-  ].map(route => {
-    if (route !== '/' && route.endsWith('/')) {
-      return route.slice(0, -1);
-    }
-    return route;
-  });
+  return ['/'];
 }
 
 async function prerender() {
@@ -270,8 +235,8 @@ async function prerender() {
           verificationError = `Expected generator content but found: ${hasWrongContent ? 'wrong page' : 'no generator content'}`;
         }
       } else if (route === '/') {
-        const hasLandingContent = savedHtml.includes('<div') || 
-                                 savedHtml.includes('<section');
+        const hasLandingContent = savedHtml.includes('homepage-horizontal-scroll') &&
+                                 savedHtml.includes('homepage-panel');
         const hasWrongContent = savedText.includes('404');
         if (hasLandingContent && !hasWrongContent) {
           verificationPassed = true;

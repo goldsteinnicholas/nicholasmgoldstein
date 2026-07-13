@@ -53,6 +53,7 @@ body.homepage-mode {
   width: 100%;
   scrollbar-width: thin;
   scrollbar-color: var(--card-bg) var(--background);
+  overscroll-behavior-x: contain;
 }
 
 .homepage-panel {
@@ -60,6 +61,7 @@ body.homepage-mode {
   width: 100%;
   min-width: 100%;
   height: 100dvh;
+  max-height: 100dvh;
   scroll-snap-align: start;
   flex-shrink: 0;
   display: flex;
@@ -70,6 +72,7 @@ body.homepage-mode {
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-y: contain;
+  touch-action: pan-y pinch-zoom;
 }
 
 .panel-rise {
@@ -151,9 +154,20 @@ body.homepage-mode {
 }
 
 .panel-split--story {
+  position: relative;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto auto;
   align-items: start;
+  padding-bottom: clamp(3rem, 5.5vh, 4.25rem);
+}
+
+.panel-next-section {
+  position: absolute;
+  right: clamp(1.25rem, 3vw, 2rem);
+  bottom: 0;
+  transform: translateY(0.75rem);
+  margin-top: 0;
+  z-index: 2;
 }
 
 .story-header {
@@ -563,17 +577,46 @@ body.homepage-mode {
 
 /* Phone: single column, readable measure */
 @media (max-width: 719px) {
+  .homepage-horizontal-scroll {
+    touch-action: pan-x pan-y pinch-zoom;
+  }
+
   .homepage-panel {
-    align-items: center;
+    align-items: flex-start;
+    justify-content: flex-start;
+    min-height: 0;
+  }
+
+  .panel-split,
+  .panel-split--intro,
+  .panel-split--story {
+    grid-template-rows: auto;
+    align-items: start;
+    width: 100%;
+    max-width: min(26rem, 100%);
+    margin-inline: auto;
+    min-height: min-content;
   }
 
   .panel-split,
   .panel-split--intro {
     grid-template-columns: 1fr;
     gap: 1.125rem;
-    max-width: min(26rem, 100%);
     padding-left: max(1.25rem, env(safe-area-inset-left));
     padding-right: max(1.25rem, env(safe-area-inset-right));
+  }
+
+  .panel-split--story {
+    padding-bottom: clamp(3rem, 8vh, 4.5rem);
+  }
+
+  .panel-next-section {
+    position: static;
+    grid-column: 1 / -1;
+    justify-self: end;
+    transform: none;
+    margin-top: 1.25rem;
+    margin-right: clamp(0.5rem, 2vw, 1rem);
   }
 
   .panel-col--left,

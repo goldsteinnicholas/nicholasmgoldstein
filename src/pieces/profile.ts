@@ -16,7 +16,7 @@ export class Profile {
             Federal Oracle Health Patient Accounting Consultant
           </span>
           <a
-            href="/Nicholas_Goldstein_Resume.pdf"
+            href="/Nicholas_Goldstein_Resume_NoPersonalInfo.pdf"
             target="_blank"
             class="panel-cta inline-flex items-center gap-2.5 px-6 py-2.5 text-base bg-gradient-to-r from-secondary to-blue-600 text-white rounded-full font-medium hover:shadow-lg hover:scale-105 transition-all duration-300 w-fit"
           >
@@ -91,6 +91,11 @@ export class Profile {
     `;
 
     container.appendChild(panel);
+  }
+
+  public bindListeners(container: HTMLElement): void {
+    const panel = container.querySelector('#intro');
+    if (!panel) return;
 
     const scrollToPanel = (panelIndex: number) => {
       const target = container.querySelector(
@@ -113,6 +118,5 @@ export class Profile {
     panel.querySelector('[data-action="read-story"]')?.addEventListener('click', () => {
       scrollToPanel(1);
     });
-
   }
 }

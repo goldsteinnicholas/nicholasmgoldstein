@@ -112,13 +112,48 @@ export class Experience {
             ${chapter.showContactLinks ? CONTACT_LINKS_HTML : `<p class="panel-text">${chapter.bodyRight}</p>`}
           </div>
           ${chapter.aside ? `<p class="panel-aside panel-rise panel-rise--delay-4">${chapter.aside}</p>` : ''}
+          ${
+            index < this.chapters.length - 1
+              ? `
+          <button
+            type="button"
+            class="intro-read-story panel-next-section"
+            aria-label="Go to next section"
+          >
+            <span class="intro-read-story-text">Next section</span>
+            <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+          </button>`
+              : ''
+          }
         </div>
       `;
       container.appendChild(panel);
     });
   }
 
+  public bindListeners(container: HTMLElement): void {
+    container.querySelectorAll('.panel-next-section').forEach((button) => {
+      button.addEventListener('click', () => {
+        const panel = button.closest('.homepage-panel') as HTMLElement | null;
+        if (!panel) return;
+
+        const currentIndex = Number(panel.dataset.panelIndex);
+        if (Number.isNaN(currentIndex)) return;
+
+        const nextPanel = container.querySelector(
+          `.homepage-panel[data-panel-index="${currentIndex + 1}"]`,
+        ) as HTMLElement | null;
+        if (!nextPanel) return;
+
+        container.scrollTo({
+          left: nextPanel.offsetLeft,
+          behavior: 'smooth',
+        });
+      });
+    });
+  }
+
   public reinitializeListeners(): void {
-    // Story panels have no interactive listeners
+    // Story panel listeners are bound in bindListeners
   }
 }
